@@ -41,4 +41,140 @@ class Validation extends BaseConfig
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------
+
+    public array $karyawanCreate = [
+        'nama' => [
+            'rules' => 'required|max_length[100]',
+            'errors'    => [
+                'required' => 'nama harus tidak boleh kosong',
+                'max_length' => 'panjang nama maksimal 100',
+            ]
+        ],
+        'jenis_kelamin' => [
+            'rules' => 'required|in_list[L,P]',
+            'errors'    => [
+                'required' => 'jenis kelamin tidak boleh kosong',
+                'in_list' => 'hanya ada pilihan L dan P',
+            ]
+        ],
+        'no_telp' => [
+            'rules' => 'required|regex_match[/^62[8][1-9][0-9]{7,10}$/]',
+            'errors'    => [
+                'required' => 'no telepon tidak boleh kosong',
+                'regex_match' => 'format tidak sesuai. contoh (6212345667)',
+            ]
+        ],
+        'alamat' => [
+            'rules' => 'required',
+            'errors'    => [
+                'required' => 'alamat tidak boleh kosong',
+            ]
+        ],
+    ];
+
+    public array $karyawanUpdate = [
+        'nama' => [
+            'rules' => 'required|max_length[100]',
+            'errors'    => [
+                'required' => 'nama harus tidak boleh kosong',
+                'max_length' => 'panjang nama maksimal 100',
+            ]
+        ],
+        'user_id' => [
+            'rules' => 'required|is_unique[users.id, id, {user_id}]',
+            'errors'    => [
+                'required' => 'akun user tidak boleh kosong',
+                'is_unique' => 'akun user tidak terdaftar pada sistem',
+            ]
+        ],
+        'jenis_kelamin' => [
+            'rules' => 'required|in_list[L,P]',
+            'errors'    => [
+                'required' => 'jenis kelamin tidak boleh kosong',
+                'in_list' => 'hanya ada pilihan L dan P',
+            ]
+        ],
+        'no_telp' => [
+            'rules' => 'required|regex_match[/^62[8][1-9][0-9]{7,10}$/]',
+            'errors'    => [
+                'required' => 'no telepon tidak boleh kosong',
+                'regex_match' => 'format tidak sesuai. contoh (6212345667)',
+            ]
+        ],
+        'alamat' => [
+            'rules' => 'required',
+            'errors'    => [
+                'required' => 'alamat tidak boleh kosong',
+            ]
+        ],
+    ];
+
+    public array $userCreate = [
+        'username' => [
+            'rules'  => 'required|min_length[3]|max_length[50]|is_unique[users.username]',
+            'errors' => [
+                'required'   => 'Username wajib diisi.',
+                'min_length' => 'Username minimal {param} karakter.',
+                'max_length' => 'Username maksimal {param} karakter.',
+                'is_unique'  => 'Username sudah terdaftar, gunakan yang lain.',
+            ]
+        ],
+        'email' => [
+            'rules'  => 'required|valid_email|is_unique[auth_identities.secret]',
+            'errors' => [
+                'required'    => 'Email wajib diisi.',
+                'valid_email' => 'Format email tidak valid.',
+                'is_unique'   => 'Email sudah terdaftar.',
+            ]
+        ],
+        'password' => [
+            'rules'  => 'required|min_length[6]',
+            'errors' => [
+                'required'   => 'Password wajib diisi.',
+                'min_length' => 'Password minimal {param} karakter.',
+            ]
+        ],
+        'confirm_password' => [
+            'rules'  => 'required|matches[password]',
+            'errors' => [
+                'required' => 'Konfirmasi password wajib diisi.',
+                'matches'  => 'Konfirmasi password tidak cocok dengan password.',
+            ]
+        ],
+    ];
+
+    public array $userUpdate = [
+        'user_id' => [
+            'rules' => 'permit_empty'
+        ],
+        'username' => [
+            'rules'  => 'required|min_length[3]|max_length[50]|is_unique[users.username,id,{user_id}]',
+            'errors' => [
+                'required'   => 'Username wajib diisi.',
+                'min_length' => 'Username minimal {param} karakter.',
+                'max_length' => 'Username maksimal {param} karakter.',
+                'is_unique'  => 'Username sudah digunakan.',
+            ]
+        ],
+        'email' => [
+            'rules'  => 'required|valid_email|is_unique[auth_identities.secret,user_id,{user_id}]',
+            'errors' => [
+                'required'    => 'Email wajib diisi.',
+                'valid_email' => 'Format email tidak valid.',
+                'is_unique'   => 'Email sudah digunakan.',
+            ]
+        ],
+        'password' => [
+            'rules'  => 'permit_empty|min_length[6]',
+            'errors' => [
+                'min_length' => 'Password minimal {param} karakter.',
+            ]
+        ],
+        'confirm_password' => [
+            'rules'  => 'permit_empty|matches[password]',
+            'errors' => [
+                'matches' => 'Konfirmasi password tidak cocok dengan password.',
+            ]
+        ],
+    ];
 }
