@@ -12,6 +12,7 @@ class UserModel extends ShieldUserModel
     protected $returnType = User::class;
     protected $primaryKey = 'id';
     protected $useAutoIncrement = false;
+    protected $useSoftDeletes = false;
     protected $afterInsert   = ['saveEmailIdentity'];
     protected $afterUpdate   = ['saveEmailIdentity'];
 
