@@ -22,8 +22,8 @@
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Jenis Kelamin</label>
                             <select name="jenis_kelamin" class="form-control <?= validation_show_error('jenis_kelamin') ? 'is-invalid' : ''; ?>" id="">
-                                <option value="L">Laki-Laki</option>
-                                <option value="P">Perempuan</option>
+                                <option value="Laki-Laki">Laki-Laki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                             <?php if (validation_show_error('jenis_kelamin')): ?>
                                 <div class="invalid-feedback">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">No Telepon</label>
-                            <input type="text" name="no_telp" value="<?= old('no_telp'); ?>" class="form-control <?= validation_show_error('no_telp') ? 'is-invalid' : ''; ?>">
+                            <input type="text" name="no_telp" value="<?= old('no_telp'); ?>" class="form-control telp <?= validation_show_error('no_telp') ? 'is-invalid' : ''; ?>">
                             <?php if (validation_show_error('no_telp')): ?>
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('no_telp'); ?>

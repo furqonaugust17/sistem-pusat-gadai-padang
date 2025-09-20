@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\KaryawanModel;
-use App\Models\KaryawanView;
 use App\Services\KaryawanService;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
@@ -31,8 +30,8 @@ class KaryawanController extends ResourceController
     public function index()
     {
         if (request()->isAJAX()) {
-            $model = new KaryawanView();
-            return DataTable::of($model->select('id, nama, jabatan, no_telp, email, lower(jenis_kelamin) as jenis_kelamin, alamat', false))
+            $model = $this->karyawanModel->Datatables();
+            return DataTable::of($model)
                 ->toJson(true);
         }
         $groups = array_filter(config('AuthGroups')->groups, function ($key) {

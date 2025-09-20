@@ -51,17 +51,17 @@ class Validation extends BaseConfig
             ]
         ],
         'jenis_kelamin' => [
-            'rules' => 'required|in_list[L,P]',
+            'rules' => 'required|in_list[Laki-Laki,Perempuan]',
             'errors'    => [
                 'required' => 'jenis kelamin tidak boleh kosong',
-                'in_list' => 'hanya ada pilihan L dan P',
+                'in_list'  => 'Jenis kelamin harus Laki-Laki atau Perempuan.'
             ]
         ],
         'no_telp' => [
-            'rules' => 'required|regex_match[/^62[8][1-9][0-9]{7,10}$/]',
+            'rules' => 'required|regex_match[/^628[0-9]{8,12}$/]',
             'errors'    => [
                 'required' => 'no telepon tidak boleh kosong',
-                'regex_match' => 'format tidak sesuai. contoh (6212345667)',
+                'regex_match' => 'Nomor telepon harus diawali 628 dan hanya angka.',
             ]
         ],
         'alamat' => [
@@ -88,17 +88,17 @@ class Validation extends BaseConfig
             ]
         ],
         'jenis_kelamin' => [
-            'rules' => 'required|in_list[L,P]',
+            'rules' => 'required|in_list[Laki-Laki,Perempuan]',
             'errors'    => [
                 'required' => 'jenis kelamin tidak boleh kosong',
-                'in_list' => 'hanya ada pilihan L dan P',
+                'in_list'  => 'Jenis kelamin harus Laki-Laki atau Perempuan.'
             ]
         ],
         'no_telp' => [
-            'rules' => 'required|regex_match[/^62[8][1-9][0-9]{7,10}$/]',
+            'rules' => 'required|regex_match[/^628[0-9]{8,12}$/]',
             'errors'    => [
                 'required' => 'no telepon tidak boleh kosong',
-                'regex_match' => 'format tidak sesuai. contoh (6212345667)',
+                'regex_match' => 'Nomor telepon harus diawali 628 dan hanya angka.',
             ]
         ],
         'alamat' => [
