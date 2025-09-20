@@ -177,4 +177,111 @@ class Validation extends BaseConfig
             ]
         ],
     ];
+
+    public array $nasabah = [
+        'nama_lengkap'        => [
+            'rules' => 'required|min_length[3]|max_length[100]',
+            'errors' => [
+                'required'   => 'Nama lengkap wajib diisi.',
+                'min_length' => 'Nama lengkap minimal 3 karakter.',
+                'max_length' => 'Nama lengkap maksimal 100 karakter.'
+            ]
+        ],
+        'panggilan'           => [
+            'rules' => 'permit_empty|min_length[2]|max_length[50]',
+            'errors' => [
+                'min_length' => 'Nama panggilan minimal 2 karakter.',
+                'max_length' => 'Nama panggilan maksimal 50 karakter.'
+            ]
+        ],
+        'tempat_lahir'        => [
+            'rules' => 'required|min_length[2]|max_length[100]',
+            'errors' => [
+                'required'   => 'Tempat lahir wajib diisi.',
+                'min_length' => 'Tempat lahir minimal 2 karakter.',
+                'max_length' => 'Tempat lahir maksimal 100 karakter.'
+            ]
+        ],
+        'tanggal_lahir'       => [
+            'rules' => 'required|valid_date[Y-m-d]',
+            'errors' => [
+                'required'    => 'Tanggal lahir wajib diisi.',
+                'valid_date'  => 'Format tanggal lahir tidak valid (gunakan YYYY-MM-DD).'
+            ]
+        ],
+        'jenis_kelamin'       => [
+            'rules' => 'required|in_list[Laki-Laki,Perempuan]',
+            'errors' => [
+                'required' => 'Jenis kelamin wajib diisi.',
+                'in_list'  => 'Jenis kelamin harus Laki-Laki atau Perempuan.'
+            ]
+        ],
+        'alamat_ktp'          => [
+            'rules' => 'required|min_length[5]|max_length[255]',
+            'errors' => [
+                'required'   => 'Alamat KTP wajib diisi.',
+                'min_length' => 'Alamat KTP minimal 5 karakter.',
+                'max_length' => 'Alamat KTP maksimal 255 karakter.'
+            ]
+        ],
+        'alamat_domisili'     => [
+            'rules' => 'permit_empty|min_length[5]|max_length[255]',
+            'errors' => [
+                'min_length' => 'Alamat domisili minimal 5 karakter.',
+                'max_length' => 'Alamat domisili maksimal 255 karakter.'
+            ]
+        ],
+        'no_telp1'            => [
+            'rules' => 'required|numeric|min_length[10]|max_length[15]|regex_match[/^628[0-9]{8,12}$/]',
+            'errors' => [
+                'required'    => 'Nomor telepon utama wajib diisi.',
+                'numeric'     => 'Nomor telepon hanya boleh berisi angka.',
+                'min_length'  => 'Nomor telepon minimal 10 digit.',
+                'max_length'  => 'Nomor telepon maksimal 15 digit.',
+                'regex_match' => 'Nomor telepon harus diawali 628 dan hanya angka.'
+            ]
+        ],
+        'no_telp2'            => [
+            'rules' => 'permit_empty|numeric|min_length[10]|max_length[15]|regex_match[/^628[0-9]{8,12}$/]',
+            'errors' => [
+                'numeric'     => 'Nomor telepon kedua hanya boleh berisi angka.',
+                'min_length'  => 'Nomor telepon kedua minimal 10 digit.',
+                'max_length'  => 'Nomor telepon kedua maksimal 15 digit.',
+                'regex_match' => 'Nomor telepon kedua harus diawali 628 dan hanya angka.'
+            ]
+        ],
+        'no_wa'               => [
+            'rules' => 'required|numeric|min_length[10]|max_length[15]|regex_match[/^628[0-9]{8,12}$/]',
+            'errors' => [
+                'required'    => 'Nomor WhatsApp wajib diisi.',
+                'numeric'     => 'Nomor WhatsApp hanya boleh berisi angka.',
+                'min_length'  => 'Nomor WhatsApp minimal 10 digit.',
+                'max_length'  => 'Nomor WhatsApp maksimal 15 digit.',
+                'regex_match' => 'Nomor WhatsApp harus diawali 628 dan hanya angka.'
+            ]
+        ],
+        'nama_kontak_darurat' => [
+            'rules' => 'permit_empty|min_length[3]|max_length[100]',
+            'errors' => [
+                'min_length' => 'Nama kontak darurat minimal 3 karakter.',
+                'max_length' => 'Nama kontak darurat maksimal 100 karakter.'
+            ]
+        ],
+        'no_kontak_darurat'   => [
+            'rules' => 'permit_empty|numeric|min_length[10]|max_length[15]|regex_match[/^628[0-9]{8,12}$/]',
+            'errors' => [
+                'numeric'     => 'Nomor kontak darurat hanya boleh berisi angka.',
+                'min_length'  => 'Nomor kontak darurat minimal 10 digit.',
+                'max_length'  => 'Nomor kontak darurat maksimal 15 digit.',
+                'regex_match' => 'Nomor kontak darurat harus diawali 628 dan hanya angka.'
+            ]
+        ],
+        'email'               => [
+            'rules' => 'permit_empty|valid_email|max_length[100]',
+            'errors' => [
+                'valid_email' => 'Format email tidak valid.',
+                'max_length'  => 'Email maksimal 100 karakter.'
+            ]
+        ],
+    ];
 }

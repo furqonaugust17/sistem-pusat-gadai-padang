@@ -10,4 +10,5 @@ $routes->get('/', 'Home::index');
 service('auth')->routes($routes);
 $routes->group('backend', static function ($routes) {
     $routes->resource('karyawan', ['controller' => 'KaryawanController']);
+    $routes->resource('nasabah', ['controller' => 'NasabahController']);
 });
