@@ -65,6 +65,24 @@ class KaryawanModel extends Model
         }
     }
 
+    public function Datatables()
+    {
+        $data = $this->select("
+        karyawans.id as id,
+        karyawans.nama as nama,
+        users.username as username,
+        karyawans.no_telp as no_telp,
+        auth_groups_users.group as jabatan,
+        auth_identities.secret as email,
+        lower(jenis_kelamin::text) AS jenis_kelamin,
+        karyawans.alamat as alamat", false)
+            ->join('users', 'karyawans.user_id = users.id', 'INNER')
+            ->join('auth_groups_users', 'users.id = auth_groups_users.user_id', 'LEFT')
+            ->join('auth_identities', 'users.id = auth_identities.user_id', 'INNER');
+
+        return $data;
+    }
+
     public function getUserId($id)
     {
         $data = $this->find($id);

@@ -56,8 +56,14 @@
 <?= $this->section('javascript'); ?>
 <script src="<?= base_url('assets/vendor/datatables/js/jquery.dataTables.min.js'); ?>"></script>
 <script src="<?= base_url('assets/vendor/sweetalert2/dist/sweetalert2.min.js'); ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        const optionPhoneMask = {
+            placeholder: '628123456789'
+        };
+        $('.telp').mask('6280000000000', optionPhoneMask)
+
         var table = $('#table-karyawan').DataTable({
             processing: true,
             serverSide: true,
@@ -110,28 +116,38 @@
     function editData(id) {
         const uriShow = '<?= route_to('KaryawanController::show', ':id'); ?>'.replace(':id', id);
         const uriUpdate = '<?= route_to('KaryawanController::update', ':id'); ?>'.replace(':id', id);
-        $('#modal-update').modal('show');
         $.ajax({
             url: uriShow,
             type: 'GET',
             success: function(response) {
-                const {
-                    nama,
-                    no_telp,
-                    jabatan,
-                    username,
-                    email,
-                    jenis_kelamin,
-                    alamat
-                } = response
-                $('#form-update').attr('action', uriUpdate);
-                $('#nama').val(nama);
-                $(`#jenis_kelamin option[value="${jenis_kelamin}"]`).attr('selected', true);
-                $('#no_telp').val(no_telp);
-                $(`#jabatan option[value="${jabatan}"]`).attr('selected', true);
-                $('#username').val(username);
-                $('#email').val(email);
-                $('#alamat').html(alamat);
+                if (response != null) {
+                    const {
+                        nama,
+                        no_telp,
+                        jabatan,
+                        username,
+                        email,
+                        jenis_kelamin,
+                        alamat
+                    } = response
+                    $('#form-update').attr('action', uriUpdate);
+                    $('#nama').val(nama);
+                    $(`#jenis_kelamin option[value="${jenis_kelamin}"]`).attr('selected', true);
+                    $('#no_telp').val(no_telp);
+                    $(`#jabatan option[value="${jabatan}"]`).attr('selected', true);
+                    $('#username').val(username);
+                    $('#email').val(email);
+                    $('#alamat').html(alamat);
+                    $('#modal-update').modal('show');
+                } else {
+                    $('#table-karyawan').DataTable().ajax.reload()
+                    Swal.fire({
+                        title: "Error",
+                        text: "Data Tidak Ditemukan",
+                        type: "error",
+                        confirmButtonText: "Ok",
+                    });
+                }
             },
             error: function(xhr, status, error) {
                 Swal.fire({
