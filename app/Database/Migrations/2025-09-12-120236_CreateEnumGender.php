@@ -8,7 +8,7 @@ class CreateEnumGender extends Migration
 {
     public function up()
     {
-        $this->db->query("CREATE TYPE gender AS ENUM('L', 'P')");
+        $this->db->query("CREATE TYPE gender AS ENUM('Laki-Laki', 'Perempuan')");
     }
 
     public function down()
