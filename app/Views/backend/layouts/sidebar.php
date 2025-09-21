@@ -9,7 +9,7 @@
             <p class="email">marquezzzz@mail.com</p>
         </div>
         <ul class="metismenu" id="menu">
-            <li><a href="<?= route_to('karyawan'); ?>" class="ai-icon" aria-expanded="false">
+            <li><a href="<?= route_to('KaryawanController::index'); ?>" class="ai-icon" aria-expanded="false">
                     <i class="fas fa-users fw-bold"></i>
                     <span class="nav-text">Karyawan</span>
                 </a>
