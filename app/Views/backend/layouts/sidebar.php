@@ -14,7 +14,7 @@
                     <span class="nav-text">Karyawan</span>
                 </a>
             </li>
-            <li><a href="<?= route_to('nasabah'); ?>" class="ai-icon" aria-expanded="false">
+            <li><a href="<?= route_to('NasabahController::index'); ?>" class="ai-icon" aria-expanded="false">
                     <i class="fas fa-users fw-bold"></i>
                     <span class="nav-text">Nasabah</span>
                 </a>
