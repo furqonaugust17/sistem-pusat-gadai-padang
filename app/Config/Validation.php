@@ -284,4 +284,103 @@ class Validation extends BaseConfig
             ]
         ],
     ];
+
+    public $barangGadaiUpdate = [
+        'nama_barang' => [
+            'rules' => 'required|min_length[3]',
+            'errors' => [
+                'required' => 'Nama barang wajib diisi',
+                'min_length' => 'Nama barang minimal 3 karakter',
+            ],
+        ],
+        'deskripsi' => [
+            'rules' => 'required|min_length[10]',
+            'errors'    => [
+                'required' => 'Deskripsi wajib diisi',
+                'min_length' => 'Deskripsi minimal 10 karakter',
+            ]
+        ],
+        'nilai_taksiran' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Nilai taksiran wajib diisi',
+            ],
+        ],
+    ];
+
+    public $barangKendaraanUpdate = [
+        'merk' => [
+            'rules' => 'required|min_length[2]',
+            'errors' => [
+                'required' => 'Merk kendaraan wajib diisi',
+            ],
+        ],
+        'tipe' => [
+            'rules' => 'required|min_length[2]',
+            'errors' => [
+                'required' => 'Tipe kendaraan wajib diisi',
+            ],
+        ],
+        'tahun_pembuatan' => [
+            'rules' => 'required|integer',
+            'errors' => [
+                'required' => 'Tahun pembuatan wajib diisi',
+                'integer' => 'Tahun pembuatan harus berupa angka',
+            ],
+        ],
+        'plat_nomor' => [
+            'rules' => 'required|min_length[4]',
+            'errors' => [
+                'required' => 'Plat nomor wajib diisi',
+            ],
+        ],
+        'stnk' => [
+            'rules' => 'permit_empty|uploaded[stnk]|is_image[stnk]|mime_in[stnk,image/jpg,image/jpeg,image/png]|max_size[stnk,2048]',
+            'errors' => [
+                'is_image' => 'File stnk harus berupa gambar',
+                'mime_in' => 'Format file harus jpg/jpeg/png',
+                'max_size' => 'Ukuran maksimal file 2MB',
+            ],
+        ],
+        'bpkb' => [
+            'rules' => 'permit_empty|uploaded[bpkb]|is_image[bpkb]|mime_in[bpkb,image/jpg,image/jpeg,image/png]|max_size[bpkb,2048]',
+            'errors' => [
+                'is_image' => 'File bpkb harus berupa gambar',
+                'mime_in' => 'Format file harus jpg/jpeg/png',
+                'max_size' => 'Ukuran maksimal file 2MB',
+            ],
+        ],
+
+    ];
+
+    public $barangElektronikUpdate = [
+        'merk' => [
+            'rules' => 'required|min_length[2]',
+            'errors' => [
+                'required' => 'Merk elektronik wajib diisi',
+            ],
+        ],
+        'tipe' => [
+            'rules' => 'required|min_length[2]',
+            'errors' => [
+                'required' => 'Tipe elektronik wajib diisi',
+            ],
+        ],
+        'tahun_pembuatan' => [
+            'rules' => 'permit_empty|integer|greater_than_equal_to[1990]|less_than_equal_to[2100]',
+        ],
+    ];
+
+
+    public $barangGadaiFiles = [
+        'file_gambar' => [
+            'rules' => 'permit_empty|uploaded[file_gambar.0]|max_size[file_gambar,2048]|is_image[file_gambar]|mime_in[file_gambar,image/jpg,image/jpeg,image/png]',
+            'errors' => [
+                'uploaded' => 'Minimal 1 gambar wajib diunggah.',
+                'max_size' => 'Ukuran setiap gambar maksimal 2MB.',
+                'is_image' => 'Setiap file harus berupa gambar.',
+                'mime_in' => 'Format gambar harus JPG atau PNG.',
+            ]
+        ],
+    ];
 }
