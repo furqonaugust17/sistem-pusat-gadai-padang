@@ -19,6 +19,11 @@
                     <span class="nav-text">Nasabah</span>
                 </a>
             </li>
+            <li><a href="<?= route_to('BarangGadaiController::index'); ?>" class="ai-icon" aria-expanded="false">
+                    <i class="fas fa-warehouse fw-bold"></i>
+                    <span class="nav-text">Barang Gadai</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
