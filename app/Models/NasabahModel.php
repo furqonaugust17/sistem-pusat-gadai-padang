@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use CodeIgniter\Database\RawSql;
-use CodeIgniter\Model;
-
-class NasabahModel extends Model
+class NasabahModel extends CustomModel
 {
     protected $table            = 'nasabahs';
     protected $primaryKey       = 'id';
@@ -24,8 +21,6 @@ class NasabahModel extends Model
         'no_telp1',
         'no_telp2',
         'no_wa',
-        'nama_kontak_darurat',
-        'no_kontak_darurat',
         'email'
     ];
 
@@ -71,12 +66,6 @@ class NasabahModel extends Model
         alamat_domisili as alamat 
         ', false);
 
-        return $data;
-    }
-
-    public function addId($data)
-    {
-        $data['data']['id'] = new RawSql('DEFAULT');
         return $data;
     }
 }

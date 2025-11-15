@@ -24,6 +24,11 @@
                     <span class="nav-text">Barang Gadai</span>
                 </a>
             </li>
+            <li><a href="<?= route_to('TransaksiController::index'); ?>" class="ai-icon" aria-expanded="false">
+                    <i class="fas fa-book-open fw-bold"></i>
+                    <span class="nav-text">Transaksi</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

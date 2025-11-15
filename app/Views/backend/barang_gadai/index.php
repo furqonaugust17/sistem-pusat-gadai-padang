@@ -29,8 +29,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Barang</th>
-                                <th>Tipe</th>
                                 <th>Deskripsi</th>
+                                <th>Jenis</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -41,8 +41,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Barang</th>
-                                <th>Tipe</th>
                                 <th>Deskripsi</th>
+                                <th>Jenis</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -98,7 +98,7 @@
                     }
                 },
                 {
-                    data: 'tipe',
+                    data: 'jenis',
                     render: function(data) {
                         return capitalizeWords(data);
                     }

@@ -14,7 +14,6 @@ class BarangElektronikModel extends CustomModel
         'merk',
         'tipe',
         'tahun_pembuatan',
-        'file_gambar',
     ];
 
     protected bool $allowEmptyInserts = false;

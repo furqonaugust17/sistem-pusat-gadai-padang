@@ -260,22 +260,6 @@ class Validation extends BaseConfig
                 'regex_match' => 'Nomor WhatsApp harus diawali 628 dan hanya angka.'
             ]
         ],
-        'nama_kontak_darurat' => [
-            'rules' => 'permit_empty|min_length[3]|max_length[100]',
-            'errors' => [
-                'min_length' => 'Nama kontak darurat minimal 3 karakter.',
-                'max_length' => 'Nama kontak darurat maksimal 100 karakter.'
-            ]
-        ],
-        'no_kontak_darurat'   => [
-            'rules' => 'permit_empty|numeric|min_length[10]|max_length[15]|regex_match[/^628[0-9]{8,12}$/]',
-            'errors' => [
-                'numeric'     => 'Nomor kontak darurat hanya boleh berisi angka.',
-                'min_length'  => 'Nomor kontak darurat minimal 10 digit.',
-                'max_length'  => 'Nomor kontak darurat maksimal 15 digit.',
-                'regex_match' => 'Nomor kontak darurat harus diawali 628 dan hanya angka.'
-            ]
-        ],
         'email'               => [
             'rules' => 'permit_empty|valid_email|max_length[100]',
             'errors' => [
@@ -285,7 +269,7 @@ class Validation extends BaseConfig
         ],
     ];
 
-    public $barangGadaiUpdate = [
+    public array $barangGadaiUpdate = [
         'nama_barang' => [
             'rules' => 'required|min_length[3]',
             'errors' => [
@@ -308,7 +292,7 @@ class Validation extends BaseConfig
         ],
     ];
 
-    public $barangKendaraanUpdate = [
+    public array $barangKendaraanUpdate = [
         'merk' => [
             'rules' => 'required|min_length[2]',
             'errors' => [
@@ -353,7 +337,7 @@ class Validation extends BaseConfig
 
     ];
 
-    public $barangElektronikUpdate = [
+    public array $barangElektronikUpdate = [
         'merk' => [
             'rules' => 'required|min_length[2]',
             'errors' => [
@@ -372,7 +356,7 @@ class Validation extends BaseConfig
     ];
 
 
-    public $barangGadaiFiles = [
+    public array $barangGadaiFiles = [
         'file_gambar' => [
             'rules' => 'permit_empty|uploaded[file_gambar.0]|max_size[file_gambar,2048]|is_image[file_gambar]|mime_in[file_gambar,image/jpg,image/jpeg,image/png]',
             'errors' => [
@@ -380,6 +364,108 @@ class Validation extends BaseConfig
                 'max_size' => 'Ukuran setiap gambar maksimal 2MB.',
                 'is_image' => 'Setiap file harus berupa gambar.',
                 'mime_in' => 'Format gambar harus JPG atau PNG.',
+            ]
+        ],
+    ];
+
+    public array $transaksiStore = [
+        'nasabah_id' => [
+            'rules'  => 'permit_empty|uuid',
+            'errors' => [
+                'uuid' => 'Data nasabah tidak valid.'
+            ]
+        ],
+        'nama_barang' => [
+            'rules'  => 'required|min_length[3]',
+            'errors' => [
+                'required'   => 'Nama barang wajib diisi.',
+                'min_length' => 'Nama barang minimal 3 karakter.'
+            ]
+        ],
+        'deskripsi' => [
+            'rules'  => 'permit_empty|string',
+            'errors' => [
+                'string' => 'Deskripsi barang tidak valid.'
+            ]
+        ],
+        'nilai_taksiran' => [
+            'rules'  => 'required|numeric',
+            'errors' => [
+                'required' => 'Nilai taksiran wajib diisi.',
+                'numeric'  => 'Nilai taksiran harus berupa angka.'
+            ]
+        ],
+        'jenis' => [
+            'rules'  => 'required|in_list[Kendaraan,Elektronik,Lainnya]',
+            'errors' => [
+                'required' => 'Tipe barang wajib dipilih.',
+                'in_list'  => 'Jenis tipe barang tidak valid.'
+            ]
+        ],
+        'merek' => [
+            'rules'  => 'permit_empty|string',
+            'errors' => [
+                'string' => 'Merek barang tidak valid.'
+            ]
+        ],
+        'tahun_pembuatan' => [
+            'rules'  => 'permit_empty|numeric|max_length[4]',
+            'errors' => [
+                'numeric'    => 'Tahun pembuatan hanya boleh angka.',
+                'max_length' => 'Tahun pembuatan maksimal 4 digit.'
+            ]
+        ],
+        'plat_nomor' => [
+            'rules'  => 'permit_empty|string',
+            'errors' => [
+                'string' => 'Plat nomor tidak valid.'
+            ]
+        ],
+        'stnk' => [
+            'rules' => 'permit_empty|uploaded[stnk]|is_image[stnk]|mime_in[stnk,image/jpg,image/jpeg,image/png]|max_size[stnk,2048]',
+            'errors' => [
+                'is_image' => 'File stnk harus berupa gambar',
+                'mime_in' => 'Format file harus jpg/jpeg/png',
+                'max_size' => 'Ukuran maksimal file 2MB',
+            ],
+        ],
+        'bpkb' => [
+            'rules' => 'permit_empty|uploaded[bpkb]|is_image[bpkb]|mime_in[bpkb,image/jpg,image/jpeg,image/png]|max_size[bpkb,2048]',
+            'errors' => [
+                'is_image' => 'File bpkb harus berupa gambar',
+                'mime_in' => 'Format file harus jpg/jpeg/png',
+                'max_size' => 'Ukuran maksimal file 2MB',
+            ],
+        ],
+        'jatuh_tempo' => [
+            'rules'  => 'required|valid_date',
+            'errors' => [
+                'required'   => 'Tanggal jatuh tempo wajib diisi.',
+                'valid_date' => 'Format tanggal jatuh tempo tidak valid.'
+            ]
+        ],
+        'nominal' => [
+            'rules'  => 'required|numeric|min_length[4]',
+            'errors' => [
+                'required'   => 'Nominal pinjaman wajib diisi.',
+                'numeric'    => 'Nominal pinjaman hanya boleh angka.',
+                'min_length' => 'Nominal pinjaman terlalu kecil.'
+            ]
+        ],
+        'nama_kontak_darurat' => [
+            'rules' => 'permit_empty|min_length[3]|max_length[100]',
+            'errors' => [
+                'min_length' => 'Nama kontak darurat minimal 3 karakter.',
+                'max_length' => 'Nama kontak darurat maksimal 100 karakter.'
+            ]
+        ],
+        'no_kontak_darurat'   => [
+            'rules' => 'permit_empty|numeric|min_length[10]|max_length[15]|regex_match[/^628[0-9]{8,12}$/]',
+            'errors' => [
+                'numeric'     => 'Nomor kontak darurat hanya boleh berisi angka.',
+                'min_length'  => 'Nomor kontak darurat minimal 10 digit.',
+                'max_length'  => 'Nomor kontak darurat maksimal 15 digit.',
+                'regex_match' => 'Nomor kontak darurat harus diawali 628 dan hanya angka.'
             ]
         ],
     ];

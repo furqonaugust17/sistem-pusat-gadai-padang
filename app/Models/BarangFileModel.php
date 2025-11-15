@@ -32,4 +32,9 @@ class BarangFileModel extends CustomModel
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
+
+    public function getFiles($barangId)
+    {
+        return $this->where('barang_id', $barangId)->findAll();
+    }
 }
