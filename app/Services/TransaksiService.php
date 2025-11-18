@@ -96,6 +96,7 @@ class TransaksiService
                 ->orLike('LOWER(nasabahs.nama_lengkap)', $searchLower)
                 ->orWhere("LOWER(CAST(transaksis.nominal AS TEXT)) LIKE ", "%{$searchLower}%", null, false)
                 ->orWhere("LOWER(CAST(transaksis.status AS TEXT)) LIKE ", "%{$searchLower}%", null, false)
+                ->orWhere("LOWER(TO_CHAR(transaksis.jatuh_tempo, 'DD Month YYYY')) LIKE ", "%{$searchLower}%", null, false)
                 ->groupEnd();
         }
 
