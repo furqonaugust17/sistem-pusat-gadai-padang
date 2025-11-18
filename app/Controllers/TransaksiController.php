@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\NasabahModel;
 use App\Models\TransaksiModel;
 use App\Services\TransaksiService;
+use PHPJasper\PHPJasper;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use Endroid\QrCode\QrCode;
@@ -207,5 +208,61 @@ class TransaksiController extends ResourceController
         return $this->response
             ->setHeader('Content-Type', $result->getMimeType())
             ->setBody($result->getString());
+    }
+
+    public function createReport($id)
+    {
+        $data = $this->transaksiModel->find($id);
+        if ($data == null) return redirect()->back();
+        $input = ROOTPATH . '/report/ugm/bukti-transaksi.jrxml';
+        $output = WRITEPATH . 'report';
+        $options = [
+            'format' => ['pdf'],
+            'locale' => 'in',
+            'params' => [
+                'query'     => "SELECT A.kode, A.nominal, A.created_at, A.nama_kontak_darurat, A.no_kontak_darurat, A.jatuh_tempo,
+B.nama_lengkap, B.alamat_ktp, B.alamat_domisili, B.tempat_lahir, B.tanggal_lahir, B.no_telp1,
+B.no_telp2, B.no_wa, B.email
+ FROM transaksis A
+INNER JOIN nasabahs AS B ON A.nasabah_id = B.id
+WHERE A.id = '$id'"
+            ],
+            'db_connection' => [
+                'driver' => 'postgres',
+                'username' => 'postgres',
+                'password' => 'Furqon_123',
+                'host' => 'pg-db',
+                'database' => 'db_sistem_ugm',
+                'port' => '5432'
+            ]
+        ];
+
+        $jasper = new PHPJasper;
+
+        $jasper->process(
+            $input,
+            $output,
+            $options
+        )->execute();
+        $filename = $output . '/tagihan' . '_' . date('d-M-Y') . '.pdf';
+        $file = $output . "/bukti-transaksi.pdf";
+        copy($file, $filename);
+        unlink($file);
+        return redirect()->to(route_to('TransaksiController::viewReport', basename($filename)));
+    }
+
+    public function viewReport($segment)
+    {
+        $filename = WRITEPATH . '/report' . '/' . $segment;
+        if (!file_exists($filename)) {
+            return redirect()->to('/');
+        }
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: inline; filename="' . basename($filename) . '"');
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+
+        readfile($filename);
+        exit;
     }
 }
