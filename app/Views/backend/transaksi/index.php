@@ -9,7 +9,6 @@
     #reader video {
         transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
-        /* untuk browser lama */
     }
 </style>
 <link href="<?= base_url('assets/vendor/select2/css/select2.min.css'); ?>" rel="stylesheet">
@@ -22,7 +21,6 @@
 <div class="row">
     <div class="col-12">
         <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target=".modal-insert">Tambah Transaksi</button>
-        <!-- <button type="button" class="btn btn-primary mb-4" id="scan">Scan QR Code</button> -->
         <button id="btnScanQR" class="btn btn-primary mb-4">
             <i class="bi bi-qr-code-scan"></i> Scan QR Code
         </button>
@@ -150,10 +148,17 @@
                     searchable: false,
                     "render": function(data, type, row) {
                         const uriShow = '<?= route_to('TransaksiController::show', ':id'); ?>'.replace(':id', data);
+                        const uriPrint = '<?= route_to('TransaksiController::createReport', ':id'); ?>'.replace(':id', data);
                         return `<div class="d-flex">
                         <a href="${uriShow}" class="btn btn-secondary shadow btn-xs sharp me-1">
                             <i class="fas fa-eye"></i>
                         </a>
+                        <form action="${uriPrint}" method="POST" target="_blank">
+                            <?= csrf_field() ?>
+                            <button type="submit"class="btn btn-primary shadow btn-xs sharp me-1">
+                                <i class="fas fa-print"></i>
+                            </button>
+                        </form>
                     </div>`
                     }
                 }
@@ -209,7 +214,8 @@
                 function onScanSuccess(decodedText) {
                     html5QrCode.stop().then(() => {
                         $('#scanModal').modal('hide');
-                        $('#table-transaksi_filter input[type="search"]').val(decodedText)
+                        table.search(decodedText);
+                        table.draw();
                     });
                 },
             ).catch(err => {
