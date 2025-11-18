@@ -162,7 +162,12 @@
                     </div>`
                     }
                 }
-            ]
+            ],
+            createdRow: function(row, data, dataIndex) {
+                if (isInReminderRange(data.jatuh_tempo, 0, 2)) {
+                    $(row).addClass('table-danger');
+                }
+            }
 
         });
         $('#site_state').on('change', function() {
@@ -224,5 +229,20 @@
             });
         })
     });
+
+    function isInReminderRange(reservasiTanggalStr, dariHari, sampaiHari) {
+        const today = new Date();
+        const reservasiDate = new Date(reservasiTanggalStr);
+
+        if (isNaN(reservasiDate)) {
+            return false;
+        }
+
+        today.setHours(0, 0, 0, 0);
+        reservasiDate.setHours(0, 0, 0, 0);
+
+        const dayDiff = (reservasiDate - today) / (1000 * 60 * 60 * 24);
+        return dayDiff >= dariHari && dayDiff <= sampaiHari;
+    }
 </script>
 <?= $this->endSection(); ?>
