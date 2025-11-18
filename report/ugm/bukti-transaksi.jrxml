@@ -1,0 +1,1054 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 5.1.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bukti-transaksi" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="10" bottomMargin="10" uuid="651d5f36-28c0-4a0a-a97e-f19047de0c44">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="query" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{query}]]>
+	</queryString>
+	<field name="kode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="kode"/>
+		<property name="com.jaspersoft.studio.field.label" value="kode"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="nominal" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="nominal"/>
+		<property name="com.jaspersoft.studio.field.label" value="nominal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="created_at" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="created_at"/>
+		<property name="com.jaspersoft.studio.field.label" value="created_at"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="nama_kontak_darurat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_kontak_darurat"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_kontak_darurat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="no_kontak_darurat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="no_kontak_darurat"/>
+		<property name="com.jaspersoft.studio.field.label" value="no_kontak_darurat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="jatuh_tempo" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="jatuh_tempo"/>
+		<property name="com.jaspersoft.studio.field.label" value="jatuh_tempo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="nama_lengkap" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_lengkap"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_lengkap"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="alamat_ktp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="alamat_ktp"/>
+		<property name="com.jaspersoft.studio.field.label" value="alamat_ktp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="alamat_domisili" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="alamat_domisili"/>
+		<property name="com.jaspersoft.studio.field.label" value="alamat_domisili"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="tempat_lahir" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tempat_lahir"/>
+		<property name="com.jaspersoft.studio.field.label" value="tempat_lahir"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="tanggal_lahir" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="tanggal_lahir"/>
+		<property name="com.jaspersoft.studio.field.label" value="tanggal_lahir"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="no_telp1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="no_telp1"/>
+		<property name="com.jaspersoft.studio.field.label" value="no_telp1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="no_telp2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="no_telp2"/>
+		<property name="com.jaspersoft.studio.field.label" value="no_telp2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="no_wa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="no_wa"/>
+		<property name="com.jaspersoft.studio.field.label" value="no_wa"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="141" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="565" height="141" backcolor="#030303" uuid="89fa0a8d-885f-449c-aa18-1cbf6901bc5a"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="220" y="0" width="343" height="35" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="1803e31f-d805-4b1b-902b-815d5d48c717">
+					<property name="com.jaspersoft.studio.unit.tabStopWidth" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" rotation="None">
+					<font fontName="Montserrat Black" size="22" isBold="true"/>
+					<paragraph lineSpacingSize="1.0" tabStopWidth="50"/>
+				</textElement>
+				<text><![CDATA[SURAT PERJANJIAN GADAI]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="360" y="38" width="89" height="16" uuid="5d5d178b-b856-40f9-a0ea-7658a62f86f8"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="451" y="38" width="112" height="16" uuid="5a109e53-60e9-411f-9daf-213ca6de9d12"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="55" width="89" height="16" uuid="224fda36-60a2-4ffb-8193-01e6e469313e"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="451" y="55" width="112" height="16" uuid="46956b92-98e1-4289-a094-801936e7649b"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="72" width="89" height="16" uuid="9a6673de-5d33-4e3e-9de0-2922ae1464cd"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="451" y="72" width="112" height="16" uuid="966438c4-57a5-4b9f-bcfa-5d732ebff571"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="89" width="89" height="16" uuid="5a67aedb-0e57-4b49-a7af-9ea6a7a3354c"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="451" y="89" width="112" height="16" uuid="9aba6114-5966-4a9e-8c32-2eca1cd7bddc"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="106" width="89" height="16" uuid="7bb30a63-8e45-4cd3-91d0-b5880f8e6b96"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="451" y="106" width="112" height="16" uuid="be0c3424-ff55-4a25-a9d4-500809c0c068"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="123" width="89" height="16" uuid="73ce47e6-a8d4-463d-aed2-5991970953e6"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="451" y="123" width="112" height="16" uuid="5c240895-7e92-4e18-8590-73e04179a5a9"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="154" y="106" width="84" height="16" uuid="a903958d-3e85-4cf4-b925-50fc98d65740"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="154" y="123" width="84" height="16" uuid="e58ba211-6664-4791-8ed8-ee73c5195950"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="56" width="50" height="10" forecolor="#FFFFFF" uuid="a12a8565-ec25-434b-9746-e4899d98ca44"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Regional Office]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="56" width="3" height="10" forecolor="#FFFFFF" uuid="29fcfd0e-4809-432d-8ac1-06656e111faa"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="56" width="137" height="20" forecolor="#FFFFFF" uuid="72aa1a07-6d3d-45f2-9c2c-ff7fa672f3ed"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Jl. Raya Nanggalo no. 28 B, Kec. Nanggalo Kota Padang, Provinsi Sumatera Barat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="76" width="50" height="10" forecolor="#FFFFFF" uuid="6a1c321a-46ab-4bdb-85ff-0cafcb210615"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[KCP I]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="76" width="3" height="10" forecolor="#FFFFFF" uuid="c5d0521b-043e-4085-afce-5ff826a42e5a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="76" width="147" height="10" forecolor="#FFFFFF" uuid="485883b2-fd3d-4752-8297-c7639114ae37"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Jl. Teuku Umar (Samping Apotek Kimia Farma)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="86" width="50" height="10" forecolor="#FFFFFF" uuid="088bdb92-2e37-4788-9f67-a2885e51ba07"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[KCP II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="86" width="3" height="10" forecolor="#FFFFFF" uuid="779fd19e-8355-429f-8baa-70a3bed89fd8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="86" width="107" height="10" forecolor="#FFFFFF" uuid="2c26d05c-7d4e-466f-aab8-80c8b2aa540d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Jl. Sumudera (Sebelum RM. FUJA)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="96" width="50" height="10" forecolor="#FFFFFF" uuid="30192444-b743-414c-b170-25980dcf01bf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[HP.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="96" width="3" height="10" forecolor="#FFFFFF" uuid="6a27ebbe-3cad-4cdc-b05e-eca1f3dda980"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="96" width="67" height="10" forecolor="#FFFFFF" uuid="af9fdb68-ffa4-4b81-b8d8-c0115a880dd0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[0812 7534 1600]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="106" width="67" height="10" forecolor="#FFFFFF" uuid="17f6b1d2-088a-472a-9b2f-3bca2fe59057"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[0811 446 1600]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="106" width="84" height="16" forecolor="#030303" uuid="981d0351-a2bf-40ee-a1aa-e90ac700d4de">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[NOMINAL GADAI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="123" width="84" height="16" forecolor="#030303" uuid="50d7b567-f6bb-40c1-9707-227bad895a29">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[JANJI PENEBUSAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="38" width="89" height="16" forecolor="#030303" uuid="1235a2b5-fb47-43da-81b8-186145e5d41c">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[NO GADAI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="55" width="89" height="16" forecolor="#030303" uuid="8329f14a-e32e-4e6d-a7cd-79939d2dd066">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[TANGGAL GADAI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="72" width="89" height="16" forecolor="#030303" uuid="4145c5de-9ba6-42d9-a323-85082b0405e8">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[TGL. GADAI OLEH SISTEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="89" width="89" height="16" forecolor="#030303" uuid="c4c151bb-f324-44ee-bfd0-edbcab026978">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[NO TRANSAKSI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="123" width="89" height="16" forecolor="#030303" uuid="9577ca4f-c0b3-4f5e-a80c-5ba2d37d72ca">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[TANGGAL DISERAHKAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="106" width="89" height="16" forecolor="#030303" uuid="8229a066-174f-46a8-95dc-b0048e00a6ce">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[TANGGAL TRANSAKSI]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="240" y="123" width="104" height="16" uuid="6ed67707-385b-4f11-b4ad-1a3abaf2ffc1"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="451" y="89" width="112" height="16" uuid="b06ed27f-0652-49b8-81bb-0e8835cdfe25">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="451" y="55" width="112" height="16" uuid="9e78e61a-3411-42ed-8be0-4dc75940742e">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{created_at}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="8" y="0" width="53" height="55" uuid="d18a7100-521d-4648-8455-5b163d39de29"/>
+				<imageExpression><![CDATA["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvOiwFKrchp5dBuGXEci4va9uCpHn3-xEGmg&s"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="240" y="106" width="104" height="16" uuid="225001b2-671d-49c2-a54b-2a29ad44d6b0"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="238" y="106" width="112" height="16" uuid="ddd2f347-6974-49fc-bfad-b2400059bc2a">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nominal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="681">
+			<staticText>
+				<reportElement x="0" y="0" width="565" height="20" uuid="1e719a59-8e53-4091-b2b9-37cefe06e8fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Yang Menerangkan Dibawah Ini Disebut Sebagai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="20" width="565" height="20" forecolor="#FFFFFF" backcolor="#030303" uuid="2d4cff98-7aa2-4b14-9cbb-dd1340e29af9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[PIHAK PERTAMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="244" width="565" height="20" forecolor="#FFFFFF" backcolor="#030303" uuid="b5f0113e-60b0-4ef9-ae91-f0b515eee1dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[PIHAK KEDUA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="43" width="83" height="18" uuid="f532be7c-eef7-4710-a1b2-cba595d2a6a9"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Nama Nasabah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="43" width="9" height="18" uuid="22afb7a7-bd2c-46cd-aa44-be5775ad30e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="43" width="465" height="18" uuid="4aeec960-8ae9-4b29-8609-516518f139a0"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_lengkap}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="61" width="83" height="18" uuid="c85b911a-21c7-4249-9284-ed5e302116c2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Alamat KTP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="61" width="9" height="18" uuid="a5345af1-68d7-42cd-bc5c-eb1541054565"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="306" y="61" width="90" height="18" uuid="88ba8289-373a-44bb-9e46-ba1fe00b913f"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Tempat/Tgl. lahir]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="396" y="61" width="169" height="18" uuid="0af71373-854a-493b-96d7-fb51070e008c"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tempat_lahir} + " / " + new SimpleDateFormat("dd MMMM yyyy").format($F{tanggal_lahir})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="61" width="206" height="42" uuid="8fae2e87-e95f-489a-aad9-309bf31e400a"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{alamat_ktp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="103" width="83" height="18" uuid="3f12e47e-4c9d-4354-ab71-4f8d7b13aadd"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Alamat Domisili]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="103" width="9" height="18" uuid="eda94969-b3fd-4c99-8421-53969b6e4c66"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="103" width="206" height="42" uuid="aef4635a-6dd4-4c38-93a9-0c2868d82955"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{alamat_domisili}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="145" width="83" height="18" uuid="63906236-875f-4317-9018-1a25ab8aaaf2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[No. HP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="145" width="9" height="18" uuid="7f155271-6f65-4bcd-815f-ea39a5dd6144"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="145" width="140" height="18" uuid="e5b1cdc5-6754-4158-83a0-da0b90233338"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_telp1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="145" width="29" height="18" uuid="4594b0c2-94bc-42c3-8f35-e96cacf79413"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Hp 2]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="269" y="145" width="140" height="18" uuid="0c5bd7b5-7a45-4160-a444-6d02b55aed62"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_telp2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="409" y="145" width="29" height="18" uuid="5c592b05-c773-4abc-99cf-e7eee3852e17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Wa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="438" y="145" width="127" height="18" uuid="47ce6e36-c358-4c78-ae0b-f07887e79669"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_wa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="163" width="83" height="18" uuid="c0f87c46-e033-4410-81b4-778f1882ccee"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Kontak Darurat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="163" width="9" height="18" uuid="9a1d30e9-c8be-4f7d-bcd9-49b55c62e32c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="163" width="465" height="18" uuid="311933ef-8ddf-439e-bf6a-6460507a3d72"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_kontak_darurat}+"("+$F{no_kontak_darurat}+")"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="181" width="83" height="18" uuid="15ceb181-39c6-4a2c-9ebf-41455fd1cfdb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Tujuan Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="181" width="9" height="18" uuid="e85bf827-9910-4f21-8501-1c343636fab6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="199" width="83" height="18" uuid="c719f3bf-2ad7-4940-8966-03d567e6ed44"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Pekerjaan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="199" width="9" height="18" uuid="da2ad4ba-06e5-4e72-ae15-42782c0a8312"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="217" width="83" height="18" uuid="286fcd8b-9064-40c1-ad55-d405c4b1ef27"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Alamat Menyurat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="217" width="9" height="18" uuid="645ee139-c998-4c6a-bc2e-0aba572080e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="102" y="183" width="15" height="15" uuid="4def8d3d-c374-42e0-a25f-7faa13a3a3f0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="119" y="181" width="49" height="18" uuid="94adaa3d-5732-446e-8ee4-4c546aa875c0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Pendidikan]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="169" y="183" width="15" height="15" uuid="31e25c58-e51c-4035-b280-627fd7c31d58">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="186" y="181" width="54" height="18" uuid="7dbde90c-9756-4026-994d-873a86c274fb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Modal Usaha]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="241" y="183" width="15" height="15" uuid="ee14c385-d344-4613-846c-225394304dd6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="258" y="181" width="86" height="18" uuid="cefce20a-0deb-440c-9ab4-03e3222b4bc2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Lain-lain,sebutkan]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="102" y="201" width="15" height="15" uuid="26b97fd5-79e3-4a09-afdb-1068964a0cd1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="119" y="199" width="49" height="18" uuid="eff1cbf1-da09-4011-857a-e899bab77651"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Swasta]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="169" y="201" width="15" height="15" uuid="d237f869-9724-45f8-9e2e-dfbe62f5451b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="186" y="199" width="54" height="18" uuid="f57acafd-9c67-4c07-9f35-a69c67466602"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[PNS]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="241" y="201" width="15" height="15" uuid="9a8c4a36-3307-4db0-a6ef-2a4919deb46d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="258" y="199" width="86" height="18" uuid="ba327303-6f20-46e4-9caa-40c81d2762a7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[BUMN/BUMD]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="345" y="201" width="15" height="15" uuid="df99a309-375e-4177-a090-fcb119f88700">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="362" y="199" width="87" height="18" uuid="afb0ae81-4b0e-4b56-8451-d07a8969395f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Wiraswasta - S/M/L]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="450" y="201" width="15" height="15" uuid="8f733107-c3f0-41ce-9560-aebb6110cfb4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="467" y="199" width="94" height="18" uuid="04deaf4b-8c37-4a6d-8af0-64e96324babd">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="10"/>
+				</textElement>
+				<text><![CDATA[Lain-lain]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="102" y="219" width="15" height="15" uuid="429236f9-f422-4e14-8388-c82f03a8b13d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="119" y="217" width="49" height="18" uuid="9f29d544-9ff2-4ba0-9232-d511808e4bf4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[KTP/NPWP]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="169" y="219" width="15" height="15" uuid="810896ad-20d9-47c8-8cec-31681717f3cc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="186" y="217" width="54" height="18" uuid="74abcc81-d938-4568-9c2e-f0b7daea2399"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Domisili]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="217" width="30" height="18" uuid="0454e957-c359-4eee-9308-e536d332635e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="217" width="9" height="18" uuid="d1134141-fb94-4de8-b443-44fa2695a3fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="281" y="217" width="140" height="18" uuid="16412867-361d-4f39-b823-30389faf592f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="266" width="83" height="18" uuid="57a75bf4-cebe-4adf-a767-530da7e1da5c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="266" width="9" height="18" uuid="eb7e7ed4-0318-4457-95fe-710facb476e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="284" width="83" height="18" uuid="d6f3f428-53fe-4407-be6f-f293c4b4e0bb"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Alamat KTP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="284" width="9" height="18" uuid="c93ee325-ea1f-48a3-bb98-06a544fc9e76"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="304" width="83" height="18" uuid="c7851fa1-28d0-485c-90a0-646f318d2099"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[No. HP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="304" width="9" height="18" uuid="8d69d566-f423-4e28-9d99-a606888523b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="266" width="169" height="18" uuid="8c14f7de-740a-4301-8805-bd6a370656d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Anjas Nurheri, S.Kom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="284" width="464" height="20" uuid="69a3396e-5547-464e-9608-f591a2facd9c"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Jl. Raya Siteba Nanggalo No. 28 B, Kec. Nanggalo, Kota Padang, Provinsi Sumatera Barat (Samping praktek dr. Efendi F)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="304" width="90" height="18" uuid="fd0b80e4-5a49-412f-be58-a0a6b65c0363"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[0812 7534 1600]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="325" width="545" height="20" uuid="ee1cc2d0-18d1-43a5-ab76-21d347a8d7e9"/>
+				<textElement>
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kedua Belah Pihak Telah Menyepakati Bahwa, Pihak Kedua Telah Memberikan Pinjaman Sejumlah Rp. "+$F{nominal}+" Kepada Pihak Pertama Dengan Jaminan Berupa Barang, dengan Keterangan Seperti Berikut :"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="101" y="345" width="9" height="18" uuid="204881eb-52f2-4e43-95f4-f54dedac50f7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="345" width="81" height="18" uuid="d68735c3-8834-4667-ad92-bcbab5a2dfdc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Jenis Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="363" width="81" height="18" uuid="4d2fd3db-1201-4278-83ee-a7b360ba286b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Merek]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="363" width="9" height="18" uuid="3966f237-7f2b-4092-8510-7139d047574f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="381" width="81" height="18" uuid="d1a18729-7ce7-42cf-b0b4-2008b895484f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="381" width="9" height="18" uuid="1f3b7d69-bbb4-4e4d-8e00-29494b2a960e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="406" width="565" height="20" forecolor="#FFFFFF" backcolor="#030303" uuid="1da7598f-da33-4b5c-8744-fee648a67fdd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Montserrat" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[SYARAT & KETENTUAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="431" width="10" height="18" uuid="eae716b7-6298-4b52-85d1-63430ab9d88d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[1.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="431" width="545" height="22" uuid="61933d00-6a55-454b-85c7-2aa9914b6944"/>
+				<textElement>
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pihak Kedua Membeli Barang Jaminan Kepada Pihak Pertama Dalam Jangka Waktu Selama " + "yang tepatnya jatuh tempo pada tanggal " + $F{jatuh_tempo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="453" width="10" height="18" uuid="ff8c9e6a-e3c7-466d-8ac5-2d7c1facdb4a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="453" width="545" height="22" uuid="2881a23b-a133-424c-9388-1a42eb8ceb1a">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pinjaman tidak dikenakan bunga berjalan akan tetapi pihak mengambil keuntungan jual kembali kepada pihak pertama dengan jumlah total yang harus dikembalikan sejumlah " + $F{nominal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="475" width="10" height="18" uuid="bcdd48f0-4bc8-46ff-9745-3bacf3578022"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="475" width="545" height="30" uuid="532c4e4b-2357-49bb-ab8c-fcb4efa8262b"/>
+				<textElement>
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Pada tanggal jatuh tempo jika pihak pertama tidak dapat menebus atau membeli barang jaminannya maka, pihak pertama secara sadar menyetujui barang jaminannya dijual oleh pihak kedua guna melaksanakan kewajiban melunasi pinjamannya dengan ketentuan :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="505" width="20" height="18" uuid="8b2019c9-a5bd-40ba-ab1a-d2167c7c2062"/>
+				<textElement>
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="505" width="515" height="21" uuid="5ed0e547-313c-4e25-ad6a-97b0407c1ea5"/>
+				<textElement>
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Jika harga barang jaminan terjual melebihi pinjaman, maka uang yang berlebih akan dikembalikan kepada pihak pertama sejumlah 10%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="526" width="515" height="21" uuid="78139622-0146-4669-950b-420045b44ee3"/>
+				<textElement>
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[Namun jika harga barang jaminan terjual kurang dari jumlah pinjaman maka pihak pertama wajib menambah kekurangan sesuai jumlah pinjaman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="526" width="20" height="18" uuid="ebbc3742-7dd1-4abf-8d59-421c77e125ce"/>
+				<textElement>
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<text><![CDATA[b)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="350" y="561" width="151" height="20" uuid="d3abb495-d346-48d3-a868-3e2cece2a4fd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Padang, " + new SimpleDateFormat("dd MMMM yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="590" width="70" height="20" uuid="02a40633-441e-4dc9-a238-ae84d000238e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat"/>
+				</textElement>
+				<text><![CDATA[Pihak Kedua]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="650" width="130" height="20" uuid="c2c233d9-5c9e-484a-b146-c00b9d7dcb6f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat"/>
+				</textElement>
+				<text><![CDATA[Anjas Nurheri, S.Kom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="590" width="79" height="20" uuid="d5eb2ffc-2779-4837-87f8-651f3a97ab69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat"/>
+				</textElement>
+				<text><![CDATA[Pihak Pertama]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="650" width="160" height="20" uuid="962daae5-d87b-4477-ae8f-16d00fb1569c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Montserrat" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_lengkap}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="80" y="614" width="39" height="30" uuid="d319ad41-6134-4dd5-bc26-6c53afd4801b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="80" y="614" width="39" height="30" uuid="c8289c42-007c-4afb-a377-0f8043f30854"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Materai
+Rp. 10.000]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+</jasperReport>
