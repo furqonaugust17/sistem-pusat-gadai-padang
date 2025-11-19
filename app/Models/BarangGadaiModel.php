@@ -10,7 +10,7 @@ class BarangGadaiModel extends CustomModel
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'tipe',
+        'jenis',
         'nama_barang',
         'deskripsi',
         'nilai_taksiran',
@@ -45,7 +45,7 @@ class BarangGadaiModel extends CustomModel
         lower(nama_barang) AS nama_barang,
         lower(deskripsi) AS deskripsi,
         lower(status::text)AS status,
-        lower(tipe::text) AS tipe
+        lower(jenis::text) AS jenis
         ', false);
 
         return $data;
@@ -57,11 +57,11 @@ class BarangGadaiModel extends CustomModel
         $result = $this->select('
         barang_gadais.id,
         barang_gadais.nama_barang,
-        barang_gadais.tipe as tipe_barang,
+        barang_gadais.jenis as tipe_barang,
         barang_gadais.deskripsi,
         barang_gadais.nilai_taksiran,
         barang_gadais.status');
-        if ($data['tipe'] == 'Kendaraan') {
+        if ($data['jenis'] == 'Kendaraan') {
             $result->select('
             barang_kendaraans.merk,
             barang_kendaraans.tipe,
@@ -71,7 +71,7 @@ class BarangGadaiModel extends CustomModel
             barang_kendaraans.bpkb,
             ')
                 ->join('barang_kendaraans', 'barang_kendaraans.barang_id = barang_gadais.id', 'inner');
-        } else if ($data['tipe'] == 'Elektronik') {
+        } else if ($data['jenis'] == 'Elektronik') {
             $result->select('
             barang_elektroniks.merk,
             barang_elektroniks.tipe,

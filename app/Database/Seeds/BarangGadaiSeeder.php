@@ -22,21 +22,21 @@ class BarangGadaiSeeder extends Seeder
         $idBarangGadai = [];
         $dataBarangs = [
             [
-                'tipe'           => 'Elektronik', // Enum: Kendaraan, Elektronik, Lainnya
+                'jenis'           => 'Elektronik', // Enum: Kendaraan, Elektronik, Lainnya
                 'nama_barang'    => 'Laptop Asus ROG',
                 'deskripsi'      => 'Laptop gaming dengan spesifikasi tinggi.',
                 'nilai_taksiran' => 15000000,
                 'status'         => 'Gadai', // Enum: Gadai, Jatuh Tempo, Lunas, Lelang, Terlelang
             ],
             [
-                'tipe'           => 'Kendaraan',
+                'jenis'           => 'Kendaraan',
                 'nama_barang'    => 'Motor Honda Vario',
                 'deskripsi'      => 'Motor matic tahun 2020 dengan kondisi sangat baik.',
                 'nilai_taksiran' => 12000000,
                 'status'         => 'Gadai',
             ],
             [
-                'tipe'           => 'Lainnya',
+                'jenis'           => 'Lainnya',
                 'nama_barang'    => 'Kalung Emas',
                 'deskripsi'      => 'Kalung emas murni 24 karat seberat 10 gram.',
                 'nilai_taksiran' => 8000000,

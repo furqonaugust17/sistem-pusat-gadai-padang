@@ -17,7 +17,6 @@ class BarangKendaraanModel extends CustomModel
         'plat_nomor',
         'stnk',
         'bpkb',
-        'file_gambar',
     ];
 
     protected bool $allowEmptyInserts = false;

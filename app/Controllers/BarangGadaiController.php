@@ -36,7 +36,7 @@ class BarangGadaiController extends ResourceController
                         $builder->groupStart()
                             ->like('lower(nama_barang)', strtolower($search), false)
                             ->orLike('lower(status::text)', strtolower($search), false)
-                            ->orLike('lower(tipe::text)', strtolower($search), false)
+                            ->orLike('lower(jenis::text)', strtolower($search), false)
                             ->groupEnd();
                     }
                 })
