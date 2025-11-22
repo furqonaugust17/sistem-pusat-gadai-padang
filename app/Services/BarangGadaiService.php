@@ -39,9 +39,9 @@ class BarangGadaiService
         $this->barangGadaiModel->update($id, $data);
 
         // Update data khusus berdasarkan tipe barang
-        if ($barang['tipe'] === 'Kendaraan') {
+        if ($barang['jenis'] === 'Kendaraan') {
             $this->updateBarangKendaraan($id, $request);
-        } elseif ($barang['tipe'] === 'Elektronik') {
+        } elseif ($barang['jenis'] === 'Elektronik') {
             $this->updateBarangElektronik($id, $request);
         }
 

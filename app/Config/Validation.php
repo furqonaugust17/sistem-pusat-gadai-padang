@@ -469,4 +469,13 @@ class Validation extends BaseConfig
             ]
         ],
     ];
+
+    public array $pembayaranCreate = [
+        'transaksi_id'   => [
+            'rules' => 'required',
+            'errors' => [
+                'required'     => 'Transaksi harus dipilih',
+            ]
+        ],
+    ];
 }

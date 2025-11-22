@@ -17,7 +17,7 @@ class BarangGadaiController extends ResourceController
 
     public function __construct()
     {
-        $this->configValidation = config('validation');
+        $this->configValidation = config('Validation');
         $this->barangGadaiModel = new BarangGadaiModel();
         $this->barangGadaiService = new BarangGadaiService();
     }
@@ -101,7 +101,7 @@ class BarangGadaiController extends ResourceController
             return redirect()->back()->with('error', 'Barang tidak ditemukan');
         }
 
-        $tipe = $barang['tipe'];
+        $tipe = $barang['jenis'];
 
 
         $rules = match ($tipe) {

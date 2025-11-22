@@ -148,6 +148,13 @@ class TransaksiController extends ResourceController
         //
     }
 
+    public function getTransaksi()
+    {
+        $query = $this->request->getGet('search');
+        $data = $this->transaksiModel->search($query);
+        return $this->response->setJSON($data);
+    }
+
     function normalizeCurrency($value)
     {
         return (int) str_replace(['.', ','], '', $value);
