@@ -34,6 +34,11 @@
                     <span class="nav-text">Pembayaran</span>
                 </a>
             </li>
+            <li><a href="<?= route_to('LaporanController::index'); ?>" class="ai-icon" aria-expanded="false">
+                    <i class="fas fa-file-alt fw-bold"></i>
+                    <span class="nav-text">Laporan</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

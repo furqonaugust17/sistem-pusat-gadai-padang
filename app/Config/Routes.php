@@ -12,6 +12,7 @@ $routes->group('backend', static function ($routes) {
     $routes->resource('karyawan', ['controller' => 'KaryawanController']);
     $routes->resource('nasabah', ['controller' => 'NasabahController']);
     $routes->resource('barang-gadai', ['controller' => 'BarangGadaiController']);
+    $routes->resource('laporan', ['controller' => 'LaporanController']);
     $routes->get('pembayaran/datatable', 'PembayaranController::datatable');
     $routes->resource('pembayaran', ['controller' => 'PembayaranController']);
     $routes->post('transaksi/generate-qrcode/(:segment)', 'TransaksiController::generateQRCode/$1');
