@@ -29,6 +29,11 @@
                     <span class="nav-text">Transaksi</span>
                 </a>
             </li>
+            <li><a href="<?= route_to('PembayaranController::index'); ?>" class="ai-icon" aria-expanded="false">
+                    <i class="fas fa-money-bill fw-bold"></i>
+                    <span class="nav-text">Pembayaran</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
