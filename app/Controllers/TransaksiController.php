@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\NasabahModel;
 use App\Models\TransaksiModel;
 use App\Services\TransaksiService;
+use PHPJasper\PHPJasper;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use Endroid\QrCode\QrCode;
@@ -148,6 +149,13 @@ class TransaksiController extends ResourceController
     public function delete($id = null)
     {
         //
+    }
+
+    public function getTransaksi()
+    {
+        $query = $this->request->getGet('search');
+        $data = $this->transaksiModel->search($query);
+        return $this->response->setJSON($data);
     }
 
     function normalizeCurrency($value)

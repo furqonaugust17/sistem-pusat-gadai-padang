@@ -53,7 +53,7 @@ class TransaksiModel extends CustomModel
         return $data;
     }
 
-    public function getData($id)
+    public function getData($id = null)
     {
         $data = $this->select("
             transaksis.id,
@@ -69,8 +69,22 @@ class TransaksiModel extends CustomModel
             nasabahs.no_wa,
             nasabahs.alamat_domisili,
         ")
+            ->join('nasabahs', 'transaksis.nasabah_id = nasabahs.id', 'INNER');
+
+        if (!$id) {
+            return $data->findAll();
+        } else {
+            return $data->find($id);
+        }
+    }
+
+    public function search($query)
+    {
+        $lowerCase = strtolower($query);
+        $data = $this->select('transaksis.id, transaksis.kode, nasabahs.nama_lengkap, transaksis.nominal')
             ->join('nasabahs', 'transaksis.nasabah_id = nasabahs.id', 'INNER')
-            ->find($id);
+            ->like('LOWER(transaksis.kode)', $lowerCase)
+            ->orLike('LOWER(nasabahs.nama_lengkap)', $lowerCase)->findAll(20);
 
         return $data;
     }
