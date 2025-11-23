@@ -21,12 +21,14 @@ class TransaksiController extends ResourceController
     protected $nasabahModel;
     protected $transaksiService;
     protected $transaksiModel;
+    protected $db;
 
     public function __construct()
     {
         $this->nasabahModel = new NasabahModel();
         $this->transaksiService = new TransaksiService();
         $this->transaksiModel = new TransaksiModel();
+        $this->db = \Config\Database::connect();
     }
 
     /**
@@ -207,5 +209,62 @@ class TransaksiController extends ResourceController
         return $this->response
             ->setHeader('Content-Type', $result->getMimeType())
             ->setBody($result->getString());
+    }
+
+    public function createReport($id)
+    {
+        $data = $this->transaksiModel->find($id);
+        if ($data == null) return redirect()->back();
+
+        $input = ROOTPATH . '/report/ugm/bukti-transaksi.jrxml';
+        $output = WRITEPATH . 'report';
+        $options = [
+            'format' => ['pdf'],
+            'locale' => 'in',
+            'params' => [
+                'query'     => "SELECT A.kode, A.nominal, A.created_at, A.nama_kontak_darurat, A.no_kontak_darurat, A.jatuh_tempo,
+B.nama_lengkap, B.alamat_ktp, B.alamat_domisili, B.tempat_lahir, B.tanggal_lahir, B.no_telp1,
+B.no_telp2, B.no_wa, B.email
+ FROM transaksis A
+INNER JOIN nasabahs AS B ON A.nasabah_id = B.id
+WHERE A.id = '$id'"
+            ],
+            'db_connection' => [
+                'driver' => 'postgres',
+                'username' => $this->db->username,
+                'password' => $this->db->password,
+                'host' => $this->db->hostname,
+                'database' => $this->db->database,
+                'port' => $this->db->port
+            ]
+        ];
+
+        $jasper = new PHPJasper;
+
+        $jasper->process(
+            $input,
+            $output,
+            $options
+        )->execute();
+        $filename = $output . '/tagihan' . '_' . date('d-M-Y') . '.pdf';
+        $file = $output . "/bukti-transaksi.pdf";
+        copy($file, $filename);
+        unlink($file);
+        return redirect()->to(route_to('TransaksiController::viewReport', basename($filename)));
+    }
+
+    public function viewReport($segment)
+    {
+        $filename = WRITEPATH . '/report' . '/' . $segment;
+        if (!file_exists($filename)) {
+            return redirect()->to('/');
+        }
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: inline; filename="' . basename($filename) . '"');
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+
+        readfile($filename);
+        exit;
     }
 }
