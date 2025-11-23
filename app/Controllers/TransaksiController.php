@@ -255,21 +255,6 @@ WHERE A.id = '$id'"
         $file = $output . "/bukti-transaksi.pdf";
         copy($file, $filename);
         unlink($file);
-        return redirect()->to(route_to('TransaksiController::viewReport', basename($filename)));
-    }
-
-    public function viewReport($segment)
-    {
-        $filename = WRITEPATH . '/report' . '/' . $segment;
-        if (!file_exists($filename)) {
-            return redirect()->to('/');
-        }
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: inline; filename="' . basename($filename) . '"');
-        header('Content-Transfer-Encoding: binary');
-        header('Accept-Ranges: bytes');
-
-        readfile($filename);
-        exit;
+        return redirect()->route('preview', [basename($filename)]);
     }
 }
