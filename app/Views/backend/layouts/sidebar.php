@@ -39,6 +39,11 @@
                     <span class="nav-text">Laporan</span>
                 </a>
             </li>
+            <li><a href="<?= route_to('BackupController::index'); ?>" class="ai-icon" aria-expanded="false">
+                    <i class="fas fa-cloud-upload-alt fw-bold"></i>
+                    <span class="nav-text">Backup Data</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
