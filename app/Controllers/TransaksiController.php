@@ -9,6 +9,7 @@ use PHPJasper\PHPJasper;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use Endroid\QrCode\QrCode;
+use PHPJasper\PHPJasper;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;
@@ -22,12 +23,14 @@ class TransaksiController extends ResourceController
     protected $nasabahModel;
     protected $transaksiService;
     protected $transaksiModel;
+    protected $db;
 
     public function __construct()
     {
         $this->nasabahModel = new NasabahModel();
         $this->transaksiService = new TransaksiService();
         $this->transaksiModel = new TransaksiModel();
+        $this->db = \Config\Database::connect();
     }
 
     /**
@@ -221,6 +224,7 @@ class TransaksiController extends ResourceController
     {
         $data = $this->transaksiModel->find($id);
         if ($data == null) return redirect()->back();
+
         $input = ROOTPATH . '/report/ugm/bukti-transaksi.jrxml';
         $output = WRITEPATH . 'report';
         $options = [
@@ -236,11 +240,11 @@ WHERE A.id = '$id'"
             ],
             'db_connection' => [
                 'driver' => 'postgres',
-                'username' => 'postgres',
-                'password' => 'Furqon_123',
-                'host' => 'pg-db',
-                'database' => 'db_sistem_ugm',
-                'port' => '5432'
+                'username' => $this->db->username,
+                'password' => $this->db->password,
+                'host' => $this->db->hostname,
+                'database' => $this->db->database,
+                'port' => $this->db->port
             ]
         ];
 
