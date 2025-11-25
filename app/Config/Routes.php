@@ -6,6 +6,9 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+$routes->get('/barang-lelang', 'Home::barangLelang');
+$routes->get('/barang-lelang/(:segment)', 'Home::detailBarangLelang/$1');
+$routes->get('/barang-gadai/lelang/list', 'BarangGadaiController::ListLelang');
 
 service('auth')->routes($routes);
 $routes->group('backend', static function ($routes) {
