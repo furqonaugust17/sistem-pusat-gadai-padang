@@ -9,7 +9,6 @@ use PHPJasper\PHPJasper;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use Endroid\QrCode\QrCode;
-use PHPJasper\PHPJasper;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;

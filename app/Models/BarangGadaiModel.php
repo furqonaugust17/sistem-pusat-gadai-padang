@@ -97,4 +97,21 @@ class BarangGadaiModel extends CustomModel
             ->where('barang_gadais.id', $id)->findAll();
         return $data ?? [];
     }
+
+    public function getLelangByCategory(string $category)
+    {
+        $data = $this->select('barang_gadais.id, barang_gadais.nama_barang, barang_gadais.nilai_taksiran, B.file_path AS foto')
+            ->join(
+                '(SELECT DISTINCT ON (barang_id) barang_id, file_path 
+            FROM barang_files 
+            ORDER BY barang_id, created_at ASC) "B"',
+                'B.barang_id = barang_gadais.id',
+                'LEFT'
+            )
+            ->where('barang_gadais.status', 'Lelang')
+            ->where('LOWER(barang_gadais.jenis::text)', $category)
+            ->orderBy('barang_gadais.updated_at', 'DESC')
+            ->findAll();
+        return $data;
+    }
 }

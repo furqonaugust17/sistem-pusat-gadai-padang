@@ -142,4 +142,18 @@ class TransaksiService
 
         return $transaksi;
     }
+
+    public function detailByKode($kode)
+    {
+        $transaksi = $this->transaksiModel->getData(kode: $kode);
+
+        if (!$transaksi) {
+            throw new \Exception("Data transaksi tidak ditemukan");
+        }
+        $barangFiles = $this->barangFileModel->getFiles($transaksi['barang_id']);
+
+        $transaksi['files'] = $barangFiles;
+
+        return $transaksi;
+    }
 }

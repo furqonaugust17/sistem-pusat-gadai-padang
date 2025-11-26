@@ -144,4 +144,23 @@ class BarangGadaiController extends ResourceController
             ->setStatusCode(200)
             ->setBody($binary);
     }
+
+    public function listLelang()
+    {
+        $kategori = $this->request->getGet('category');
+
+        if (!$kategori) {
+            return $this->response->setStatusCode(400)->setJSON([
+                'status' => 'fail',
+                'message' => 'Kategori tidak boleh kosong'
+            ]);
+        }
+
+        $items = $this->barangGadaiService->getLelangByCategory($kategori);
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $items
+        ]);
+    }
 }

@@ -23,6 +23,22 @@ class BarangGadaiService
         $this->barangFileModel = new BarangFileModel();
     }
 
+    public function getLelangByCategory(string $category)
+    {
+        return $this->barangGadaiModel->getLelangByCategory($category);
+    }
+
+    public function getDetailBarangGadai(string $id)
+    {
+        $barangGadai = $this->barangGadaiModel->getBarangGadai($id);
+        $gambar = $this->barangGadaiModel->getGambar($id);
+
+        return [
+            'barang' => $barangGadai,
+            'gambar' => $gambar
+        ];
+    }
+
     public function updateBarangGadai($id, $request)
     {
         $barang = $this->barangGadaiModel->find($id);

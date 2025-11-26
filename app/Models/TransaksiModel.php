@@ -53,7 +53,7 @@ class TransaksiModel extends CustomModel
         return $data;
     }
 
-    public function getData($id = null)
+    public function getData($id = null, $kode = null)
     {
         $data = $this->select("
             transaksis.id,
@@ -71,10 +71,12 @@ class TransaksiModel extends CustomModel
         ")
             ->join('nasabahs', 'transaksis.nasabah_id = nasabahs.id', 'INNER');
 
-        if (!$id) {
+        if (!$id && !$kode) {
             return $data->findAll();
-        } else {
+        } else if ($id && !$kode) {
             return $data->find($id);
+        } else if (!$id && $kode) {
+            return $data->where('kode', $kode)->first();
         }
     }
 
