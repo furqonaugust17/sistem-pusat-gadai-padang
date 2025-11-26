@@ -2,11 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Services\LaporanService;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 
 class LaporanController extends ResourceController
 {
+    protected $laporanService;
+
+    public function __construct()
+    {
+        $this->laporanService = new LaporanService();
+    }
+
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -20,71 +28,29 @@ class LaporanController extends ResourceController
         return view('backend/laporan/index', $data);
     }
 
-    /**
-     * Return the properties of a resource object.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function show($id = null)
-    {
-        //
-    }
-
-    /**
-     * Return a new resource object, with default properties.
-     *
-     * @return ResponseInterface
-     */
-    public function new()
-    {
-        //
-    }
-
-    /**
-     * Create a new resource object, from "posted" parameters.
-     *
-     * @return ResponseInterface
-     */
     public function create()
     {
-        //
-    }
+        $jenis   = $this->request->getPost('jenis_laporan');
+        $periode = $this->request->getPost('periode_waktu');
+        $format  = $this->request->getPost('format');
 
-    /**
-     * Return the editable properties of a resource object.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function edit($id = null)
-    {
-        //
-    }
+        if (!$jenis || !$periode || !$format) {
+            return redirect()->back()->with('errors', 'Parameter laporan tidak lengkap')->withInput();
+        }
 
-    /**
-     * Add or update a model resource, from "posted" properties.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function update($id = null)
-    {
-        //
-    }
+        try {
 
-    /**
-     * Delete the designated resource object from the model.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function delete($id = null)
-    {
-        //
+
+            $file = $this->laporanService->generate([
+                'jenis_laporan' => $jenis,
+                'periode_waktu' => $periode,
+                'format'        => $format,
+            ]);
+
+            return redirect()->route('preview', [urlencode($file['filename'])]);
+        } catch (\Exception $e) {
+
+            return redirect()->back()->with('errors', $e->getMessage())->withInput();
+        }
     }
 }
