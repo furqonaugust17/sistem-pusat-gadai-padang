@@ -161,7 +161,7 @@
 
 <?= $this->section('script'); ?>
 <script src="<?= base_url('assets/vendor/global/global.min.js') ?>"></script>
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
 
         function loadData(category) {

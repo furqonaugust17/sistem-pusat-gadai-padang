@@ -9,6 +9,8 @@ $routes->get('/', 'Home::index');
 $routes->get('/barang-lelang', 'Home::barangLelang');
 $routes->get('/barang-lelang/(:segment)', 'Home::detailBarangLelang/$1');
 $routes->get('/barang-gadai/lelang/list', 'BarangGadaiController::ListLelang');
+$routes->get('/cek-transaksi', 'CekTransaksiController::index');
+$routes->post('/cek-transaksi', 'CekTransaksiController::getTransaksi');
 
 service('auth')->routes($routes);
 $routes->group('backend', static function ($routes) {
