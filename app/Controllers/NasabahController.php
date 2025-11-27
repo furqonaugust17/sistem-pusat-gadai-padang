@@ -15,7 +15,7 @@ class NasabahController extends ResourceController
 
     public function __construct()
     {
-        $this->configValidation = config('validation');
+        $this->configValidation = config('Validation');
         $this->nasabahModel = new NasabahModel();
     }
 

@@ -3,23 +3,29 @@
 namespace App\Services;
 
 use App\Models\BarangFileModel;
+use App\Models\NasabahModel;
 use App\Models\TransaksiModel;
+use App\Services\SendMessageService;
 
 class TransaksiService
 {
     protected $transaksiModel;
+    protected $nasabahModel;
     protected $barangFileModel;
     protected $nasabahService;
     protected $barangService;
+    protected $sendMessageService;
     protected $db;
 
     public function __construct()
     {
 
         $this->transaksiModel = new TransaksiModel();
+        $this->nasabahModel = new NasabahModel();
         $this->barangFileModel = new BarangFileModel();
         $this->nasabahService = new NasabahService();
         $this->barangService  = new BarangService();
+        $this->sendMessageService  = new SendMessageService();
         $this->db = \Config\Database::connect();
     }
 
@@ -29,15 +35,25 @@ class TransaksiService
 
         try {
 
-            $nasabah_id = $this->nasabahService->getOrCreate($data);
-
+            $nasabah = $this->nasabahService->getOrCreate($data);
             $barang_id = $this->barangService->createBarang($data, $files);
 
-            $trx_id = $this->createTransaksi($nasabah_id, $barang_id, $data, $karyawan_id);
+            $transaksi = $this->createTransaksi($nasabah['id'], $barang_id, $data, $karyawan_id);
 
             $this->db->transCommit();
 
-            return $trx_id;
+            $message = $this->sendMessageService->templateNewTransaction([
+                'nama_nasabah'      => isset($data['nama_lengkap']) ? $data['nama_lengkap'] : $nasabah['nama_lengkap'],
+                'kode'              => $transaksi['kode'],
+                'nama_barang'       => $data['nama_barang'],
+                'jenis_barang'      => $data['jenis'],
+                'jumlah_pinjaman'   => number_format($data['nominal'], 0, ',', '.'),
+                'tanggal_transaksi' => date('j F Y', strtotime($transaksi['created_at'])),
+                'jatuh_tempo'       => date('j F Y', strtotime($data['jatuh_tempo'])),
+            ]);
+
+            $this->sendMessageService->sendMessage($nasabah['no_wa'], $message, $transaksi['id']);
+            return $transaksi['id'];
         } catch (\Exception $e) {
             $this->db->transRollback();
             throw $e;
@@ -48,7 +64,7 @@ class TransaksiService
     {
         $kode = $this->generateKodeTransaksi();
 
-        $this->transaksiModel->insert([
+        $transaksiID = $this->transaksiModel->insert([
             'nasabah_id' => $nasabah_id,
             'barang_id' => $barang_id,
             'karyawan_id' => $karyawan_id,
@@ -60,7 +76,13 @@ class TransaksiService
             'status' => 'Gadai',
         ]);
 
-        return $this->transaksiModel->getInsertID();
+        $transaksi = $this->transaksiModel->select('created_at')->find($transaksiID);
+
+        return [
+            'id'            => $transaksiID,
+            'kode'          => $kode,
+            'created_at'    => $transaksi['created_at']
+        ];
     }
 
     public function generateKodeTransaksi()
@@ -155,5 +177,10 @@ class TransaksiService
         $transaksi['files'] = $barangFiles;
 
         return $transaksi;
+    }
+
+    public function createMessage()
+    {
+        return "oke bose";
     }
 }

@@ -370,10 +370,7 @@ class Validation extends BaseConfig
 
     public array $transaksiStore = [
         'nasabah_id' => [
-            'rules'  => 'permit_empty|uuid',
-            'errors' => [
-                'uuid' => 'Data nasabah tidak valid.'
-            ]
+            'rules'  => 'permit_empty',
         ],
         'nama_barang' => [
             'rules'  => 'required|min_length[3]',

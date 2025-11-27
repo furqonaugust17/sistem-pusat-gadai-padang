@@ -90,4 +90,21 @@ class TransaksiModel extends CustomModel
 
         return $data;
     }
+
+    public function getReminderList()
+    {
+        return $this->select("
+            transaksis.id,
+            transaksis.kode,
+            transaksis.jatuh_tempo,
+            nasabahs.nama_lengkap AS nama_nasabah,
+            nasabahs.no_wa
+        ")
+            ->join('nasabahs', 'nasabahs.id = transaksis.nasabah_id')
+            ->where('transaksis.status', 'Gadai')
+            ->where("DATE(transaksis.jatuh_tempo) >= CURRENT_DATE")
+            ->where("DATE(transaksis.jatuh_tempo) <= CURRENT_DATE + INTERVAL '3 days'")
+            ->orderBy('transaksis.jatuh_tempo', 'ASC')
+            ->findAll();
+    }
 }

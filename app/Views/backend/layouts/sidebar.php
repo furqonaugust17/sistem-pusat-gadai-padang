@@ -9,7 +9,6 @@
             <p class="email"><?= auth()->user()->email; ?></p>
         </div>
         <ul class="metismenu" id="menu">
-
             <?php if (auth()->user()->inGroup('admin')): ?>
                 <li><a href="<?= route_to('NasabahController::index'); ?>" class="ai-icon" aria-expanded="false">
                         <i class="fas fa-users fw-bold"></i>
