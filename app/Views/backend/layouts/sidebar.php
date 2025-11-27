@@ -44,6 +44,11 @@
                     <span class="nav-text">Backup Data</span>
                 </a>
             </li>
+            <li><a href="<?= route_to('WhatsappController::index'); ?>" class="ai-icon" aria-expanded="false">
+                    <i class="fab fa-whatsapp fw-bold"></i>
+                    <span class="nav-text">WhatsApp</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
