@@ -25,17 +25,17 @@ class SendReminder extends BaseCommand
             return;
         }
 
-        foreach ($list as $trx) {
+        foreach ($list as $transaksi) {
 
             $pesan = $wa->templateReminder([
-                'nama_nasabah'         => $trx['nama_nasabah'],
-                'kode'         => $trx['kode'],
-                'jatuh_tempo'  => $trx['jatuh_tempo'],
+                'nama_nasabah'         => $transaksi['nama_nasabah'],
+                'kode'         => $transaksi['kode'],
+                'jatuh_tempo'  => $transaksi['jatuh_tempo'],
             ]);
 
-            $wa->sendMessageWithDelay($trx['no_wa'], $pesan);
+            $wa->sendMessageWithDelay(number: $transaksi['no_wa'], message: $pesan, transaksiId: $transaksi['id']);
 
-            CLI::write("Terkirim ke {$trx['no_wa']}", 'green');
+            CLI::write("Terkirim ke {$transaksi['no_wa']}", 'green');
         }
 
         CLI::write("Semua pengingat berhasil dikirimkan!", 'light_green');

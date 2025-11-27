@@ -2,16 +2,20 @@
 
 namespace App\Services;
 
+use App\Models\LogPesanModel;
+
 class SendMessageService
 {
     protected $client;
+    protected $logPesanModel;
 
     public function __construct()
     {
         $this->client = service('curlrequest');
+        $this->logPesanModel = new LogPesanModel();
     }
 
-    public function sendMessage($number, $message)
+    public function sendMessage($number, $message, $transaksiId = null)
     {
         try {
             $response = $this->client->post(getenv('WA_GATEWAY') . 'api/v1/send-message', [
@@ -29,12 +33,29 @@ class SendMessageService
             $status = $response->getStatusCode();
             $body   = json_decode($response->getBody(), true);
 
+            if ($transaksiId) {
+                $this->logPesanModel->insert([
+                    'transaksi_id' => $transaksiId,
+                    'status'       => $status === 200 ? 'berhasil' : 'gagal',
+                    'created_at'   => date('Y-m-d H:i:s'),
+                ]);
+            }
+
             return [
                 'success' => $status === 200,
                 'status'  => $status,
                 'data'    => $body ?? [],
             ];
         } catch (\Exception $e) {
+
+            if ($transaksiId) {
+                $this->logPesanModel->insert([
+                    'transaksi_id' => $transaksiId,
+                    'status'       => 'gagal',
+                    'created_at'   => date('Y-m-d H:i:s'),
+                ]);
+            }
+
             return [
                 'success' => false,
                 'status'  => 500,
@@ -46,13 +67,13 @@ class SendMessageService
 
 
 
-    public function sendMessageWithDelay($number, $message, $delay = null)
+    public function sendMessageWithDelay($number, $message, $delay = null, $transaksiId = null)
     {
         if ($delay === null) {
             $delay = rand(30, 60);
         }
 
-        $this->sendMessage($number, $message);
+        $this->sendMessage($number, $message, $transaksiId);
 
         sleep($delay);
     }
