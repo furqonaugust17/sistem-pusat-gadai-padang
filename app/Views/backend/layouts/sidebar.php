@@ -32,6 +32,11 @@
                 </li>
             <?php endif; ?>
             <?php if (auth()->user()->inGroup('pemilik')): ?>
+                <li><a href="<?= route_to('DashboardController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-chart-area fw-bold"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
                 <li><a href="<?= route_to('KaryawanController::index'); ?>" class="ai-icon" aria-expanded="false">
                         <i class="fas fa-users fw-bold"></i>
                         <span class="nav-text">Karyawan</span>

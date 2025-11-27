@@ -17,6 +17,7 @@ $routes->group('backend', static function ($routes) {
     $routes->get('/', 'RedirectRoleController::index');
 
     $routes->group('', ['filter' => 'group:pemilik'], static function ($routes) {
+        $routes->resource('dashboard', ['controller' => 'DashboardController']);
         $routes->resource('karyawan', ['controller' => 'KaryawanController']);
         $routes->resource('laporan', ['controller' => 'LaporanController']);
         $routes->resource('backup', ['controller' => 'BackupController']);
