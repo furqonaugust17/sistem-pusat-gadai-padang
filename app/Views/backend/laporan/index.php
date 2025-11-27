@@ -16,7 +16,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
-                        <form action="<?= route_to('laporan::create') ?>" method="POST">
+                        <form action="<?= route_to('laporan::create') ?>" method="POST" target="_blank">
                             <?= csrf_field() ?>
                             <table class="w-100">
                                 <tr>
