@@ -76,7 +76,8 @@ class Filters extends BaseFilters
             'csrf' => [
                 'except' => [
                     'backend/report/*',
-                    'backend/transaksi/generate-qrcode/*'
+                    'backend/transaksi/generate-qrcode/*',
+                    'backend/report/*'
                 ]
             ],
             'session' => ['except' => ['/', 'barang-lelang', 'barang-lelang/*', 'barang-gadai/lelang/list', 'cek-transaksi', 'login*', 'register', 'auth/a/*', 'logout']],
