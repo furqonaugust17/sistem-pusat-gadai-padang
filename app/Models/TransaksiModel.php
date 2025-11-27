@@ -107,4 +107,31 @@ class TransaksiModel extends CustomModel
             ->orderBy('transaksis.jatuh_tempo', 'ASC')
             ->findAll();
     }
+
+    public function transaksiBulanan()
+    {
+        $query = $this
+            ->select("EXTRACT(MONTH FROM created_at) as bulan, COUNT(*) as jumlah_transaksi, SUM(nominal) as total_nominal")
+            ->groupBy("EXTRACT(MONTH FROM created_at)")
+            ->orderBy("bulan", "ASC")
+            ->get()
+            ->getResultArray();
+
+        $bulanData = array_fill(0, 12, ['jumlah' => 0, 'nominal' => 0]);
+
+        foreach ($query as $row) {
+            $index = (int)$row['bulan'] - 1;
+            $bulanData[$index] = [
+                'jumlah' => (int)$row['jumlah_transaksi'],
+                'nominal' => (float)$row['total_nominal']
+            ];
+        }
+
+        $response = [
+            'jumlah_transaksi' => array_map(fn($b) => $b['jumlah'], $bulanData),
+            'total_nominal' => array_map(fn($b) => $b['nominal'], $bulanData),
+        ];
+
+        return $response;
+    }
 }

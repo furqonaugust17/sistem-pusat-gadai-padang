@@ -16,7 +16,7 @@ class RedirectRoleController extends BaseController
         }
 
         if ($user->inGroup('pemilik')) {
-            return redirect()->to('/backend/karyawan');
+            return redirect()->to('/backend/dashboard');
         }
 
         return redirect()->to('/');

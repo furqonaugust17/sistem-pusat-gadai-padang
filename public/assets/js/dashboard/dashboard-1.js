@@ -1,179 +1,81 @@
-(function($) {
-    "use strict"
+(function ($) {
+	"use strict"
 
+	var dzChartlist = function () {
 
- var dzChartlist = function(){
-	
-	var screenWidth = $(window).width();
-	var marketChart = function(){
-		 var options = {
-          series: [{
-          name: 'series1',
-          data: [200, 400, 300, 400, 200, 400, 200,300, 200, 300]
-        }, {
-          name: 'series2',
-          data: [500, 300, 400, 200, 500, 200, 400, 300, 500, 200]
-        }],
-          chart: {
-          height: 300,
-          type: 'area',
-		  toolbar:{
-			  show:false
-		  }
-        },
-		colors:["#FFAB2D","#00ADA3"],
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'smooth',
-		  width:3
-        },
-		legend:{
-			show:false
-		},
-		grid:{
-			show:false,
-			strokeDashArray: 6,
-			borderColor: '#dadada',
-		},
-		yaxis: {
-		  labels: {
-			style: {
-				colors: '#B5B5C3',
-				fontSize: '12px',
-				fontFamily: 'Poppins',
-				fontWeight: 400
-				
-			},
-			formatter: function (value) {
-			  return value + "k";
-			}
-		  },
-		},
-        xaxis: {
-          categories: ["Week 01","Week 02","Week 03","Week 04","Week 05","Week 06","Week 07","Week 08","Week 09","Week 10"],
-		  labels:{
-			  style: {
-				colors: '#B5B5C3',
-				fontSize: '12px',
-				fontFamily: 'Poppins',
-				fontWeight: 400
-				
-			},
-		  }
-        },
-		fill:{
-			type:'solid',
-			opacity:0.05
-		},
-        tooltip: {
-          x: {
-            format: 'dd/MM/yy HH:mm'
-          },
-        },
-        };
+		var transaksiChart = function () {
+			$.ajax({
+				url: '/backend/dashboard',
+				method: 'GET',
+				dataType: 'json',
+				success: function (data) {
+					var options = {
+						series: [{
+							name: 'Jumlah Transaksi',
+							data: data.jumlah_transaksi
+						}, {
+							name: 'Total Nominal',
+							data: data.total_nominal
+						}],
+						chart: {
+							height: 300,
+							type: 'area',
+							toolbar: {
+								show: false
+							}
+						},
+						colors: ["#FFAB2D", "#00ADA3"],
+						dataLabels: { enabled: false },
+						stroke: { curve: 'smooth', width: 3 },
+						legend: { show: true, position: 'top' },
+						grid: { show: true, strokeDashArray: 6, borderColor: '#dadada' },
+						yaxis: [{
+							title: { text: 'Jumlah Transaksi', style: { color: '#FFAB2D', fontSize: '12px' } },
+							labels: { style: { colors: '#B5B5C3', fontSize: '12px' } }
+						}, {
+							opposite: true,
+							title: { text: 'Total Nominal', style: { color: '#00ADA3', fontSize: '12px' } },
+							labels: {
+								style: { colors: '#B5B5C3', fontSize: '12px' },
+								formatter: function (value) {
+									return new Intl.NumberFormat("id-ID", {
+										minimumFractionDigits: 0,
+										maximumFractionDigits: 0,
+										style: "currency",
+										currency: "IDR"
+									}).format(value);
+								}
+							}
+						}],
+						xaxis: {
+							categories: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+							labels: { style: { colors: '#B5B5C3', fontSize: '12px' } }
+						},
+						fill: { type: 'solid', opacity: 0.1 },
+						tooltip: { shared: true, intersect: false }
+					};
 
-        var chart = new ApexCharts(document.querySelector("#marketChart"), options);
-        chart.render();
-	}
-	var currentChart = function(){
-		 var options = {
-          series: [85, 60, 67, 50],
-          chart: {
-          height: 315,
-          type: 'radialBar',
-        },
-        plotOptions: {
-          radialBar: {
-				startAngle:-90,
-			   endAngle: 90,
-            dataLabels: {
-              name: {
-                fontSize: '22px',
-              },
-              value: {
-                fontSize: '16px',
-              },
-            }
-          },
-        },
-		stroke:{
-			 lineCap: 'round',
-		},
-        labels: ['Income', 'Income', 'Imcome', 'Income'],
-		 colors:['#ec8153', '#70b944','#498bd9','#6647bf'],
-        };
-
-        var chart = new ApexCharts(document.querySelector("#currentChart"), options);
-        chart.render();
-	}
-	
-	var recentContact = function(){
-		jQuery('.testimonial-one').owlCarousel({
-			loop:true,
-			autoplay:true,
-			margin:20,
-			nav:false,
-			rtl:true,
-			dots: false,
-			navText: ['', ''],
-			responsive:{
-				0:{
-					items:3
+					var chart = new ApexCharts(document.querySelector("#transaksiChart"), options);
+					chart.render();
 				},
-				450:{
-					items:4
-				},
-				600:{
-					items:5
-				},	
-				991:{
-					items:5
-				},			
-				
-				1200:{
-					items:7
-				},
-				1601:{
-					items:5
+				error: function (xhr, status, error) {
+					console.error("Error AJAX:", status, error);
 				}
-			}
-		})
-	}
-	
-	
-	/* Function ============ */
-		return {
-			init:function(){
-			},
-			
-			
-			load:function(){
-					marketChart();
-					currentChart();
-					recentContact();
-					
-			},
-			
-			resize:function(){
-			}
+			});
 		}
-	
+
+		return {
+			init: function () { },
+			load: function () { transaksiChart(); },
+			resize: function () { }
+		}
+
 	}();
 
-	
-		
-	jQuery(window).on('load',function(){
-		setTimeout(function(){
+	jQuery(window).on('load', function () {
+		setTimeout(function () {
 			dzChartlist.load();
-		}, 1000); 
-		
+		}, 500);
 	});
-
-	jQuery(window).on('resize',function(){
-		
-		
-	});     
 
 })(jQuery);
