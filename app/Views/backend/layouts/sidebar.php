@@ -2,48 +2,53 @@
     <div class="deznav-scroll">
         <div class="main-profile">
             <div class="image-bx">
-                <img src="images/Untitled-1.jpg" alt="">
+                <img src="<?= base_url('assets/images/avatar.jpg'); ?>" alt="">
                 <a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
             </div>
-            <h5 class="name"><span class="font-w400">Hello,</span> Marquez</h5>
-            <p class="email">marquezzzz@mail.com</p>
+            <h5 class="name"><span class="font-w400">Halo,</span> <?= session('karyawan_nama'); ?></h5>
+            <p class="email"><?= auth()->user()->email; ?></p>
         </div>
         <ul class="metismenu" id="menu">
-            <li><a href="<?= route_to('KaryawanController::index'); ?>" class="ai-icon" aria-expanded="false">
-                    <i class="fas fa-users fw-bold"></i>
-                    <span class="nav-text">Karyawan</span>
-                </a>
-            </li>
-            <li><a href="<?= route_to('NasabahController::index'); ?>" class="ai-icon" aria-expanded="false">
-                    <i class="fas fa-users fw-bold"></i>
-                    <span class="nav-text">Nasabah</span>
-                </a>
-            </li>
-            <li><a href="<?= route_to('BarangGadaiController::index'); ?>" class="ai-icon" aria-expanded="false">
-                    <i class="fas fa-warehouse fw-bold"></i>
-                    <span class="nav-text">Barang Gadai</span>
-                </a>
-            </li>
-            <li><a href="<?= route_to('TransaksiController::index'); ?>" class="ai-icon" aria-expanded="false">
-                    <i class="fas fa-book-open fw-bold"></i>
-                    <span class="nav-text">Transaksi</span>
-                </a>
-            </li>
-            <li><a href="<?= route_to('PembayaranController::index'); ?>" class="ai-icon" aria-expanded="false">
-                    <i class="fas fa-money-bill fw-bold"></i>
-                    <span class="nav-text">Pembayaran</span>
-                </a>
-            </li>
-            <li><a href="<?= route_to('LaporanController::index'); ?>" class="ai-icon" aria-expanded="false">
-                    <i class="fas fa-file-alt fw-bold"></i>
-                    <span class="nav-text">Laporan</span>
-                </a>
-            </li>
-            <li><a href="<?= route_to('BackupController::index'); ?>" class="ai-icon" aria-expanded="false">
-                    <i class="fas fa-cloud-upload-alt fw-bold"></i>
-                    <span class="nav-text">Backup Data</span>
-                </a>
-            </li>
+
+            <?php if (auth()->user()->inGroup('admin')): ?>
+                <li><a href="<?= route_to('NasabahController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-users fw-bold"></i>
+                        <span class="nav-text">Nasabah</span>
+                    </a>
+                </li>
+                <li><a href="<?= route_to('BarangGadaiController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-warehouse fw-bold"></i>
+                        <span class="nav-text">Barang Gadai</span>
+                    </a>
+                </li>
+                <li><a href="<?= route_to('TransaksiController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-book-open fw-bold"></i>
+                        <span class="nav-text">Transaksi</span>
+                    </a>
+                </li>
+                <li><a href="<?= route_to('PembayaranController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-money-bill fw-bold"></i>
+                        <span class="nav-text">Pembayaran</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if (auth()->user()->inGroup('pemilik')): ?>
+                <li><a href="<?= route_to('KaryawanController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-users fw-bold"></i>
+                        <span class="nav-text">Karyawan</span>
+                    </a>
+                </li>
+                <li><a href="<?= route_to('LaporanController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-file-alt fw-bold"></i>
+                        <span class="nav-text">Laporan</span>
+                    </a>
+                </li>
+                <li><a href="<?= route_to('BackupController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-cloud-upload-alt fw-bold"></i>
+                        <span class="nav-text">Backup Data</span>
+                    </a>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
 </div>
