@@ -17,7 +17,7 @@ class KaryawanController extends ResourceController
 
     public function __construct()
     {
-        $this->configValidation = config('validation');
+        $this->configValidation = config('Validation');
         $this->karyawanService = new KaryawanService();
         $this->karyawanModel = new KaryawanModel();
     }

@@ -39,7 +39,7 @@
                                         <div class="col-12 mb-2">
                                             <div class="form-group">
                                                 <label class="text-label">Pilih Nasabah</label>
-                                                <select class="form-control" name="nasabah" id="single-select">
+                                                <select class="form-control" name="nasabah_id" id="single-select">
                                                     <?php foreach ($nasabahs as $nasabah): ?>
                                                         <option value="<?= $nasabah['id']; ?>"><?= $nasabah['nama_lengkap']; ?></option>
                                                     <?php endforeach; ?>
