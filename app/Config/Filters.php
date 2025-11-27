@@ -79,6 +79,7 @@ class Filters extends BaseFilters
                     'backend/transaksi/generate-qrcode/*'
                 ]
             ],
+            'session' => ['except' => ['/', 'barang-lelang', 'barang-lelang/*', 'barang-gadai/lelang/list', 'cek-transaksi', 'login*', 'register', 'auth/a/*', 'logout']],
             // 'invalidchars',
         ],
         'after' => [

@@ -497,7 +497,7 @@ class Auth extends ShieldAuth
      */
     public function groupDeniedRedirect(): string
     {
-        $url = setting('Auth.redirects')['group_denied'];
+        $url = previous_url();
 
         return $this->getUrl($url);
     }
