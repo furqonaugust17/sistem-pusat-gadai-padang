@@ -76,7 +76,8 @@ class Filters extends BaseFilters
             'csrf' => [
                 'except' => [
                     'backend/report/*',
-                    'backend/transaksi/generate-qrcode/*'
+                    'backend/transaksi/generate-qrcode/*',
+                    'backend/report/*'
                 ]
             ],
             // 'invalidchars',
