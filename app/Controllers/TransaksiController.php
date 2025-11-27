@@ -63,16 +63,6 @@ class TransaksiController extends ResourceController
     }
 
     /**
-     * Return a new resource object, with default properties.
-     *
-     * @return ResponseInterface
-     */
-    public function new()
-    {
-        //
-    }
-
-    /**
      * Create a new resource object, from "posted" parameters.
      *
      * @return ResponseInterface
@@ -94,7 +84,7 @@ class TransaksiController extends ResourceController
             $validation->setRules($rules->transaksiStore);
         }
 
-        if (! $validation->run($data)) {
+        if (!$validation->run($data)) {
             return redirect()->back()->withInput()->with('errors', 'Transaksi berhasil dibuat');
         }
 
@@ -103,51 +93,14 @@ class TransaksiController extends ResourceController
             $trx_id = $this->transaksiService->create(
                 $data,
                 $this->request->getFiles(),
-                // user()->id
-                "c31c97ac-a712-4d7f-b9ba-ae8e43616595"
+                session('karyawan_id')
             );
 
-            return redirect()->back()->with('success', 'Transaksi berhasil dibuat');
+            return redirect()->to(route_to('TransaksiController::show', $trx_id))->with('success', 'Transaksi berhasil dibuat');
         } catch (\Throwable $e) {
-
-            return redirect()->back()->withInput()->with('error', $e->getMessage());
+            dd($e);
+            return redirect()->back()->withInput()->with('errors', $e->getMessage());
         }
-    }
-
-    /**
-     * Return the editable properties of a resource object.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function edit($id = null)
-    {
-        //
-    }
-
-    /**
-     * Add or update a model resource, from "posted" properties.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function update($id = null)
-    {
-        //
-    }
-
-    /**
-     * Delete the designated resource object from the model.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function delete($id = null)
-    {
-        //
     }
 
     public function getTransaksi()

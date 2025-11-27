@@ -16,11 +16,12 @@ class NasabahService
     public function getOrCreate(array $data)
     {
         if (!empty($data['nasabah_id'])) {
-            return $data['nasabah_id'];
+            return $this->nasabahModel->select('id, nama_lengkap, no_wa')
+                ->find($data['nasabah_id']);
         }
 
         $this->nasabahModel->insert($data);
-
-        return $this->nasabahModel->getInsertID();
+        $id = $this->nasabahModel->getInsertID();
+        return array_merge(['id' => $id], $data);
     }
 }
