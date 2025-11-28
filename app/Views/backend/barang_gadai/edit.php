@@ -227,7 +227,7 @@
 
 
 <?= $this->section('javascript'); ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script src="<?= base_url('assets/js/jquery.mask.min.js'); ?>"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.money').mask("#.##0", {

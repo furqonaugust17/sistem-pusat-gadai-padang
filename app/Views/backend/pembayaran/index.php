@@ -23,6 +23,7 @@
     }
 
     #reader video {
+        width: 400px !important;
         transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
     }
@@ -90,8 +91,8 @@
 <script src="<?= base_url('assets/vendor/select2/js/select2.full.min.js'); ?>"></script>
 <script src="<?= base_url('assets/vendor/datatables/js/jquery.dataTables.min.js'); ?>"></script>
 <script src="<?= base_url('assets/vendor/sweetalert2/dist/sweetalert2.min.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="<?= base_url('assets/js/jquery.mask.min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/html5-qrcode.min.js'); ?>" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         let html5QrCode;
@@ -186,6 +187,7 @@
                         $('#single-select').select2('open');
                         $('.select2-search__field').val(decodedText).trigger('keyup');
                     });
+                    html5QrCode = null;
                 },
             ).catch(err => {
                 Swal.fire({
@@ -201,6 +203,14 @@
                 });
             });
         })
+
+        $('#scanModal').on('hidden.bs.modal', function(e) {
+            if (html5QrCode) {
+                html5QrCode.stop().then(() => {
+                    html5QrCode = null;
+                });
+            }
+        });
 
         $('#single-select').on('select2:select', function(e) {
 

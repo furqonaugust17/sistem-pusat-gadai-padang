@@ -52,7 +52,7 @@
 
 <?= $this->section('script'); ?>
 <script src="<?= base_url('assets/vendor/global/global.min.js') ?>"></script>
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="<?= base_url('assets/js/html5-qrcode.min.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/vendor/sweetalert2/dist/sweetalert2.min.js'); ?>"></script>
 <script type="text/javascript">
     $(document).ready(function() {

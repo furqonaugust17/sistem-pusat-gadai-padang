@@ -16,7 +16,7 @@
     <title>Login</title>
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="<?= base_url('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css'); ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/css/style.css'); ?>?version=<?= time(); ?>" rel="stylesheet">
 
 </head>
 
@@ -29,10 +29,7 @@
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
-                                    <div class="text-center mb-3">
-                                        <img src="images/logo-full-black.png" alt="">
-                                    </div>
-                                    <h4 class="text-center mb-4">Sign in your acrount</h4>
+                                    <h2 class="text-center mb-4">Login</h2>
                                     <?php if (session('error') !== null) : ?>
                                         <div class="alert alert-danger" role="alert"><?= esc(session('error')) ?></div>
                                     <?php elseif (session('errors') !== null) : ?>
@@ -78,7 +75,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Login</button>
                                         </div>
                                     </form>
                                     <?php if (setting('Auth.allowRegistration')) : ?>
