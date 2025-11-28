@@ -15,6 +15,7 @@ $routes->post('/cek-transaksi', 'CekTransaksiController::getTransaksi');
 service('auth')->routes($routes);
 $routes->group('backend', static function ($routes) {
     $routes->get('/', 'RedirectRoleController::index');
+    $routes->resource('whatsapp', ['controller' => 'WhatsappController']);
 
     $routes->group('', ['filter' => 'group:pemilik'], static function ($routes) {
         $routes->resource('dashboard', ['controller' => 'DashboardController']);
