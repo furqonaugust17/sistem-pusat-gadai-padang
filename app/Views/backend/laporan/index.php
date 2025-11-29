@@ -25,7 +25,7 @@
                                     <td>
                                         <select class="form-control" name="jenis_laporan" id="">
                                             <option value="nasabah">Nasabah</option>
-                                            <option value="nasabah">Karyawan</option>
+                                            <option value="karyawan">Karyawan</option>
                                             <option value="transaksi">Transaksi</option>
                                             <option value="pembayaran">Pembayaran</option>
                                             <option value="barang-gadai">Barang Gadai</option>

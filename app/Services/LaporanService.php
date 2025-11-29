@@ -67,12 +67,48 @@ ORDER BY n.nama_lengkap ASC
                 "
             ],
             'karyawan' => [
-                'jrxml' => ROOTPATH . "report/ugm/karyawan.jrxml",
+                'jrxml' => ROOTPATH . "report/ugm/laporan_karyawan.jrxml",
                 'title' => 'Laporan Karyawan',
+                'query' => "
+SELECT 
+    k.id,
+    k.nama,
+    k.no_telp,
+	ai.secret as email,
+    k.created_at AS tanggal_bergabung,
+    COUNT(t.id) AS jumlah_transaksi,
+    COALESCE(SUM(t.nominal), 0) AS total_nominal_transaksi
+FROM karyawans k
+INNER JOIN users u ON u.id = k.user_id
+INNER JOIN auth_groups_users agu ON agu.user_id = u.id
+INNER JOIN auth_identities ai ON ai.user_id = u.id
+LEFT JOIN transaksis t ON t.karyawan_id = k.id
+WHERE agu.group = 'admin' AND t.created_at >= '$dateRange[0]' AND t.created_at <= '$dateRange[1]'
+GROUP BY 
+    k.id, k.nama, k.no_telp, k.created_at, ai.secret
+ORDER BY k.id ASC;
+                "
             ],
             'transaksi' => [
-                'jrxml' => ROOTPATH . "report/ugm/transaksi.jrxml",
+                'jrxml' => ROOTPATH . "report/ugm/laporan_transaksi.jrxml",
                 'title' => 'Laporan Transaksi',
+                'query' => "
+SELECT 
+    t.kode AS kode_transaksi,
+    n.nama_lengkap AS nama_nasabah,
+    k.nama AS nama_karyawan,
+    b.nama_barang AS barang_gadai,
+    t.nominal AS nilai_pinjaman,
+    t.created_at::date AS tanggal_transaksi,
+    t.jatuh_tempo::date,
+    t.status
+FROM transaksis AS t
+INNER JOIN nasabahs AS n ON t.nasabah_id = n.id
+INNER JOIN karyawans AS k ON t.karyawan_id = k.id
+INNER JOIN barang_gadais AS b ON t.barang_id = b.id
+WHERE t.created_at >= '$dateRange[0]' AND t.created_at <= '$dateRange[1]'
+ORDER BY t.created_at DESC;
+                "
             ],
             'pembayaran' => [
                 'jrxml' => ROOTPATH . "report/ugm/pembayaran.jrxml",
@@ -110,6 +146,7 @@ ORDER BY n.nama_lengkap ASC
         $periodeEnd   = DateTime::createFromFormat("m/d/Y", $dateRange[1])->format("d-m-Y");
         $options = [
             'format' => [$format],
+            'locale' => 'in_ID',
             'params' => [
                 'periode_start' => $periodeStart,
                 'periode_end'   => $periodeEnd,
