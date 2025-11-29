@@ -77,7 +77,7 @@ class Filters extends BaseFilters
                 'except' => [
                     'backend/report/*',
                     'backend/transaksi/generate-qrcode/*',
-                    'backend/report/*'
+                    'backend/laporan',
                 ]
             ],
             'session' => ['except' => ['/', 'barang-lelang', 'barang-lelang/*', 'barang-gadai/lelang/list', 'cek-transaksi', 'login*', 'register', 'auth/a/*', 'logout']],

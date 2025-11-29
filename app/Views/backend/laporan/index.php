@@ -45,7 +45,7 @@
                                     <td>
                                         <select class="form-control" name="format" id="">
                                             <option value="pdf">PDF</option>
-                                            <option value="excel">Excel</option>
+                                            <option value="xlsx">Excel</option>
                                         </select>
                                     </td>
                                 </tr>
