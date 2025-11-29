@@ -67,20 +67,94 @@ ORDER BY n.nama_lengkap ASC
                 "
             ],
             'karyawan' => [
-                'jrxml' => ROOTPATH . "report/ugm/karyawan.jrxml",
+                'jrxml' => ROOTPATH . "report/ugm/laporan_karyawan.jrxml",
                 'title' => 'Laporan Karyawan',
+                'query' => "
+SELECT 
+    k.id,
+    k.nama,
+    k.no_telp,
+	ai.secret as email,
+    k.created_at AS tanggal_bergabung,
+    COUNT(t.id) AS jumlah_transaksi,
+    COALESCE(SUM(t.nominal), 0) AS total_nominal_transaksi
+FROM karyawans k
+INNER JOIN users u ON u.id = k.user_id
+INNER JOIN auth_groups_users agu ON agu.user_id = u.id
+INNER JOIN auth_identities ai ON ai.user_id = u.id
+LEFT JOIN transaksis t ON t.karyawan_id = k.id
+WHERE agu.group = 'admin' AND t.created_at >= '$dateRange[0]' AND t.created_at <= '$dateRange[1]'
+GROUP BY 
+    k.id, k.nama, k.no_telp, k.created_at, ai.secret
+ORDER BY k.id ASC
+                "
             ],
             'transaksi' => [
-                'jrxml' => ROOTPATH . "report/ugm/transaksi.jrxml",
+                'jrxml' => ROOTPATH . "report/ugm/laporan_transaksi.jrxml",
                 'title' => 'Laporan Transaksi',
+                'query' => "
+SELECT 
+    t.kode AS kode_transaksi,
+    n.nama_lengkap AS nama_nasabah,
+    k.nama AS nama_karyawan,
+    b.nama_barang AS barang_gadai,
+    t.nominal AS nilai_pinjaman,
+    t.created_at::date AS tanggal_transaksi,
+    t.jatuh_tempo::date,
+    t.status
+FROM transaksis AS t
+INNER JOIN nasabahs AS n ON t.nasabah_id = n.id
+INNER JOIN karyawans AS k ON t.karyawan_id = k.id
+INNER JOIN barang_gadais AS b ON t.barang_id = b.id
+WHERE t.created_at >= '$dateRange[0]' AND t.created_at <= '$dateRange[1]'
+ORDER BY t.created_at DESC
+                "
             ],
             'pembayaran' => [
-                'jrxml' => ROOTPATH . "report/ugm/pembayaran.jrxml",
+                'jrxml' => ROOTPATH . "report/ugm/laporan_pembayaran.jrxml",
                 'title' => 'Laporan Pembayaran',
+                'query' => "
+SELECT 
+    p.id AS id,
+    t.kode AS kode_transaksi,
+    n.nama_lengkap AS nama_nasabah,
+    b.nama_barang AS barang_gadai,
+    p.total_bayar,
+    p.tanggal_bayar
+FROM pembayarans AS p
+INNER JOIN transaksis AS t ON p.transaksi_id = t.id
+INNER JOIN nasabahs AS n ON t.nasabah_id = n.id
+INNER JOIN barang_gadais AS b ON t.barang_id = b.id
+WHERE p.created_at >= '$dateRange[0]' AND p.created_at <= '$dateRange[1]'
+ORDER BY p.tanggal_bayar DESC
+                "
             ],
-            'barang_gadai' => [
-                'jrxml' => ROOTPATH . "report/ugm/barang_gadai.jrxml",
+            'barang-gadai' => [
+                'jrxml' => ROOTPATH . "report/ugm/laporan_barang_gadai.jrxml",
                 'title' => 'Laporan Barang Gadai',
+                'query' => "
+SELECT 
+    bg.id,
+    bg.nama_barang,
+    bg.jenis AS kategori_barang,
+    bg.nilai_taksiran,
+    t.nominal AS nominal_gadai,
+    n.nama_lengkap AS nama_pemilik,
+    (
+        SELECT file_path 
+        FROM barang_files 
+        WHERE barang_id = bg.id
+        ORDER BY id ASC
+        LIMIT 1
+    ) AS foto_barang,
+    t.created_at AS tanggal_masuk,
+    bg.status
+FROM barang_gadais AS bg
+INNER JOIN transaksis AS t ON t.barang_id = bg.id
+INNER JOIN nasabahs AS n ON t.nasabah_id = n.id
+WHERE t.created_at >= '$dateRange[0]' AND t.created_at <= '$dateRange[1]'
+ORDER BY t.created_at DESC
+                "
             ],
         ];
 
@@ -110,10 +184,11 @@ ORDER BY n.nama_lengkap ASC
         $periodeEnd   = DateTime::createFromFormat("m/d/Y", $dateRange[1])->format("d-m-Y");
         $options = [
             'format' => [$format],
+            'locale' => 'in_ID',
             'params' => [
                 'periode_start' => $periodeStart,
                 'periode_end'   => $periodeEnd,
-                'query' => $query
+                'query' => $query,
             ],
             'db_connection' => [
                 'driver'   => 'postgres',
@@ -124,6 +199,10 @@ ORDER BY n.nama_lengkap ASC
                 'port'     => $this->db->port,
             ]
         ];
+
+        if ($title == 'Laporan Barang Gadai') {
+            $options['params']['base_url'] = base_url();
+        }
 
         $jasper->process(
             $jrxml,

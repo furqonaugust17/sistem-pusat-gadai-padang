@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan_transaksi" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="758e9fb1-77f3-4ed2-9379-a027a2ee2604">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="periode_end" class="java.lang.String"/>
+	<parameter name="periode_start" class="java.lang.String"/>
+	<parameter name="query" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{query}]]>
+	</queryString>
+	<field name="kode_transaksi" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="kode_transaksi"/>
+		<property name="com.jaspersoft.studio.field.label" value="kode_transaksi"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="nama_nasabah" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_nasabah"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_nasabah"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="nama_karyawan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_karyawan"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_karyawan"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="karyawans"/>
+	</field>
+	<field name="barang_gadai" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="barang_gadai"/>
+		<property name="com.jaspersoft.studio.field.label" value="barang_gadai"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang_gadais"/>
+	</field>
+	<field name="nilai_pinjaman" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="nilai_pinjaman"/>
+		<property name="com.jaspersoft.studio.field.label" value="nilai_pinjaman"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="tanggal_transaksi" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="tanggal_transaksi"/>
+		<property name="com.jaspersoft.studio.field.label" value="tanggal_transaksi"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="jatuh_tempo" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="jatuh_tempo"/>
+		<property name="com.jaspersoft.studio.field.label" value="jatuh_tempo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="30" width="802" height="30" uuid="1bdd5d27-38fd-4869-a9e9-0c2336f80d3c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Periode " 
++ new SimpleDateFormat("dd MMMM yyyy").format(
+      new SimpleDateFormat("dd-MM-yyyy").parse($P{periode_start})
+  ) 
++ " - " 
++ new SimpleDateFormat("dd MMMM yyyy").format(
+      new SimpleDateFormat("dd-MM-yyyy").parse($P{periode_end})
+  )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="30" uuid="c2ae0308-8349-41ef-8735-0ba647e562ea"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN TRANSAKSI]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="64e684a2-6317-4dd2-9648-eb8ff90c2087"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Kode Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="0" width="110" height="20" uuid="17f8c3f5-dd01-428f-8a40-96a600fc0bbe"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Nama Karyawan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="0" width="122" height="20" uuid="841e515d-54c6-4d01-b696-c33024eea35b"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Barang Gadai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="138" height="20" uuid="c7b91106-4a5d-46c9-a2d7-de9c6895db0d"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Nama Nasabah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="662" y="0" width="88" height="20" uuid="ad869fd8-f48c-41a5-bd30-747d7d5c5680"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Jatuh Tempo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="120" height="20" uuid="0665483b-6fea-43dc-8576-38e0250a64c1"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Nilai Pinjaman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="570" y="0" width="92" height="20" uuid="c74fa751-e307-4119-b478-514c8db16056"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Tanggal Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="750" y="0" width="52" height="20" uuid="46d9c083-2294-459c-a851-85aab9290f49"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="48" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="48" uuid="74cf42a5-9a6b-41f0-ad32-1696fc3ce17c"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kode_transaksi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="138" height="48" uuid="e79db50a-6629-4736-8163-5ba591a015d4"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_nasabah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="0" width="110" height="48" uuid="73810045-28c5-4208-bc6a-e90f3d9471bf"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_karyawan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="0" width="122" height="48" uuid="7ffe2ef1-022f-4a55-b951-4a03b2c63e8c"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barang_gadai}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.##;¤-#,##0.##">
+				<reportElement x="450" y="0" width="120" height="48" uuid="13b646e4-8c35-42bf-af22-51bcf4517af4"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nilai_pinjaman}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="570" y="0" width="92" height="48" uuid="d705f79d-978e-4ae5-a0ea-1edc2b9aa2cc"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy").format($F{tanggal_transaksi})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="662" y="0" width="88" height="48" uuid="c5c366fd-1b5d-44ba-a78f-d55c77a1f8a8"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy").format($F{jatuh_tempo})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="750" y="0" width="52" height="48" uuid="a7b00368-a2cb-41b8-8abd-11007c3ec7be"/>
+				<box padding="3">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="702" y="0" width="100" height="30" uuid="5e87213d-8732-4b96-819e-d51facad2eb0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Halaman  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<noData>
+		<band height="30">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="30" uuid="417f8571-e89e-469b-9f99-cbfee5632d10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIDAK ADA DATA]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>
