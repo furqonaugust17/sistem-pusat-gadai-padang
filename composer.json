@@ -14,8 +14,7 @@
         "codeigniter4/framework": "^4.0",
         "codeigniter4/shield": "^1.2",
         "endroid/qr-code": "^6.0",
-        "geekcom/phpjasper": "^3.4",
-        "hermawan/codeigniter4-datatables": "^0.8.0"
+        "geekcom/phpjasper": "^3.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",
