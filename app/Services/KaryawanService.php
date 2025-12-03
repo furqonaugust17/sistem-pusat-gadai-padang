@@ -76,4 +76,38 @@ class KaryawanService
 
         $this->db->transComplete();
     }
+
+    public function datatable($orderBy, $orderDir, $start, $length, $search, $draw)
+    {
+        $builder = $this->karyawanModel->Datatables();
+
+        if ($search) {
+            $searchLower = strtolower($search);
+
+            $builder->groupStart()
+                ->like('LOWER(karyawans.nama)', $searchLower)
+                ->orLike('LOWER(auth_groups_users.group)', $searchLower)
+                ->orLike('LOWER(karyawans.no_telp)', $searchLower)
+                ->orLike('LOWER(auth_identities.secret)', $searchLower)
+                ->orLike('LOWER(karyawans.alamat)', $searchLower)
+                ->orWhere("LOWER(CAST(karyawans.jenis_kelamin AS TEXT)) LIKE ", "%{$searchLower}%", null, false)
+                ->groupEnd();
+        }
+
+
+        $recordsTotal = $builder->countAllResults(false);
+
+
+        $builder->orderBy($orderBy, $orderDir)
+            ->limit($length, $start);
+
+        $rows = $builder->get()->getResultArray();
+
+        return [
+            "draw"            => intval($draw),
+            "recordsTotal"    => $recordsTotal,
+            "recordsFiltered" => $recordsTotal,
+            "data"            => $rows
+        ];
+    }
 }

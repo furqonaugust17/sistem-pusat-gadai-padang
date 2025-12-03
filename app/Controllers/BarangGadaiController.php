@@ -6,7 +6,6 @@ use App\Models\BarangGadaiModel;
 use App\Services\BarangGadaiService;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
-use Hermawan\DataTables\DataTable;
 
 class BarangGadaiController extends ResourceController
 {
@@ -30,17 +29,7 @@ class BarangGadaiController extends ResourceController
     public function index()
     {
         if (request()->isAJAX()) {
-            return DataTable::of($this->barangGadaiModel->Datatables())
-                ->filter(function ($builder, $request) {
-                    if ($search = $request->search['value']) {
-                        $builder->groupStart()
-                            ->like('lower(nama_barang)', strtolower($search), false)
-                            ->orLike('lower(status::text)', strtolower($search), false)
-                            ->orLike('lower(jenis::text)', strtolower($search), false)
-                            ->groupEnd();
-                    }
-                })
-                ->toJson(true);
+            return $this->datatable();
         }
 
         $data = [
@@ -112,14 +101,14 @@ class BarangGadaiController extends ResourceController
         $finalRules = array_merge($this->configValidation->barangGadaiUpdate, $rules, $this->configValidation->barangGadaiFiles);
 
         if (!$this->validate($finalRules)) {
-            return redirect()->to(route_to('BarangGadaiController::edit', $id))->withInput()->with('errors', 'Barang gadai gagal diperbarui rules');
+            return redirect()->to(route_to('BarangGadaiController::edit', $id))->withInput()->with('errors', 'Barang gadai gagal diperbarui');
         }
 
         try {
             $this->barangGadaiService->updateBarangGadai($id, $this->request);
             return redirect()->to(route_to('BarangGadaiController::show', $id))->with('success', 'Barang gadai berhasil diperbarui');
         } catch (\Exception $e) {
-            return redirect()->to(route_to('BarangGadaiController::edit', $id))->withInput()->with('errors', 'Barang gadai gagal diperbarui catch');
+            return redirect()->to(route_to('BarangGadaiController::edit', $id))->withInput()->with('errors', 'Barang gadai gagal diperbarui');
         }
     }
 
@@ -162,5 +151,27 @@ class BarangGadaiController extends ResourceController
             'status' => 'success',
             'data' => $items
         ]);
+    }
+
+    public function datatable()
+    {
+        $req  = $this->request;
+        $draw = $req->getVar('draw');
+        $start  = (int) $req->getVar('start') ?? 0;
+        $length = (int) $req->getVar('length') ?? 10;
+        $search = $req->getVar('search')['value'] ?? null;
+        $order  = $req->getVar('order')[0] ?? null;
+
+        $columns = [
+            'barang_gadais.nama_barang',
+            'barang_gadais.jenis',
+            'barang_gadais.status',
+        ];
+
+        $orderBy = $columns[$order['column']] ?? 'barang_gadais.nama_barang';
+        $orderDir = $order['dir'] ?? 'asc';
+
+        $output = $this->barangGadaiService->datatable($orderBy, $orderDir, $start, $length, $search, $draw);
+        return $this->response->setJSON($output);
     }
 }

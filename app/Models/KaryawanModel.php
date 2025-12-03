@@ -78,7 +78,7 @@ class KaryawanModel extends Model
         karyawans.alamat as alamat", false)
             ->join('users', 'karyawans.user_id = users.id', 'INNER')
             ->join('auth_groups_users', 'users.id = auth_groups_users.user_id', 'LEFT')
-            ->join('auth_identities', 'users.id = auth_identities.user_id', 'INNER');
+            ->join('auth_identities', 'users.id = auth_identities.user_id', 'INNER')->where('auth_groups_users.group !=', 'pemilik');
 
         return $data;
     }

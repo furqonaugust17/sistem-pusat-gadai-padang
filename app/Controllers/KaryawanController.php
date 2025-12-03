@@ -6,7 +6,6 @@ use App\Models\KaryawanModel;
 use App\Services\KaryawanService;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
-use Hermawan\DataTables\DataTable;
 
 class KaryawanController extends ResourceController
 {
@@ -30,9 +29,7 @@ class KaryawanController extends ResourceController
     public function index()
     {
         if (request()->isAJAX()) {
-            $model = $this->karyawanModel->Datatables();
-            return DataTable::of($model)
-                ->toJson(true);
+            return $this->datatable();
         }
         $groups = array_filter(config('AuthGroups')->groups, function ($key) {
             return ($key == 'admin' || $key == 'staff');
@@ -164,5 +161,30 @@ class KaryawanController extends ResourceController
             return $this->response->setStatusCode($statusCode)->setJSON($data);
         }
         return redirect()->back()->with($status, $message);
+    }
+
+    public function datatable()
+    {
+        $req  = $this->request;
+        $draw = $req->getVar('draw');
+        $start  = (int) $req->getVar('start') ?? 0;
+        $length = (int) $req->getVar('length') ?? 10;
+        $search = $req->getVar('search')['value'] ?? null;
+        $order  = $req->getVar('order')[0] ?? null;
+
+        $columns = [
+            'karyawans.nama',
+            'auth_groups_users.group',
+            'karyawans.no_telp',
+            'auth_identities.secret',
+            'karyawans.jenis_kelamin',
+            'karyawans.alamat',
+        ];
+
+        $orderBy = $columns[$order['column']] ?? 'karyawans.nama';
+        $orderDir = $order['dir'] ?? 'asc';
+
+        $output = $this->karyawanService->datatable($orderBy, $orderDir, $start, $length, $search, $draw);
+        return $this->response->setJSON($output);
     }
 }

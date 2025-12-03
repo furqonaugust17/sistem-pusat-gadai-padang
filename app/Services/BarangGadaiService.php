@@ -163,4 +163,37 @@ class BarangGadaiService
             @unlink($absolutePath);
         }
     }
+
+    public function datatable($orderBy, $orderDir, $start, $length, $search, $draw)
+    {
+        $builder = $this->barangGadaiModel
+            ->select("barang_gadais.id, barang_gadais.nama_barang, barang_gadais.deskripsi, barang_gadais.jenis, barang_gadais.status");
+
+
+        if ($search) {
+            $searchLower = strtolower($search);
+
+            $builder->groupStart()
+                ->like('LOWER(barang_gadais.nama_barang)', $searchLower)
+                ->orWhere("LOWER(CAST(barang_gadais.jenis AS TEXT)) LIKE ", "%{$searchLower}%", null, false)
+                ->orWhere("LOWER(CAST(barang_gadais.status AS TEXT)) LIKE ", "%{$searchLower}%", null, false)
+                ->groupEnd();
+        }
+
+
+        $recordsTotal = $builder->countAllResults(false);
+
+
+        $builder->orderBy($orderBy, $orderDir)
+            ->limit($length, $start);
+
+        $rows = $builder->get()->getResultArray();
+
+        return [
+            "draw"            => intval($draw),
+            "recordsTotal"    => $recordsTotal,
+            "recordsFiltered" => $recordsTotal,
+            "data"            => $rows
+        ];
+    }
 }

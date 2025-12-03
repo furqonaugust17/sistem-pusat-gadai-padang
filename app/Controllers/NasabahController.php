@@ -3,13 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\NasabahModel;
+use App\Services\NasabahService;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
-use Hermawan\DataTables\DataTable;
 
 class NasabahController extends ResourceController
 {
     protected $nasabahModel;
+    protected $nasabahService;
     protected $helpers = ['form'];
     protected $configValidation;
 
@@ -17,6 +18,7 @@ class NasabahController extends ResourceController
     {
         $this->configValidation = config('Validation');
         $this->nasabahModel = new NasabahModel();
+        $this->nasabahService = new NasabahService();
     }
 
     /**
@@ -27,8 +29,9 @@ class NasabahController extends ResourceController
     public function index()
     {
         if (request()->isAJAX()) {
-            return DataTable::of($this->nasabahModel->Datatables())
-                ->toJson(true);
+            // return DataTable::of($this->nasabahModel->Datatables())
+            //     ->toJson(true);
+            return $this->datatable();
         }
 
         $data = [
@@ -145,5 +148,29 @@ class NasabahController extends ResourceController
             return $this->response->setStatusCode($statusCode)->setJSON($data);
         }
         return redirect()->back()->with($status, $message);
+    }
+
+    public function datatable()
+    {
+        $req  = $this->request;
+        $draw = $req->getVar('draw');
+        $start  = (int) $req->getVar('start') ?? 0;
+        $length = (int) $req->getVar('length') ?? 10;
+        $search = $req->getVar('search')['value'] ?? null;
+        $order  = $req->getVar('order')[0] ?? null;
+
+        $columns = [
+            'nasabahs.nama_lengkap',
+            'nasabahs.no_telp1',
+            'nasabahs.email',
+            'nasabahs.jenis_kelamin',
+            'nasabahs.alamat_domisili',
+        ];
+
+        $orderBy = $columns[$order['column']] ?? 'karyawans.nama';
+        $orderDir = $order['dir'] ?? 'asc';
+
+        $output = $this->nasabahService->datatable($orderBy, $orderDir, $start, $length, $search, $draw);
+        return $this->response->setJSON($output);
     }
 }

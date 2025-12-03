@@ -62,7 +62,8 @@ class TransaksiService
 
     protected function createTransaksi($nasabah_id, $barang_id, $data, $karyawan_id)
     {
-        $kode = $this->generateKodeTransaksi();
+        $nasabah = explode('-', $nasabah_id)[1];
+        $kode = $this->generateKodeTransaksi(strtoupper($nasabah));
 
         $transaksiID = $this->transaksiModel->insert([
             'nasabah_id' => $nasabah_id,
@@ -77,7 +78,6 @@ class TransaksiService
         ]);
 
         $transaksi = $this->transaksiModel->select('created_at')->find($transaksiID);
-
         return [
             'id'            => $transaksiID,
             'kode'          => $kode,
@@ -85,7 +85,7 @@ class TransaksiService
         ];
     }
 
-    public function generateKodeTransaksi()
+    public function generateKodeTransaksi($nasabah_id)
     {
         $prefix = "UGM";
         $datePart = date("ym");
@@ -100,7 +100,7 @@ class TransaksiService
 
         $seq = str_pad($count + 1, 4, "0", STR_PAD_LEFT);
 
-        return "{$prefix}-{$datePart}-{$seq}";
+        return "{$prefix}-{$nasabah_id}-{$datePart}-{$seq}";
     }
 
     public function datatable($orderBy, $orderDir, $start, $length, $search, $draw)
