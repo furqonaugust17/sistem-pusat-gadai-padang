@@ -12,7 +12,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 id="status"></h3>
+                <h3 id="status">Koneksi WhatsApp terputus!</h3>
                 <div class="alert alert-warning m-0">
                     <p class="m-0">pastikan anda menggunakan whatsapp untuk bisnis (bukan whastapp pribadi)</p>
                 </div>

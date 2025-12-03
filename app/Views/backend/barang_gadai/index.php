@@ -72,7 +72,7 @@
         var table = $('#table-barang-gadai').DataTable({
             processing: true,
             serverSide: true,
-            searching: false,
+            searching: true,
             language: {
                 paginate: {
                     next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',

@@ -19,12 +19,12 @@
     <div class="container">
         <h1 class="text-center mb-3">Cek Transaksi Anda</h1>
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-12">
+            <div class="col-lg-7 col-12">
                 <div class="input-group h-100">
                     <input class="form-control w-100" type="text" name="kode" id="no-transaksi">
                 </div>
             </div>
-            <div class="col-lg-4 col-12 ps-lg-0 pt-lg-0 pt-3 d-flex justify-content-lg-start justify-content-center gap-3">
+            <div class="col-lg-3 col-12 ps-lg-0 pt-lg-0 pt-3 d-flex justify-content-lg-start justify-content-center gap-3">
                 <button class="btn btn-primary w-lg-auto w-100" id="search"><i class="fas fa-search"></i></button>
                 <button class="btn btn-primary w-lg-auto w-100" id="camera"><i class="fas fa-camera"></i></button>
             </div>

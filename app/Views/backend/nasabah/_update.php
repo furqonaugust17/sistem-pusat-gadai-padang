@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Nasabah</h5>
+                <h5 class="modal-title">Ubah Nasabah</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal">
                 </button>
             </div>
@@ -111,25 +111,6 @@
                             <?php if (validation_show_error('email')): ?>
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('email'); ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                        <span class="fw-bold fs-3">Kontak Darurat</span>
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Nama Kontak Darurat <span class="text-danger">*</span></label>
-                            <input type="text" id="nama_kontak_darurat" name="nama_kontak_darurat" value="<?= old('nama_kontak_darurat'); ?>" class="form-control <?= validation_show_error('nama_kontak_darurat') ? 'is-invalid' : ''; ?>">
-                            <?php if (validation_show_error('nama_kontak_darurat')): ?>
-                                <div class="invalid-feedback">
-                                    <?= validation_show_error('nama_kontak_darurat'); ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">No Kontak Darurat <span class="text-danger">*</span></label>
-                            <input type="text" id="no_kontak_darurat" name="no_kontak_darurat" value="<?= old('no_kontak_darurat'); ?>" class="form-control telp <?= validation_show_error('no_kontak_darurat') ? 'is-invalid' : ''; ?>">
-                            <?php if (validation_show_error('no_kontak_darurat')): ?>
-                                <div class="invalid-feedback">
-                                    <?= validation_show_error('no_kontak_darurat'); ?>
                                 </div>
                             <?php endif; ?>
                         </div>
