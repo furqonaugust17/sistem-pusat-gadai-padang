@@ -96,10 +96,10 @@ class BarangGadaiController extends ResourceController
         $rules = match ($tipe) {
             'Kendaraan' => $this->configValidation->barangKendaraanUpdate,
             'Elektronik' =>  $this->configValidation->barangElektronikUpdate,
+            default => []
         };
 
         $finalRules = array_merge($this->configValidation->barangGadaiUpdate, $rules, $this->configValidation->barangGadaiFiles);
-
         if (!$this->validate($finalRules)) {
             return redirect()->to(route_to('BarangGadaiController::edit', $id))->withInput()->with('errors', 'Barang gadai gagal diperbarui');
         }

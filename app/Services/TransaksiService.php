@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\BarangFileModel;
+use App\Models\BarangGadaiModel;
 use App\Models\NasabahModel;
 use App\Models\TransaksiModel;
 use App\Services\SendMessageService;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 
 class TransaksiService
 {
@@ -15,6 +17,7 @@ class TransaksiService
     protected $nasabahService;
     protected $barangService;
     protected $sendMessageService;
+    protected $barangGadaiModel;
     protected $db;
 
     public function __construct()
@@ -26,6 +29,7 @@ class TransaksiService
         $this->nasabahService = new NasabahService();
         $this->barangService  = new BarangService();
         $this->sendMessageService  = new SendMessageService();
+        $this->barangGadaiModel = new BarangGadaiModel();
         $this->db = \Config\Database::connect();
     }
 
@@ -75,6 +79,8 @@ class TransaksiService
             'nominal' => $data['nominal'],
             'jatuh_tempo' => $data['jatuh_tempo'],
             'status' => 'Gadai',
+            'tujuan' => $data['tujuan'],
+            'detail_tujuan' => $data['detail_tujuan'] ?? null,
         ]);
 
         $transaksi = $this->transaksiModel->select('created_at')->find($transaksiID);
@@ -101,6 +107,33 @@ class TransaksiService
         $seq = str_pad($count + 1, 4, "0", STR_PAD_LEFT);
 
         return "{$prefix}-{$nasabah_id}-{$datePart}-{$seq}";
+    }
+
+    public function updateStatus($id)
+    {
+        $transaksi = $this->transaksiModel->select('barang_id')->find($id);
+
+        if (!$transaksi) {
+            throw new \RuntimeException('Data transaksi tidak ditemukan.');
+        }
+
+        $this->db->transStart();
+
+        try {
+            $this->transaksiModel->update($id, ['status' => 'Lelang']);
+            $this->barangGadaiModel->update($transaksi['barang_id'], ['status' => 'Lelang']);
+
+            $this->db->transComplete();
+
+            if ($this->db->transStatus() === false) {
+                throw new DatabaseException('Gagal menyimpan perubahan ke database.');
+            }
+
+            return true;
+        } catch (\Exception $e) {
+            $this->db->transRollback();
+            throw $e;
+        }
     }
 
     public function datatable($orderBy, $orderDir, $start, $length, $search, $draw)
@@ -177,10 +210,5 @@ class TransaksiService
         $transaksi['files'] = $barangFiles;
 
         return $transaksi;
-    }
-
-    public function createMessage()
-    {
-        return "oke bose";
     }
 }

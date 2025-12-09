@@ -33,7 +33,7 @@
     import {
         io
     } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
-    const socket = io("wss://pdp.furqonaugust.web.id", {
+    const socket = io("<?= getenv('WA_GATEWAY_BASE_URL'); ?>", {
         transports: ["websocket"]
     });
 

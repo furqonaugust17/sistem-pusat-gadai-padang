@@ -290,6 +290,12 @@ class Validation extends BaseConfig
                 'required' => 'Nilai taksiran wajib diisi',
             ],
         ],
+        'status' => [
+            'rules' => 'permit_empty|in_list[Lelang,Terlelang]',
+            'errors' => [
+                'in_list' => 'Status tidak valid',
+            ],
+        ],
     ];
 
     public array $barangKendaraanUpdate = [
@@ -441,6 +447,19 @@ class Validation extends BaseConfig
                 'valid_date' => 'Format tanggal jatuh tempo tidak valid.'
             ]
         ],
+        'tujuan' => [
+            'rules'  => 'required|in_list[pendidikan,modal-usaha,konsumsi,lain-lain]',
+            'errors' => [
+                'required'   => 'Tujuan harus dipilih',
+                'in_list' => 'Tujuan tidak valid'
+            ]
+        ],
+        'detail_tujuan' => [
+            'rules'  => 'permit_empty|min_length[4]',
+            'errors' => [
+                'min_length' => 'Detail tujuan minimal 4 karakter'
+            ]
+        ],
         'nominal' => [
             'rules'  => 'required|numeric|min_length[4]',
             'errors' => [
@@ -450,15 +469,17 @@ class Validation extends BaseConfig
             ]
         ],
         'nama_kontak_darurat' => [
-            'rules' => 'permit_empty|min_length[3]|max_length[100]',
+            'rules' => 'required|min_length[3]|max_length[100]',
             'errors' => [
+                'required' => 'Nama kontak darurat wajib diisi',
                 'min_length' => 'Nama kontak darurat minimal 3 karakter.',
                 'max_length' => 'Nama kontak darurat maksimal 100 karakter.'
             ]
         ],
         'no_kontak_darurat'   => [
-            'rules' => 'permit_empty|numeric|min_length[10]|max_length[15]|regex_match[/^628[0-9]{8,12}$/]',
+            'rules' => 'required|numeric|min_length[10]|max_length[15]|regex_match[/^628[0-9]{8,12}$/]',
             'errors' => [
+                'required' => 'Nomor kontak darurat wajib diisi',
                 'numeric'     => 'Nomor kontak darurat hanya boleh berisi angka.',
                 'min_length'  => 'Nomor kontak darurat minimal 10 digit.',
                 'max_length'  => 'Nomor kontak darurat maksimal 15 digit.',

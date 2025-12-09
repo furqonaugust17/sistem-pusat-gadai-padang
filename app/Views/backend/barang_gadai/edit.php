@@ -65,7 +65,19 @@
                                             <tr>
                                                 <th>Status</th>
                                                 <th>:</th>
-                                                <td class="p-2"><input class="bg-body form-control" type="text" value="<?= $data['status']; ?>" disabled></td>
+                                                <td class="p-2">
+                                                    <?php if ($data['status'] != 'Lelang'): ?>
+                                                        <input class="bg-body form-control" type="text" value="<?= $data['status']; ?>" disabled>
+                                                    <?php else: ?>
+                                                        <select name="status" id="" class="form-control <?= validation_show_error('status') ? 'is-invalid' : ''; ?>">
+                                                            <option value="Lelang" selected disabled>Lelang</option>
+                                                            <option value="Terlelang">Terlelang</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            <?= validation_show_error('status'); ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

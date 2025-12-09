@@ -21,7 +21,8 @@ class NasabahModel extends CustomModel
         'no_telp1',
         'no_telp2',
         'no_wa',
-        'email'
+        'email',
+        'pekerjaan',
     ];
 
     protected bool $allowEmptyInserts = false;

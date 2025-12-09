@@ -85,7 +85,7 @@ class TransaksiController extends ResourceController
         }
 
         if (!$validation->run($data)) {
-            return redirect()->back()->withInput()->with('errors', 'Transaksi berhasil dibuat');
+            return redirect()->back()->withInput()->with('errors', 'Transaksi gagal dibuat');
         }
 
         try {
@@ -107,7 +107,26 @@ class TransaksiController extends ResourceController
     {
         $query = $this->request->getGet('search');
         $data = $this->transaksiModel->search($query);
-        return $this->response->setJSON($data);
+        return $this->respond($data);
+    }
+
+    public function updateStatus($id)
+    {
+        $response = [
+            'data' => ['csrf' => csrf_hash()]
+        ];
+
+        try {
+            $this->transaksiService->updateStatus($id);
+            $response['message'] = 'Status berhasil diubah menjadi Lelang.';
+            return $this->respond($response, 200);
+        } catch (\RuntimeException $e) {
+            $response['message'] = $e->getMessage();
+            return $this->respond($response, 404);
+        } catch (\Exception $e) {
+            $response['message'] = 'Terjadi kesalahan sistem: ' . $e->getMessage();
+            return $this->respond($response, 500);
+        }
     }
 
     function normalizeCurrency($value)

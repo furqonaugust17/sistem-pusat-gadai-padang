@@ -32,6 +32,7 @@ $routes->group('backend', static function ($routes) {
         $routes->post('transaksi/generate-qrcode/(:segment)', 'TransaksiController::generateQRCode/$1');
         $routes->get('transaksi/datatable', 'TransaksiController::datatable');
         $routes->get('transaksi/getTransaksi', 'TransaksiController::getTransaksi');
+        $routes->put('transaksi/updateStatus/(:segment)', 'TransaksiController::updateStatus/$1');
         $routes->resource('transaksi', ['controller' => 'TransaksiController']);
         $routes->get('upload/file/(:segment)/(:alpha)', 'BarangGadaiController::showFile/$1/$2', ['as' => 'file.barang']);
         $routes->post('report/(:segment)', 'TransaksiController::createReport/$1');

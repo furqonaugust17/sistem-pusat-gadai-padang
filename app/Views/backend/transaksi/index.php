@@ -153,7 +153,24 @@
                         return `<div class="d-flex">
                         <a href="${uriShow}" class="btn btn-secondary shadow btn-xs sharp me-1">
                             <i class="fas fa-eye"></i>
-                        </a>
+                            </a>
+                        <div class="dropdown custom-dropdown">
+                           <button type="button" 
+                                class="btn btn-secondary shadow btn-xs sharp me-1" 
+                                ${row.status.includes('Jatuh Tempo') ? 'data-bs-toggle="dropdown"' : ''} 
+                                ${!row.status.includes('Jatuh Tempo') ? 'disabled style="pointer-events: none;"' : ''} 
+                                aria-expanded="false">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                ${row.status.includes('Jatuh Tempo') 
+                                    ? `<button class="dropdown-item" type="button" 
+                                        onclick="event.stopPropagation(); updateStatus('${data}')">
+                                        Update Status Lelang
+                                    </button>`
+                                    : ''}
+                            </div>
+                        </div>
                         <form action="${uriPrint}" method="POST" target="_blank">
                             <?= csrf_field() ?>
                             <button type="submit"class="btn btn-primary shadow btn-xs sharp me-1">
@@ -165,7 +182,7 @@
                 }
             ],
             createdRow: function(row, data, dataIndex) {
-                if (isInReminderRange(data.jatuh_tempo, 0, 2)) {
+                if (isInReminderRange(data.jatuh_tempo, 0, 2) && !data.status.includes('Lunas')) {
                     $(row).addClass('table-danger');
                 }
             }
@@ -248,6 +265,19 @@
             }
         });
 
+        $('select[name="tujuan"]').on('change', function() {
+            const value = $(this).val();
+
+            if (value == 'lain-lain') {
+                $('#detail_tujuan').show();
+                $('#detail_tujuan').attr('disabled', false);
+                return
+            }
+            $('#detail_tujuan').hide();
+            $('#detail_tujuan').attr('disabled', true);
+            return
+        })
+
     });
 
     function isInReminderRange(reservasiTanggalStr, dariHari, sampaiHari) {
@@ -263,6 +293,62 @@
 
         const dayDiff = (reservasiDate - today) / (1000 * 60 * 60 * 24);
         return dayDiff >= dariHari && dayDiff <= sampaiHari;
+    }
+
+    function updateStatus(id) {
+        Swal.fire({
+            title: "Anda Yakin?",
+            text: "Statu data ini akan diubah menjadi lelang. dan tidak bisa dikembalikan.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ubah",
+            cancelButtonText: "Batal",
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '<?= route_to('TransaksiController::updateStatus', ':id') ?>'.replace(':id', id),
+                    method: 'PUT',
+                    data: {
+                        '<?= csrf_token(); ?>': $('meta[name="<?= csrf_header(); ?>"]').attr('content')
+                    },
+                    success: function(response) {
+                        toastr.success(response.message, {
+                            closeButton: false,
+                            debug: false,
+                            newestOnTop: false,
+                            progressBar: true,
+                            positionClass: "toast-top-right",
+                            preventDuplicates: false,
+                            onclick: null,
+                            showDuration: 300,
+                            hideDuration: 1000,
+                            timeOut: 500,
+                            extendedTimeOut: 1000,
+                            showEasing: "swing",
+                            hideEasing: "linear",
+                            showMethod: "fadeIn",
+                            hideMethod: "fadeOut"
+                        })
+                        $('#table-transaksi').DataTable().ajax.reload()
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            title: "Error",
+                            text: xhr.responseJSON.message,
+                            type: "error",
+                            confirmButtonText: "Ok",
+                        });
+                    },
+                    complete: function(xhr, status, error) {
+                        $('meta[name="<?= csrf_header(); ?>"]').attr('content', xhr.responseJSON.data.csrf);
+                        $(`input[name="<?= csrf_token(); ?>"]`).each(function() {
+                            $(this).val(xhr.responseJSON.data.csrf);
+                        });
+                    }
+                })
+            }
+        })
     }
 </script>
 <?= $this->endSection(); ?>

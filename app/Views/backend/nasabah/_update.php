@@ -66,6 +66,15 @@
                                 </div>
                             <?php endif; ?>
                         </div>
+                        <div class="mb-3 col-12">
+                            <label class="form-label">Pekerjaan <span class="text-danger">*</span></label>
+                            <input type="text" name="pekerjaan" class="form-control <?= validation_show_error('pekerjaan') ? 'is-invalid' : ''; ?>" value="<?= old('pekerjaan'); ?>" id="">
+                            <?php if (validation_show_error('pekerjaan')): ?>
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('pekerjaan'); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
                             <select id="jenis_kelamin" name="jenis_kelamin" class="form-control <?= validation_show_error('jenis_kelamin') ? 'is-invalid' : ''; ?>" id="">

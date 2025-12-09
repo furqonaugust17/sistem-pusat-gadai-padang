@@ -70,7 +70,7 @@ class SendMessageService
     public function sendMessageWithDelay($number, $message, $delay = null, $transaksiId = null)
     {
         if ($delay === null) {
-            $delay = rand(30, 60);
+            $delay = rand(20, 30);
         }
 
         $this->sendMessage($number, $message, $transaksiId);

@@ -18,6 +18,8 @@ class TransaksiModel extends CustomModel
         'nominal',
         'jatuh_tempo',
         'status',
+        'tujuan',
+        'detail_tujuan',
     ];
 
     protected bool $allowEmptyInserts = false;
