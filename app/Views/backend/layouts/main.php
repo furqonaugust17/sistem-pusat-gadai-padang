@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <?= csrf_meta(); ?>
     <title><?= $titlePage ?></title>
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('home/logo.png') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/vendor/chartist/css/chartist.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/vendor/toastr/css/toastr.min.css'); ?>">
     <?= $this->renderSection('css'); ?>

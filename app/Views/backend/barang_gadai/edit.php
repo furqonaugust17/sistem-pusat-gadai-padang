@@ -70,7 +70,7 @@
                                                         <input class="bg-body form-control" type="text" value="<?= $data['status']; ?>" disabled>
                                                     <?php else: ?>
                                                         <select name="status" id="" class="form-control <?= validation_show_error('status') ? 'is-invalid' : ''; ?>">
-                                                            <option value="Lelang" selected disabled>Lelang</option>
+                                                            <option value="Lelang" selected>Lelang</option>
                                                             <option value="Terlelang">Terlelang</option>
                                                         </select>
                                                         <div class="invalid-feedback">

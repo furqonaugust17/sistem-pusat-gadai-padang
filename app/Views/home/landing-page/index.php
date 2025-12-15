@@ -51,10 +51,13 @@
 
                 <div class="mt-4">
                     <span class="trust-badge me-2">Terdaftar: PT Usaha Gadai Mandiri</span>
-                    <span class="trust-badge">Jam Operasional: Sen–Sab 09:30–17:00</span>
+                    <span class="trust-badge">Jam Operasional: Sen–Sab 09:30–21:00</span>
                 </div>
             </div>
-            <div class="bg-holder d-none d-xxl-block py-6" style="background-image:url(<?= base_url('home/assets/img/illustration/hero-section.png'); ?>);background-position:right top;background-size:contain; z-index:-1;"></div>
+            <!-- <div class="d-none d-xxl-block py-6" style="position: absolute; right: 0; top: 0; width: 70%; z-index: -1;">
+                <img src="<?= base_url('home/assets/img/illustration/hero-section.png'); ?>" alt="Hero Illustration" class="img-fluid">
+            </div> -->
+            <div class="bg-holder d-none d-xxl-block py-6" style="background-image:url(<?= base_url('home/assets/img/illustration/hero-section.png'); ?>);background-position:right center;background-size:70%; z-index:-1;"></div>
         </div>
     </div>
 </section>
