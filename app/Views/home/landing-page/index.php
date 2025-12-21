@@ -284,7 +284,7 @@
 
             <div class="col-lg-6">
                 <h3 class="mb-2">Legalitas & Keamanan</h3>
-                <p class="text-muted mb-1">Nomor izin: <strong>— (isi nomor izin jika ada)</strong></p>
+                <p class="text-muted mb-1">Nomor izin: <strong>— AHU-063392.AH.01.30 Tahun 2024</strong></p>
                 <p class="text-muted">Kami menyimpan barang di fasilitas aman dan menyediakan bukti gadai resmi untuk setiap transaksi.</p>
             </div>
         </div>
