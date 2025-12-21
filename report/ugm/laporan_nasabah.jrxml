@@ -15,8 +15,9 @@
 	<parameter name="periode_start" class="java.lang.String"/>
 	<parameter name="periode_end" class="java.lang.String"/>
 	<parameter name="query" class="java.lang.String"/>
+	<parameter name="username" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[ $P!{query} ]]>
+		<![CDATA[$P!{query}]]>
 	</queryString>
 	<field name="id" class="java.util.UUID">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -76,8 +77,7 @@
 + " - " 
 + new SimpleDateFormat("dd MMMM yyyy").format(
       new SimpleDateFormat("dd-MM-yyyy").parse($P{periode_end})
-  )
-]]></textFieldExpression>
+  )]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -251,14 +251,34 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="46" splitType="Stretch">
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement x="702" y="16" width="100" height="30" uuid="020a98e6-3ff9-4cef-9b26-dd88da4357e5"/>
+				<reportElement x="702" y="0" width="100" height="30" uuid="020a98e6-3ff9-4cef-9b26-dd88da4357e5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Halaman  " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="70">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="702" y="0" width="100" height="20" uuid="7cc7e908-15be-4f19-800c-eca1ea287af3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dicetak Oleh]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="702" y="40" width="100" height="30" uuid="237e11a9-c7e2-4e35-beb9-888cbe29f93f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{username}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 	<noData>
 		<band height="30">
 			<staticText>

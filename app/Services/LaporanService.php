@@ -189,6 +189,7 @@ ORDER BY t.created_at DESC
                 'periode_start' => $periodeStart,
                 'periode_end'   => $periodeEnd,
                 'query' => $query,
+                'username' => session('karyawan_nama')
             ],
             'db_connection' => [
                 'driver'   => 'postgres',

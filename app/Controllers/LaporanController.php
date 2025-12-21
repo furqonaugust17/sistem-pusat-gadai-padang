@@ -49,7 +49,7 @@ class LaporanController extends ResourceController
 
             return redirect()->route('preview', [urlencode($file['filename'])]);
         } catch (\Exception $e) {
-
+            dd($e);
             return redirect()->back()->with('errors', $e->getMessage())->withInput();
         }
     }

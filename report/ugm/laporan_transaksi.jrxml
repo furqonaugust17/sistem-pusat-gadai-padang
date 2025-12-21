@@ -15,6 +15,7 @@
 	<parameter name="periode_end" class="java.lang.String"/>
 	<parameter name="periode_start" class="java.lang.String"/>
 	<parameter name="query" class="java.lang.String"/>
+	<parameter name="username" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[$P!{query}]]>
 	</queryString>
@@ -280,6 +281,7 @@
 	</detail>
 	<pageFooter>
 		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
 				<reportElement x="702" y="0" width="100" height="30" uuid="5e87213d-8732-4b96-819e-d51facad2eb0"/>
 				<textElement textAlignment="Right"/>
@@ -287,6 +289,25 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="70">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="702" y="40" width="100" height="30" uuid="bca7a841-9e90-42c5-b289-2b2ea629132a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{username}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="702" y="0" width="100" height="20" uuid="ceb8aac4-b9d0-4756-b0a4-028dbe224e93">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dicetak Oleh]]></text>
+			</staticText>
+		</band>
+	</summary>
 	<noData>
 		<band height="30">
 			<staticText>

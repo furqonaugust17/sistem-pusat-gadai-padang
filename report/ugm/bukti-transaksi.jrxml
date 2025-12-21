@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 5.1.0  -->
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 6.4.3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bukti-transaksi" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="10" bottomMargin="10" uuid="651d5f36-28c0-4a0a-a97e-f19047de0c44">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ugm/DataAdapter.jrdax"/>
 	<parameter name="query" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[$P!{query}]]>
@@ -81,6 +81,24 @@
 		<property name="com.jaspersoft.studio.field.name" value="email"/>
 		<property name="com.jaspersoft.studio.field.label" value="email"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="jenis_barang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="jenis_barang"/>
+		<property name="com.jaspersoft.studio.field.label" value="jenis_barang"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang_gadais"/>
+	</field>
+	<field name="nama_barang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_barang"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_barang"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang_gadais"/>
+	</field>
+	<field name="merek" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="merek"/>
+		<property name="com.jaspersoft.studio.field.label" value="merek"/>
+	</field>
+	<field name="jenis_detail" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="jenis_detail"/>
+		<property name="com.jaspersoft.studio.field.label" value="jenis_detail"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -382,7 +400,7 @@
 					<font fontName="Montserrat" size="6" isBold="false"/>
 					<paragraph leftIndent="3"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{created_at}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy").format($F{created_at})]]></textFieldExpression>
 			</textField>
 			<image>
 				<reportElement x="8" y="0" width="53" height="55" uuid="d18a7100-521d-4648-8455-5b163d39de29"/>
@@ -394,8 +412,8 @@
 					<pen lineWidth="0.0"/>
 				</graphicElement>
 			</rectangle>
-			<textField>
-				<reportElement x="238" y="106" width="112" height="16" uuid="ddd2f347-6974-49fc-bfad-b2400059bc2a">
+			<textField pattern="¤#,##0.##;¤-#,##0.##">
+				<reportElement x="238" y="106" width="106" height="16" uuid="ddd2f347-6974-49fc-bfad-b2400059bc2a">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="styled">
@@ -403,6 +421,56 @@
 					<paragraph leftIndent="3"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nominal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="451" y="38" width="112" height="16" uuid="b95f78e6-6eca-4b67-993b-926c699937a6">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="451" y="72" width="112" height="16" uuid="f7f21d3a-94ef-4b8f-ae1c-d1404a74b04d">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy").format($F{created_at})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="451" y="106" width="112" height="16" uuid="7089a71c-74d5-412c-8864-e2a44c887b39">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy").format($F{created_at})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="451" y="123" width="112" height="16" uuid="cd4a1764-7593-44fd-adaa-15b67cc46a25">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy").format($F{created_at})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="123" width="104" height="16" uuid="a4d05413-a36f-42f9-8e8e-2359c4f569f8">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="6" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy").format($F{jatuh_tempo})]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -534,7 +602,7 @@
 				</textElement>
 				<text><![CDATA[Hp 2]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="269" y="145" width="140" height="18" uuid="0c5bd7b5-7a45-4160-a444-6d02b55aed62"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Montserrat" size="8"/>
@@ -795,7 +863,7 @@
 				</textElement>
 				<text><![CDATA[:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="281" y="217" width="140" height="18" uuid="16412867-361d-4f39-b823-30389faf592f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Montserrat" size="8"/>
@@ -852,7 +920,7 @@
 				<text><![CDATA[Anjas Nurheri, S.Kom]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="284" width="464" height="20" uuid="69a3396e-5547-464e-9608-f591a2facd9c"/>
+				<reportElement x="100" y="284" width="465" height="20" uuid="69a3396e-5547-464e-9608-f591a2facd9c"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Montserrat" size="8"/>
 				</textElement>
@@ -870,7 +938,9 @@
 				<textElement>
 					<font fontName="Montserrat" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Kedua Belah Pihak Telah Menyepakati Bahwa, Pihak Kedua Telah Memberikan Pinjaman Sejumlah Rp. "+$F{nominal}+" Kepada Pihak Pertama Dengan Jaminan Berupa Barang, dengan Keterangan Seperti Berikut :"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Kedua Belah Pihak Telah Menyepakati Bahwa, Pihak Kedua Telah Memberikan Pinjaman Sejumlah Rp"+
+new java.text.DecimalFormat("#,##0").format($F{nominal})
++" Kepada Pihak Pertama Dengan Jaminan Berupa Barang, dengan Keterangan Seperti Berikut :"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="101" y="345" width="9" height="18" uuid="204881eb-52f2-4e43-95f4-f54dedac50f7">
@@ -956,7 +1026,7 @@
 				<textElement>
 					<font fontName="Montserrat" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Pinjaman tidak dikenakan bunga berjalan akan tetapi pihak mengambil keuntungan jual kembali kepada pihak pertama dengan jumlah total yang harus dikembalikan sejumlah " + $F{nominal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Pinjaman tidak dikenakan bunga berjalan akan tetapi pihak mengambil keuntungan jual kembali kepada pihak pertama dengan jumlah total yang harus dikembalikan sejumlah Rp" + new java.text.DecimalFormat("#,##0").format($F{nominal})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="475" width="10" height="18" uuid="bcdd48f0-4bc8-46ff-9745-3bacf3578022"/>
@@ -1049,6 +1119,27 @@
 				<text><![CDATA[Materai
 Rp. 10.000]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="110" y="345" width="140" height="18" uuid="56349dcc-732b-4c82-81c6-6ed481468efa"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jenis_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="363" width="140" height="18" uuid="f2ec6e22-4dbc-435a-97d6-2d1bd1572b8a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{merek}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="381" width="140" height="18" uuid="a134b6bb-7ceb-4c8d-9dc3-2b2387b72160"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Montserrat" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jenis_detail}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 </jasperReport>

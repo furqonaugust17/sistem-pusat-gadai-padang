@@ -200,13 +200,56 @@ class TransaksiController extends ResourceController
         $output = WRITEPATH . 'report';
         $options = [
             'format' => ['pdf'],
-            'locale' => 'in',
+            'locale' => 'in_ID',
             'params' => [
-                'query'     => "SELECT A.kode, A.nominal, A.created_at, A.nama_kontak_darurat, A.no_kontak_darurat, A.jatuh_tempo,
-B.nama_lengkap, B.alamat_ktp, B.alamat_domisili, B.tempat_lahir, B.tanggal_lahir, B.no_telp1,
-B.no_telp2, B.no_wa, B.email
- FROM transaksis A
-INNER JOIN nasabahs AS B ON A.nasabah_id = B.id
+                'query'     => "
+SELECT 
+    A.kode,
+    A.nominal,
+    A.created_at,
+    A.nama_kontak_darurat,
+    A.no_kontak_darurat,
+    A.jatuh_tempo,
+
+    B.nama_lengkap,
+    B.alamat_ktp,
+    B.alamat_domisili,
+    B.tempat_lahir,
+    B.tanggal_lahir,
+    B.no_telp1,
+    B.no_telp2,
+    B.no_wa,
+    B.email,
+
+    C.jenis AS jenis_barang,
+    C.nama_barang,
+
+    CASE
+        WHEN C.jenis = 'Elektronik' THEN E.merk
+        WHEN C.jenis = 'Kendaraan' THEN K.merk
+        ELSE NULL
+    END AS merek,
+
+    CASE
+        WHEN C.jenis = 'Elektronik' THEN E.tipe
+        WHEN C.jenis = 'Kendaraan' THEN K.tipe
+        ELSE NULL
+    END AS jenis_detail
+
+FROM transaksis A
+INNER JOIN nasabahs B 
+    ON A.nasabah_id = B.id
+INNER JOIN barang_gadais C 
+    ON A.barang_id = C.id
+
+LEFT JOIN barang_elektroniks E 
+    ON E.barang_id = C.id 
+    AND C.jenis = 'Elektronik'
+
+LEFT JOIN barang_kendaraans K 
+    ON K.barang_id = C.id 
+    AND C.jenis = 'Kendaraan'
+
 WHERE A.id = '$id'"
             ],
             'db_connection' => [
