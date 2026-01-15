@@ -186,9 +186,13 @@ class TransaksiController extends ResourceController
 
         $result = $writer->write($qrCode, null, $label);
 
-        return $this->response
-            ->setHeader('Content-Type', $result->getMimeType())
-            ->setBody($result->getString());
+        $path = WRITEPATH . 'qr/qrcode-' . $id . '.png';
+        $result->saveToFile($path);
+
+        // return $this->response
+        //     ->setHeader('Content-Type', $result->getMimeType())
+        //     ->setBody($result->getString());
+        return $this->createQrCode($id, $path);
     }
 
     public function createReport($id)
@@ -273,6 +277,48 @@ WHERE A.id = '$id'"
         $file = $output . "/bukti-transaksi.pdf";
         copy($file, $filename);
         unlink($file);
+        return redirect()->route('preview', [basename($filename)]);
+    }
+
+    public function createQrCode($id, $image)
+    {
+        $data = $this->transaksiModel->find($id);
+        if ($data == null) return redirect()->back();
+
+        $input = ROOTPATH . '/report/ugm/qr_code.jrxml';
+        $output = WRITEPATH . 'report';
+        $options = [
+            'format' => ['pdf'],
+            'locale' => 'in_ID',
+            'params' => [
+                'image_path' => $image,
+                'query'     => "
+SELECT B.nama_lengkap, C.nama_barang, A.nominal, A.jatuh_tempo FROM transaksis A 
+INNER JOIN nasabahs B ON A.nasabah_id = B.id
+INNER JOIN barang_gadais C ON A.barang_id = C.id WHERE A.id = '$id'"
+            ],
+            'db_connection' => [
+                'driver' => 'postgres',
+                'username' => $this->db->username,
+                'password' => $this->db->password,
+                'host' => $this->db->hostname,
+                'database' => $this->db->database,
+                'port' => $this->db->port
+            ]
+        ];
+
+        $jasper = new PHPJasper;
+
+        $jasper->process(
+            $input,
+            $output,
+            $options
+        )->execute();
+        $filename = $output . '/qr_code' . '_' . date('d-M-Y') . '.pdf';
+        $file = $output . "/qr_code.pdf";
+        copy($file, $filename);
+        unlink($file);
+
         return redirect()->route('preview', [basename($filename)]);
     }
 }

@@ -21,7 +21,9 @@
 <body>
     <main class="main" id="top">
         <?= $this->include('home/layouts/navbar'); ?>
-        <?= $this->renderSection('content'); ?>
+        <div class="min-vh-100">
+            <?= $this->renderSection('content'); ?>
+        </div>
         <?= $this->include('home/layouts/footer'); ?>
     </main>
 

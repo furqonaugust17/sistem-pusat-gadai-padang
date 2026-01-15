@@ -71,6 +71,7 @@
 <section class="py-7 py-lg-8">
     <div class="container">
         <div class="row">
+            <h1 class="text-center mb-4">Detail Barang Gadai</h1>
             <div class="col-12">
                 <div class="card shadow border-0 h-100">
                     <div class="card-body">
@@ -143,7 +144,7 @@
         const swiper = new Swiper(".mySwiper", {
             loop: true,
             spaceBetween: 10,
-            slidesPerView: <?= ceil(count($data['gambar']) / 2) ?>,
+            slidesPerView: <?= count($data['gambar']); ?>,
             freeMode: true,
             watchSlidesProgress: true,
         });
