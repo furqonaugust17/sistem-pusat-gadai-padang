@@ -94,12 +94,14 @@
                                         </div>
                                         <div thumbsSlider="" class="swiper mySwiper">
                                             <div class="swiper-wrapper">
-                                                <?php foreach ($data['gambar'] as $index => $gambar): ?>
-                                                    <div class="swiper-slide">
-                                                        <img src="<?= base_url($gambar['file_path']) ?>"
-                                                            class="card-img-top" alt="...">
-                                                    </div>
-                                                <?php endforeach; ?>
+                                                <?php if (count($data['gambar']) > 1): ?>
+                                                    <?php foreach ($data['gambar'] as $index => $gambar): ?>
+                                                        <div class="swiper-slide">
+                                                            <img src="<?= base_url($gambar['file_path']) ?>"
+                                                                class="card-img-top" alt="...">
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="btn-next">

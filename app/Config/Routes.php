@@ -16,6 +16,7 @@ service('auth')->routes($routes);
 $routes->group('backend', static function ($routes) {
     $routes->get('/', 'RedirectRoleController::index');
     $routes->resource('whatsapp', ['controller' => 'WhatsappController']);
+    $routes->resource('profile', ['controller' => 'ProfileController']);
 
     $routes->group('', ['filter' => 'group:pemilik'], static function ($routes) {
         $routes->resource('dashboard', ['controller' => 'DashboardController']);

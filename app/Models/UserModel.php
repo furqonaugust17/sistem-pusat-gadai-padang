@@ -55,4 +55,12 @@ class UserModel extends ShieldUserModel
 
         return $returnID ? $this->insertID : true;
     }
+
+    public function profileData($id)
+    {
+        $data = $this->select('users.username, karyawans.nama, karyawans.no_telp, karyawans.alamat, auth_identities.secret as email_user')
+            ->join('karyawans', 'users.id = karyawans.user_id', 'inner')
+            ->join('auth_identities', 'users.id = auth_identities.user_id', 'inner')->find($id);
+        return $data;
+    }
 }
