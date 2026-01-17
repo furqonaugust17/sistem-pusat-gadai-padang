@@ -267,6 +267,12 @@ class Validation extends BaseConfig
                 'max_length'  => 'Email maksimal 100 karakter.'
             ]
         ],
+        'pekerjaan'           => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Pekerjaan harus diisi',
+            ]
+        ],
     ];
 
     public array $barangGadaiUpdate = [
@@ -382,6 +388,12 @@ class Validation extends BaseConfig
             'rules'  => 'required',
             'errors'    => [
                 'required' => 'Cabang harus dipilih'
+            ]
+        ],
+        'kode_trans' => [
+            'rules'  => 'required',
+            'errors'    => [
+                'required' => 'Kode harus diisi'
             ]
         ],
         'nama_barang' => [

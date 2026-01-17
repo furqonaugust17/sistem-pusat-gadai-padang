@@ -126,9 +126,8 @@
                         no_telp1,
                         no_telp2,
                         no_wa,
-                        nama_kontak_darurat,
-                        no_kontak_darurat,
-                        email
+                        email,
+                        pekerjaan,
                     } = response
                     $('#form-update').attr('action', uriUpdate);
                     $('#nama_lengkap').val(nama_lengkap);
@@ -142,8 +141,7 @@
                     $('#no_wa').val(no_wa);
                     $('#no_telp2').val(no_telp2);
                     $('#email').val(email);
-                    $('#nama_kontak_darurat').val(nama_kontak_darurat);
-                    $('#no_kontak_darurat').val(no_kontak_darurat);
+                    $('#pekerjaan').val(pekerjaan);
                     $('#modal-update').modal('show');
                 } else {
                     Swal.fire({

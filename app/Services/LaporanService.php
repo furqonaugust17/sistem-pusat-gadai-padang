@@ -101,7 +101,8 @@ SELECT
     t.nominal AS nilai_pinjaman,
     t.created_at::date AS tanggal_transaksi,
     t.jatuh_tempo::date,
-    t.status
+    t.status,
+    t.kode_trans
 FROM transaksis AS t
 INNER JOIN nasabahs AS n ON t.nasabah_id = n.id
 INNER JOIN karyawans AS k ON t.karyawan_id = k.id

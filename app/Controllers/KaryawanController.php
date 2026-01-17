@@ -56,16 +56,6 @@ class KaryawanController extends ResourceController
     }
 
     /**
-     * Return a new resource object, with default properties.
-     *
-     * @return ResponseInterface
-     */
-    public function new()
-    {
-        //
-    }
-
-    /**
      * Create a new resource object, from "posted" parameters.
      *
      * @return ResponseInterface
@@ -85,18 +75,6 @@ class KaryawanController extends ResourceController
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->with('errors', 'Karyawan gagal ditambahkan');
         }
-    }
-
-    /**
-     * Return the editable properties of a resource object.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function edit($id = null)
-    {
-        //
     }
 
     /**

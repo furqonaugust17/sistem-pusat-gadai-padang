@@ -50,7 +50,7 @@
                         </div>
                         <div class="mb-3 col-12">
                             <label class="form-label">Alamat KTP <span class="text-danger">*</span></label>
-                            <textarea id="alamat_ktp" name="alamat_ktp" class="form-control <?= validation_show_error('alamat_ktp') ? 'is-invalid' : ''; ?>" id=""><?= old('alamat_ktp'); ?></textarea>
+                            <textarea id="alamat_ktp" name="alamat_ktp" class="form-control <?= validation_show_error('alamat_ktp') ? 'is-invalid' : ''; ?>"><?= old('alamat_ktp'); ?></textarea>
                             <?php if (validation_show_error('alamat_ktp')): ?>
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('alamat_ktp'); ?>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="mb-3 col-12">
                             <label class="form-label">Alamat Domisili <span class="text-danger">*</span></label>
-                            <textarea id="alamat_domisili" name="alamat_domisili" class="form-control <?= validation_show_error('alamat_domisili') ? 'is-invalid' : ''; ?>" id=""><?= old('alamat_domisili'); ?></textarea>
+                            <textarea id="alamat_domisili" name="alamat_domisili" class="form-control <?= validation_show_error('alamat_domisili') ? 'is-invalid' : ''; ?>"><?= old('alamat_domisili'); ?></textarea>
                             <?php if (validation_show_error('alamat_domisili')): ?>
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('alamat_domisili'); ?>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="mb-3 col-12">
                             <label class="form-label">Pekerjaan <span class="text-danger">*</span></label>
-                            <input type="text" name="pekerjaan" class="form-control <?= validation_show_error('pekerjaan') ? 'is-invalid' : ''; ?>" value="<?= old('pekerjaan'); ?>" id="">
+                            <input type="text" name="pekerjaan" class="form-control <?= validation_show_error('pekerjaan') ? 'is-invalid' : ''; ?>" value="<?= old('pekerjaan'); ?>" id="pekerjaan">
                             <?php if (validation_show_error('pekerjaan')): ?>
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('pekerjaan'); ?>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
-                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control <?= validation_show_error('jenis_kelamin') ? 'is-invalid' : ''; ?>" id="">
+                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control <?= validation_show_error('jenis_kelamin') ? 'is-invalid' : ''; ?>">
                                 <option value="Laki-Laki">Laki-Laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>

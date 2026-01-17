@@ -56,10 +56,8 @@ class TransaksiService
                 'nama_barang'       => $data['nama_barang'],
                 'jenis_barang'      => $data['jenis'],
                 'jumlah_pinjaman'   => number_format($data['nominal'], 0, ',', '.'),
-                'tanggal_transaksi' => Time::parse($transaksi['created_at'])
-                    ->toLocalizedString('dd MMMM yyyy'),
-                'jatuh_tempo'       => Time::parse($data['jatuh_tempo'])
-                    ->toLocalizedString('dd MMMM yyyy'),
+                'tanggal_transaksi' => $transaksi['created_at'],
+                'jatuh_tempo'       => $data['jatuh_tempo'],
             ]);
 
             $this->sendMessageService->sendMessage($nasabah['no_wa'], $message, $transaksi['id']);
@@ -87,7 +85,8 @@ class TransaksiService
             'status' => 'Gadai',
             'tujuan' => $data['tujuan'],
             'detail_tujuan' => $data['detail_tujuan'] ?? null,
-            'cabang_id' => $data['detail_tujuan'] ?? $this->cabangModel->select('id')->like('LOWER(nama_cabang)', 'utama')->first()
+            'cabang_id' => $data['detail_tujuan'] ?? $this->cabangModel->select('id')->like('LOWER(nama_cabang)', 'utama')->first(),
+            'kode_trans' => $data['kode_trans'] ?? null
         ]);
 
         $transaksi = $this->transaksiModel->select('created_at')->find($transaksiID);
@@ -146,7 +145,7 @@ class TransaksiService
     public function datatable($orderBy, $orderDir, $start, $length, $search, $draw)
     {
         $builder = $this->transaksiModel
-            ->select("transaksis.id,transaksis.kode, nasabahs.nama_lengkap as nasabah, transaksis.nominal, transaksis.jatuh_tempo, transaksis.status")
+            ->select("transaksis.id, transaksis.kode, transaksis.kode_trans, nasabahs.nama_lengkap as nasabah, transaksis.nominal, transaksis.jatuh_tempo, transaksis.status")
             ->join("nasabahs", "nasabahs.id = transaksis.nasabah_id");
 
 
@@ -155,6 +154,7 @@ class TransaksiService
 
             $builder->groupStart()
                 ->like('LOWER(transaksis.kode)', $searchLower)
+                ->orLike('LOWER(transaksis.kode_trans)', $searchLower)
                 ->orLike('LOWER(nasabahs.nama_lengkap)', $searchLower)
                 ->orWhere("LOWER(CAST(transaksis.nominal AS TEXT)) LIKE ", "%{$searchLower}%", null, false)
                 ->orWhere("LOWER(CAST(transaksis.status AS TEXT)) LIKE ", "%{$searchLower}%", null, false)

@@ -35,6 +35,7 @@
                         <thead>
                             <tr>
                                 <th>Kode</th>
+                                <th>Kode Transaksi</th>
                                 <th>Nasabah</th>
                                 <th>Nominal</th>
                                 <th>Status</th>
@@ -47,6 +48,7 @@
                         <tfoot>
                             <tr>
                                 <th>Kode</th>
+                                <th>Kode Transaksi</th>
                                 <th>Nasabah</th>
                                 <th>Nominal</th>
                                 <th>Status</th>
@@ -133,6 +135,9 @@
                     data: "kode",
                 },
                 {
+                    data: "kode_trans"
+                },
+                {
                     data: "nasabah"
                 },
                 {
@@ -147,37 +152,54 @@
                 {
                     data: 'id',
                     searchable: false,
-                    "render": function(data, type, row) {
+                    render: function(data, type, row) {
+
                         const uriShow = '<?= route_to('TransaksiController::show', ':id'); ?>'.replace(':id', data);
                         const uriPrint = '<?= route_to('TransaksiController::createReport', ':id'); ?>'.replace(':id', data);
-                        return `<div class="d-flex">
-                        <a href="${uriShow}" class="btn btn-secondary shadow btn-xs sharp me-1">
-                            <i class="fas fa-eye"></i>
-                            </a>
-                        <div class="dropdown custom-dropdown">
-                           <button type="button" 
-                                class="btn btn-secondary shadow btn-xs sharp me-1" 
-                                ${row.status.includes('Jatuh Tempo') ? 'data-bs-toggle="dropdown"' : ''} 
-                                ${!row.status.includes('Jatuh Tempo') ? 'disabled style="pointer-events: none;"' : ''} 
-                                aria-expanded="false">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                ${row.status.includes('Jatuh Tempo') 
-                                    ? `<button class="dropdown-item" type="button" 
-                                        onclick="event.stopPropagation(); updateStatus('${data}')">
-                                        Update Status Lelang
-                                    </button>`
-                                    : ''}
-                            </div>
-                        </div>
-                        <form action="${uriPrint}" method="POST" target="_blank">
-                            <?= csrf_field() ?>
-                            <button type="submit"class="btn btn-primary shadow btn-xs sharp me-1">
-                                <i class="fas fa-print"></i>
-                            </button>
-                        </form>
-                    </div>`
+
+                        const canUpdate = row.status && row.status.includes('Jatuh Tempo');
+
+                        return `
+        <div class="btn-group" role="group">
+            <button 
+                type="button" 
+                class="btn btn-primary btn-xs dropdown-toggle"
+                data-bs-toggle="dropdown"
+                data-bs-boundary="viewport"
+                data-bs-display="static"
+                aria-expanded="false"
+            >Aksi</button>
+
+            <div class="dropdown-menu dropdown-menu-end">
+                <a href="${uriShow}" class="dropdown-item">
+                    <i class="fas fa-eye me-2"></i> Lihat Detail
+                </a>
+
+                ${
+                    canUpdate 
+                    ? `<button 
+                            type="button" 
+                            class="dropdown-item"
+                            onclick="event.stopPropagation(); updateStatus('${data}')"
+                       >
+                            <i class="fas fa-pencil-alt me-2"></i> Update Status Lelang
+                       </button>`
+                    : ''
+                }
+
+                <button type="submit" class="dropdown-item text-start" onclick="event.stopPropagation(); sendNotification('${data}')">
+                    <i class="fas fa-paper-plane me-2"></i> Kirim Notifikasi
+                </button>
+                <div class="dropdown-divider"></div>
+                <form action="${uriPrint}" method="POST" target="_blank">
+                    <button type="submit" class="dropdown-item text-start">
+                        <i class="fas fa-print me-2"></i> Cetak
+                    </button>
+                </form>
+
+            </div>
+        </div>
+        `;
                     }
                 }
             ],
@@ -298,7 +320,7 @@
     function updateStatus(id) {
         Swal.fire({
             title: "Anda Yakin?",
-            text: "Statu data ini akan diubah menjadi lelang. dan tidak bisa dikembalikan.",
+            text: "Status data ini akan diubah menjadi lelang. dan tidak bisa dikembalikan.",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -309,6 +331,62 @@
                 $.ajax({
                     url: '<?= route_to('TransaksiController::updateStatus', ':id') ?>'.replace(':id', id),
                     method: 'PUT',
+                    data: {
+                        '<?= csrf_token(); ?>': $('meta[name="<?= csrf_header(); ?>"]').attr('content')
+                    },
+                    success: function(response) {
+                        toastr.success(response.message, {
+                            closeButton: false,
+                            debug: false,
+                            newestOnTop: false,
+                            progressBar: true,
+                            positionClass: "toast-top-right",
+                            preventDuplicates: false,
+                            onclick: null,
+                            showDuration: 300,
+                            hideDuration: 1000,
+                            timeOut: 500,
+                            extendedTimeOut: 1000,
+                            showEasing: "swing",
+                            hideEasing: "linear",
+                            showMethod: "fadeIn",
+                            hideMethod: "fadeOut"
+                        })
+                        $('#table-transaksi').DataTable().ajax.reload()
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            title: "Error",
+                            text: xhr.responseJSON.message,
+                            type: "error",
+                            confirmButtonText: "Ok",
+                        });
+                    },
+                    complete: function(xhr, status, error) {
+                        $('meta[name="<?= csrf_header(); ?>"]').attr('content', xhr.responseJSON.data.csrf);
+                        $(`input[name="<?= csrf_token(); ?>"]`).each(function() {
+                            $(this).val(xhr.responseJSON.data.csrf);
+                        });
+                    }
+                })
+            }
+        })
+    }
+
+    function sendNotification(id) {
+        Swal.fire({
+            title: "Anda Yakin?",
+            text: "Notifikasi akan dikirimkan kepada nasabah",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ubah",
+            cancelButtonText: "Batal",
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '<?= route_to('TransaksiController::sendNotification', ':id') ?>'.replace(':id', id),
+                    method: 'POST',
                     data: {
                         '<?= csrf_token(); ?>': $('meta[name="<?= csrf_header(); ?>"]').attr('content')
                     },

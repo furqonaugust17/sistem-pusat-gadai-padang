@@ -21,6 +21,7 @@ class TransaksiModel extends CustomModel
         'tujuan',
         'detail_tujuan',
         'cabang_id',
+        'kode_trans',
     ];
 
     protected bool $allowEmptyInserts = false;

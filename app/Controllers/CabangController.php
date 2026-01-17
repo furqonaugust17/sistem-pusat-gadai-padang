@@ -53,16 +53,6 @@ class CabangController extends ResourceController
     }
 
     /**
-     * Return a new resource object, with default properties.
-     *
-     * @return ResponseInterface
-     */
-    public function new()
-    {
-        //
-    }
-
-    /**
      * Create a new resource object, from "posted" parameters.
      *
      * @return ResponseInterface
@@ -76,18 +66,6 @@ class CabangController extends ResourceController
         $data = $this->request->getPost();
         $this->cabangModel->insert($data);
         return redirect()->to(route_to('backend/cabang'))->with('success', 'Cabang berhasil ditambahkan');
-    }
-
-    /**
-     * Return the editable properties of a resource object.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function edit($id = null)
-    {
-        //
     }
 
     /**

@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 6.4.3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bukti-transaksi" pageWidth="595" pageHeight="842" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="10" bottomMargin="10" uuid="651d5f36-28c0-4a0a-a97e-f19047de0c44">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ugm/DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="query" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[$P!{query}]]>
@@ -35,6 +35,11 @@
 	<field name="jatuh_tempo" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.name" value="jatuh_tempo"/>
 		<property name="com.jaspersoft.studio.field.label" value="jatuh_tempo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="kode_trans" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="kode_trans"/>
+		<property name="com.jaspersoft.studio.field.label" value="kode_trans"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
 	</field>
 	<field name="nama_lengkap" class="java.lang.String">
@@ -430,7 +435,7 @@
 					<font fontName="Montserrat" size="6" isBold="false"/>
 					<paragraph leftIndent="3"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{kode}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{kode} + " ("+  $F{kode_trans} + ") "]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="451" y="72" width="112" height="16" uuid="f7f21d3a-94ef-4b8f-ae1c-d1404a74b04d">

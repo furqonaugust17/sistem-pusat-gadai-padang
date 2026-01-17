@@ -29,8 +29,6 @@ class NasabahController extends ResourceController
     public function index()
     {
         if (request()->isAJAX()) {
-            // return DataTable::of($this->nasabahModel->Datatables())
-            //     ->toJson(true);
             return $this->datatable();
         }
 
@@ -54,16 +52,6 @@ class NasabahController extends ResourceController
     }
 
     /**
-     * Return a new resource object, with default properties.
-     *
-     * @return ResponseInterface
-     */
-    public function new()
-    {
-        //
-    }
-
-    /**
      * Create a new resource object, from "posted" parameters.
      *
      * @return ResponseInterface
@@ -83,18 +71,6 @@ class NasabahController extends ResourceController
     }
 
     /**
-     * Return the editable properties of a resource object.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function edit($id = null)
-    {
-        //
-    }
-
-    /**
      * Add or update a model resource, from "posted" properties.
      *
      * @param int|string|null $id
@@ -105,6 +81,9 @@ class NasabahController extends ResourceController
     {
         $nasabahValidation = $this->configValidation->nasabah;
         $data = $this->request->getPost();
+
+
+        // dd($data);
 
         if (!$this->validate($nasabahValidation)) {
             return redirect()->back()->withInput()->with('errors', 'Nasabah gagal diubah');

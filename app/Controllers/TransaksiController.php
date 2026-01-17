@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\CabangModel;
 use App\Models\NasabahModel;
 use App\Models\TransaksiModel;
+use App\Services\SendMessageService;
 use App\Services\TransaksiService;
 use PHPJasper\PHPJasper;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -22,6 +23,7 @@ class TransaksiController extends ResourceController
     protected $helpers = ['form'];
     protected $nasabahModel;
     protected $transaksiService;
+    protected $sendMessageService;
     protected $transaksiModel;
     protected $cabangModel;
     protected $db;
@@ -30,6 +32,7 @@ class TransaksiController extends ResourceController
     {
         $this->nasabahModel = new NasabahModel();
         $this->transaksiService = new TransaksiService();
+        $this->sendMessageService = new SendMessageService();
         $this->transaksiModel = new TransaksiModel();
         $this->cabangModel = new CabangModel();
         $this->db = \Config\Database::connect();
@@ -102,8 +105,7 @@ class TransaksiController extends ResourceController
 
             return redirect()->to(route_to('TransaksiController::show', $trx_id))->with('success', 'Transaksi berhasil dibuat');
         } catch (\Throwable $e) {
-            dd($e);
-            return redirect()->back()->withInput()->with('errors', $e->getMessage());
+            return redirect()->back()->withInput()->with('errors', 'Terjadi kesalahan pada sistem. silahkan coba lagi nanti');
         }
     }
 
@@ -125,10 +127,10 @@ class TransaksiController extends ResourceController
             $response['message'] = 'Status berhasil diubah menjadi Lelang.';
             return $this->respond($response, 200);
         } catch (\RuntimeException $e) {
-            $response['message'] = $e->getMessage();
+            $response['message'] = 'Terjadi kesalahan pada sistem. silahkan coba lagi nanti';
             return $this->respond($response, 404);
         } catch (\Exception $e) {
-            $response['message'] = 'Terjadi kesalahan sistem: ' . $e->getMessage();
+            $response['message'] = 'Terjadi kesalahan pada sistem. silahkan coba lagi nanti';
             return $this->respond($response, 500);
         }
     }
@@ -149,6 +151,7 @@ class TransaksiController extends ResourceController
 
         $columns = [
             'transaksis.kode',
+            'transaksis.kode_trans',
             'nasabahs.nama_lengkap',
             'transaksis.nominal',
             'transaksis.jatuh_tempo',
@@ -193,9 +196,6 @@ class TransaksiController extends ResourceController
         $path = WRITEPATH . 'qr/qrcode-' . $id . '.png';
         $result->saveToFile($path);
 
-        // return $this->response
-        //     ->setHeader('Content-Type', $result->getMimeType())
-        //     ->setBody($result->getString());
         return $this->createQrCode($id, $path);
     }
 
@@ -218,6 +218,7 @@ SELECT
     A.nama_kontak_darurat,
     A.no_kontak_darurat,
     A.jatuh_tempo,
+    A.kode_trans,
 
     B.nama_lengkap,
     B.alamat_ktp,
@@ -324,5 +325,28 @@ INNER JOIN barang_gadais C ON A.barang_id = C.id WHERE A.id = '$id'"
         unlink($file);
 
         return redirect()->route('preview', [basename($filename)]);
+    }
+
+    public function sendNotification($id)
+    {
+        $data = $this->transaksiModel->getData($id);
+        $message = $this->sendMessageService->templateReminder([
+            'nama_nasabah' => $data['nama_lengkap'],
+            'kode' => $data['kode'],
+            'jatuh_tempo' => $data['jatuh_tempo'],
+        ]);
+
+        $response = [
+            'data' => ['csrf' => csrf_hash()]
+        ];
+
+        try {
+            $this->sendMessageService->sendMessage($data['no_wa'], $message, $id);
+            $response['message'] = 'Notifikasi berhasil dikirim';
+            return $this->respond($response, 200);
+        } catch (\Throwable $th) {
+            $response['message'] = 'Terjadi kesalahan pada sistem. silahkan coba lagi nanti';
+            return $this->respond($response, 500);
+        }
     }
 }

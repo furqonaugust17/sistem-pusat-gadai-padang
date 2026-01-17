@@ -15,7 +15,7 @@ $routes->post('/cek-transaksi', 'CekTransaksiController::getTransaksi');
 service('auth')->routes($routes);
 $routes->group('backend', static function ($routes) {
     $routes->get('/', 'RedirectRoleController::index');
-    $routes->resource('whatsapp', ['controller' => 'WhatsappController']);
+    $routes->get('whatsapp', 'WhatsappController::index');
     $routes->resource('profile', ['controller' => 'ProfileController']);
 
     $routes->group('', ['filter' => 'group:pemilik'], static function ($routes) {
@@ -35,6 +35,8 @@ $routes->group('backend', static function ($routes) {
         $routes->get('transaksi/datatable', 'TransaksiController::datatable');
         $routes->get('transaksi/getTransaksi', 'TransaksiController::getTransaksi');
         $routes->put('transaksi/updateStatus/(:segment)', 'TransaksiController::updateStatus/$1');
+        $routes->post('transaksi/sendNotification/(:segment)', 'TransaksiController::sendNotification/$1');
+        $routes->get('whatsapp/log-pesan', 'WhatsappController::logPesan');
         $routes->resource('transaksi', ['controller' => 'TransaksiController']);
         $routes->get('upload/file/(:segment)/(:alpha)', 'BarangGadaiController::showFile/$1/$2', ['as' => 'file.barang']);
         $routes->post('report/(:segment)', 'TransaksiController::createReport/$1');

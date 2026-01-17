@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="qr_code" pageWidth="420" pageHeight="298" orientation="Landscape" columnWidth="380" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="69a42919-bd72-41e2-b623-ec9339befb3c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="image_path" class="java.lang.String"/>
+	<parameter name="query" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{query}]]>
+	</queryString>
+	<field name="nama_lengkap" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_lengkap"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_lengkap"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="nasabahs"/>
+	</field>
+	<field name="nama_barang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_barang"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_barang"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="barang_gadais"/>
+	</field>
+	<field name="nominal" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="nominal"/>
+		<property name="com.jaspersoft.studio.field.label" value="nominal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<field name="jatuh_tempo" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="jatuh_tempo"/>
+		<property name="com.jaspersoft.studio.field.label" value="jatuh_tempo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transaksis"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="258">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image>
+				<reportElement x="0" y="30" width="120" height="120" uuid="1e24ddb3-0c38-4b4e-8dae-cae9359f6270">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{image_path}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="120" y="30" width="80" height="24" uuid="ade2e64e-cb60-45f8-9b29-921c655f247c"/>
+				<text><![CDATA[Nama Nasabah ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="54" width="80" height="19" uuid="bb1bafd5-0380-4782-b289-315909066aec"/>
+				<text><![CDATA[Barang Gadai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="73" width="80" height="21" uuid="4413f82b-fb42-4a9d-b828-44ce7f345da0"/>
+				<text><![CDATA[Nominal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="30" width="10" height="24" uuid="b8f2d47d-f03c-41bf-8af1-ee4e5ec114a7"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="54" width="10" height="19" uuid="d62a31c8-9a07-4b98-addc-e77e6bed070b"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="73" width="10" height="21" uuid="877dfd13-b2c1-4b35-861b-4b30aaf6af54"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="210" y="30" width="170" height="24" uuid="1bad5485-687b-40ee-be2c-01e0995c63b2"/>
+				<textFieldExpression><![CDATA[$F{nama_lengkap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="54" width="170" height="19" uuid="79d1c056-eebf-48f9-9e81-1dc25fad732c"/>
+				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.##;¤-#,##0.##">
+				<reportElement x="210" y="73" width="170" height="21" uuid="8da1775c-0ea5-4bd4-b6d7-d0bd552682b0"/>
+				<textFieldExpression><![CDATA[$F{nominal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="180" width="380" height="78" forecolor="#FF0905" uuid="b4385431-33d5-46d4-9ff1-cfb7078f9eda"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*CATATAN
+QR CODE INI JANGAN SAMPAI HILANG UNTUK MEMUDAHKAN PENGECEKAN TRANSAKSI]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

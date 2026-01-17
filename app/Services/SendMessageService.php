@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\LogPesanModel;
+use CodeIgniter\I18n\Time;
 
 class SendMessageService
 {
@@ -47,7 +48,6 @@ class SendMessageService
                 'data'    => $body ?? [],
             ];
         } catch (\Exception $e) {
-
             if ($transaksiId) {
                 $this->logPesanModel->insert([
                     'transaksi_id' => $transaksiId,
@@ -80,10 +80,12 @@ class SendMessageService
 
     public function templateReminder(array $data)
     {
+        $jatuh_tempo = Time::parse($data['jatuh_tempo'])
+            ->toLocalizedString('dd MMMM yyyy');
         return "
 Halo {$data['nama_nasabah']},
 
-Ini adalah pengingat bahwa transaksi Anda dengan kode *{$data['kode']}* akan jatuh tempo pada *{$data['jatuh_tempo']}*.
+Ini adalah pengingat bahwa transaksi Anda dengan kode *{$data['kode']}* akan jatuh tempo pada *{$jatuh_tempo}*.
 
 Silakan melakukan  pelunasan agar barang tidak masuk proses lelang.
 
@@ -93,6 +95,10 @@ Terima kasih telah mempercayai Pusat Gadai Padang
 
     public function templateNewTransaction(array $data)
     {
+        $tanggal_transaksi = Time::parse($data['tanggal_transaksi'])
+            ->toLocalizedString('dd MMMM yyyy');
+        $jatuh_tempo = Time::parse($data['jatuh_tempo'])
+            ->toLocalizedString('dd MMMM yyyy');
         return "Halo *{$data['nama_nasabah']}*,
 
 Transaksi gadai Anda telah berhasil dicatat oleh *PT Usaha Gadai Mandiri*.
@@ -101,12 +107,51 @@ Transaksi gadai Anda telah berhasil dicatat oleh *PT Usaha Gadai Mandiri*.
 • Nomor Kontrak: {$data['kode']}
 • Barang: {$data['nama_barang']} ({$data['jenis_barang']})
 • Pinjaman: Rp {$data['jumlah_pinjaman']}
-• Tanggal Transaksi: {$data['tanggal_transaksi']}
-• Jatuh Tempo: {$data['jatuh_tempo']}
+• Tanggal Transaksi: {$tanggal_transaksi}
+• Jatuh Tempo: {$jatuh_tempo}
 
 Kontak: +6281275341600
 
 Terima kasih telah mempercayai Pusat Gadai Padang
         ";
+    }
+
+    public function datatable($orderBy, $orderDir, $start, $length, $search, $draw)
+    {
+        $builder = $this->logPesanModel->datatable();
+
+        if ($search) {
+            $searchLower = strtolower($search);
+
+            $builder->groupStart()
+                ->like('LOWER(transaksis.kode)', $searchLower)
+                ->orLike('LOWER(nasabahs.nama_lengkap)', $searchLower)
+                ->orLike('LOWER(log_pesans.status::text)', $searchLower)
+                ->orWhere("LOWER(TO_CHAR(log_pesans.created_at, 'DD Month YYYY')) LIKE ", "%{$searchLower}%", null, false)
+                ->groupEnd();
+        }
+
+        $recordsTotal = $builder->countAllResults(false);
+
+        $builder->orderBy($orderBy, $orderDir)
+            ->limit($length, $start);
+
+        $rows = $builder->get()->getResultArray();
+
+        foreach ($rows as &$r) {
+            $r['created_at']   = Time::parse($r['created_at'])
+                ->toLocalizedString('dd MMMM yyyy');
+            $r['status'] = match ($r['status']) {
+                'gagal' => '<span class="badge bg-danger">Gagal</span>',
+                'berhasil' => '<span class="badge bg-success">Berhasil</span>'
+            };
+        }
+
+        return [
+            "draw"            => intval($draw),
+            "recordsTotal"    => $recordsTotal,
+            "recordsFiltered" => $recordsTotal,
+            "data"            => $rows
+        ];
     }
 }

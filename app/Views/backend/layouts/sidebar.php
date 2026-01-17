@@ -30,6 +30,11 @@
                         <span class="nav-text">Pembayaran</span>
                     </a>
                 </li>
+                <li><a href="<?= route_to('WhatsappController::logPesan'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-comments fw-bold"></i>
+                        <span class="nav-text">Riwayat Pesan</span>
+                    </a>
+                </li>
             <?php endif; ?>
             <?php if (auth()->user()->inGroup('pemilik')): ?>
                 <li><a href="<?= route_to('DashboardController::index'); ?>" class="ai-icon" aria-expanded="false">

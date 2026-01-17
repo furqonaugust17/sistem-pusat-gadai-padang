@@ -56,7 +56,7 @@
             </div>
         <?php endif; ?>
     </div>
-    <div class="mb-3 col-12">
+    <div class="mb-3 col-6">
         <label class="form-label">Lokasi <span class="text-danger">*</span></label>
         <select class="form-control <?= validation_show_error('tujuan') ? 'is-invalid' : ''; ?>" name="cabang_id" id="">
             <?php foreach ($cabangs as $index => $cabang): ?>
@@ -66,6 +66,15 @@
         <?php if (validation_show_error('cabang_id')): ?>
             <div class="invalid-feedback">
                 <?= validation_show_error('cabang_id'); ?>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="mb-3 col-6">
+        <label class="form-label">Kode <span class="text-danger">*</span></label>
+        <input type="text" name="kode_trans" value="<?= old('kode_trans'); ?>" class="form-control <?= validation_show_error('kode_trans') ? 'is-invalid' : ''; ?>">
+        <?php if (validation_show_error('kode_trans')): ?>
+            <div class="invalid-feedback">
+                <?= validation_show_error('kode_trans'); ?>
             </div>
         <?php endif; ?>
     </div>
