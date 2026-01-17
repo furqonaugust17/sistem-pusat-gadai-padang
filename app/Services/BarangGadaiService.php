@@ -51,7 +51,7 @@ class BarangGadaiService
             'nama_barang'   => $request->getPost('nama_barang'),
             'deskripsi'     => $request->getPost('deskripsi'),
             'nilai_taksiran' => str_replace('.', '', $request->getPost('nilai_taksiran')),
-            'status' => $request->getPost('status'),
+            'status' => $request->getPost('status') ?? $barang['status'],
         ];
         $this->barangGadaiModel->update($id, $data);
 
