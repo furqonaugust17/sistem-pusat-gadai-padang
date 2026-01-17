@@ -116,7 +116,7 @@ class TransaksiModel extends CustomModel
     public function transaksiBulanan()
     {
         $query = $this
-            ->select("EXTRACT(MONTH FROM created_at) as bulan, COUNT(*) as jumlah_transaksi, SUM(nominal) as total_nominal")->where('YEAR(created_at)', date('Y'))
+            ->select("EXTRACT(MONTH FROM created_at) as bulan, COUNT(*) as jumlah_transaksi, SUM(nominal) as total_nominal")->where('EXTRACT(YEAR FROM created_at)', date('Y'))
             ->groupBy("EXTRACT(MONTH FROM created_at)")
             ->orderBy("bulan", "ASC")
             ->get()
