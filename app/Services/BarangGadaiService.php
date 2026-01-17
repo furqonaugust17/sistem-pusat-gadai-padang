@@ -160,7 +160,7 @@ class BarangGadaiService
     public function datatable($orderBy, $orderDir, $start, $length, $search, $draw)
     {
         $builder = $this->barangGadaiModel
-            ->select("barang_gadais.id, barang_gadais.nama_barang, barang_gadais.deskripsi, barang_gadais.jenis, barang_gadais.status");
+            ->select("transaksis.kode,barang_gadais.id, barang_gadais.nama_barang, barang_gadais.deskripsi, barang_gadais.jenis, barang_gadais.status")->join('transaksis', 'barang_gadais.id = transaksis.barang_id', 'inner');
 
 
         if ($search) {
@@ -168,6 +168,7 @@ class BarangGadaiService
 
             $builder->groupStart()
                 ->like('LOWER(barang_gadais.nama_barang)', $searchLower)
+                ->orLike('LOWER(transaksis.kode)', $searchLower)
                 ->orWhere("LOWER(CAST(barang_gadais.jenis AS TEXT)) LIKE ", "%{$searchLower}%", null, false)
                 ->orWhere("LOWER(CAST(barang_gadais.status AS TEXT)) LIKE ", "%{$searchLower}%", null, false)
                 ->groupEnd();

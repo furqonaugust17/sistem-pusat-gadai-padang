@@ -1,5 +1,5 @@
 <div class="nav-header">
-    <a href="index.html" class="brand-logo">
+    <a href="/backend" class="brand-logo">
         <img src="<?= base_url('home/logo.png'); ?>" class="img-fluid w-50" alt="">
     </a>
 

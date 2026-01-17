@@ -9,6 +9,7 @@ use App\Models\NasabahModel;
 use App\Models\TransaksiModel;
 use App\Services\SendMessageService;
 use CodeIgniter\Database\Exceptions\DatabaseException;
+use CodeIgniter\I18n\Time;
 
 class TransaksiService
 {
@@ -55,8 +56,10 @@ class TransaksiService
                 'nama_barang'       => $data['nama_barang'],
                 'jenis_barang'      => $data['jenis'],
                 'jumlah_pinjaman'   => number_format($data['nominal'], 0, ',', '.'),
-                'tanggal_transaksi' => date('j F Y', strtotime($transaksi['created_at'])),
-                'jatuh_tempo'       => date('j F Y', strtotime($data['jatuh_tempo'])),
+                'tanggal_transaksi' => Time::parse($transaksi['created_at'])
+                    ->toLocalizedString('dd MMMM yyyy'),
+                'jatuh_tempo'       => Time::parse($data['jatuh_tempo'])
+                    ->toLocalizedString('dd MMMM yyyy'),
             ]);
 
             $this->sendMessageService->sendMessage($nasabah['no_wa'], $message, $transaksi['id']);
@@ -171,7 +174,8 @@ class TransaksiService
 
         foreach ($rows as &$r) {
             $r['nominal']       = number_format($r['nominal'], 0, ',', '.');
-            $r['jatuh_tempo']   = date('d F Y', strtotime($r['jatuh_tempo']));
+            $r['jatuh_tempo']   = Time::parse($r['jatuh_tempo'])
+                ->toLocalizedString('dd MMMM yyyy');
             $r['status'] = match ($r['status']) {
                 'Gadai' => '<span class="badge bg-warning text-dark">Gadai</span>',
                 'Lelang' => '<span class="badge bg-danger">Lelang</span>',

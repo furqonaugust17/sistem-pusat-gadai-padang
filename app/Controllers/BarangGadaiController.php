@@ -163,12 +163,13 @@ class BarangGadaiController extends ResourceController
         $order  = $req->getVar('order')[0] ?? null;
 
         $columns = [
+            'transaksis.kode',
             'barang_gadais.nama_barang',
             'barang_gadais.jenis',
             'barang_gadais.status',
         ];
 
-        $orderBy = $columns[$order['column']] ?? 'barang_gadais.nama_barang';
+        $orderBy = $columns[$order['column']] ?? 'transaksis.kode';
         $orderDir = $order['dir'] ?? 'asc';
 
         $output = $this->barangGadaiService->datatable($orderBy, $orderDir, $start, $length, $search, $draw);

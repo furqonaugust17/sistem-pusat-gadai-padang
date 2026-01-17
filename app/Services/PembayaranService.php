@@ -6,6 +6,7 @@ use App\Models\BarangFileModel;
 use App\Models\BarangGadaiModel;
 use App\Models\PembayaranModel;
 use App\Models\TransaksiModel;
+use CodeIgniter\I18n\Time;
 
 class PembayaranService
 {
@@ -97,7 +98,8 @@ class PembayaranService
 
         foreach ($rows as &$r) {
             $r['total_bayar']       = number_format($r['total_bayar'], 0, ',', '.');
-            $r['tanggal_bayar']   = date('d F Y', strtotime($r['tanggal_bayar']));
+            $r['tanggal_bayar']   = Time::parse($r['tanggal_bayar'])
+                ->toLocalizedString('dd MMMM yyyy');
         }
 
         return [

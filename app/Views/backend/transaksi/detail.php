@@ -1,3 +1,7 @@
+<?php
+
+use CodeIgniter\I18n\Time;
+?>
 <?= $this->extend('backend/layouts/main'); ?>
 <?= $this->section('content'); ?>
 <div class="row">
@@ -30,7 +34,8 @@
                                 <tr>
                                     <th>Jatuh Tempo</th>
                                     <th>:</th>
-                                    <td><?= date('d F Y', strtotime($data['jatuh_tempo'])); ?></td>
+                                    <td><?= Time::parse($data['jatuh_tempo'])
+                                            ->toLocalizedString('dd MMMM yyyy'); ?></td>
                                 </tr>
                                 <tr>
                                     <th>Nama Darurat</th>

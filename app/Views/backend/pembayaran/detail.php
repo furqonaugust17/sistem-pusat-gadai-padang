@@ -1,3 +1,7 @@
+<?php
+
+use CodeIgniter\I18n\Time;
+?>
 <?= $this->extend('backend/layouts/main'); ?>
 <?= $this->section('content'); ?>
 
@@ -20,7 +24,8 @@
                             <tr>
                                 <th>Tanggal Bayar</th>
                                 <th>:</th>
-                                <td><?= date('d F Y', strtotime($data['pembayaran']['tanggal'])); ?></td>
+                                <td><?= Time::parse($data['pembayaran']['tanggal'])
+                                        ->toLocalizedString('dd MMMM yyyy'); ?></td>
                             </tr>
                             <tr>
                                 <th>Total Bayar</th>
@@ -56,7 +61,9 @@
                             <tr>
                                 <th>Jatuh Tempo</th>
                                 <th>:</th>
-                                <td><?= date('d F Y', strtotime($data['transaksi']['jatuh_tempo'])); ?></td>
+                                <td><?= Time::parse($data['transaksi']['jatuh_tempo'])
+                                        ->toLocalizedString('dd MMMM yyyy'); ?></td>
+
                             </tr>
                             <tr>
                                 <th>Status</th>
