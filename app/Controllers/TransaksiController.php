@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CabangModel;
 use App\Models\NasabahModel;
 use App\Models\TransaksiModel;
 use App\Services\TransaksiService;
@@ -22,6 +23,7 @@ class TransaksiController extends ResourceController
     protected $nasabahModel;
     protected $transaksiService;
     protected $transaksiModel;
+    protected $cabangModel;
     protected $db;
 
     public function __construct()
@@ -29,6 +31,7 @@ class TransaksiController extends ResourceController
         $this->nasabahModel = new NasabahModel();
         $this->transaksiService = new TransaksiService();
         $this->transaksiModel = new TransaksiModel();
+        $this->cabangModel = new CabangModel();
         $this->db = \Config\Database::connect();
     }
 
@@ -41,7 +44,8 @@ class TransaksiController extends ResourceController
     {
         $data = [
             'titlePage' => 'Transaksi',
-            'nasabahs'  => $this->nasabahModel->findAll()
+            'nasabahs'  => $this->nasabahModel->findAll(),
+            'cabangs'   => $this->cabangModel->findAll()
         ];
         return view('backend/transaksi/index', $data);
     }

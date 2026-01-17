@@ -56,4 +56,17 @@
             </div>
         <?php endif; ?>
     </div>
+    <div class="mb-3 col-12">
+        <label class="form-label">Lokasi <span class="text-danger">*</span></label>
+        <select class="form-control <?= validation_show_error('tujuan') ? 'is-invalid' : ''; ?>" name="cabang_id" id="">
+            <?php foreach ($cabangs as $index => $cabang): ?>
+                <option value="<?= $cabang['id']; ?>"><?= $cabang['nama_cabang']; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <?php if (validation_show_error('cabang_id')): ?>
+            <div class="invalid-feedback">
+                <?= validation_show_error('cabang_id'); ?>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>

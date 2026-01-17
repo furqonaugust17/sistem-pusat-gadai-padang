@@ -30,7 +30,7 @@
                                 <tr>
                                     <th>Jatuh Tempo</th>
                                     <th>:</th>
-                                    <td><?= $data['jatuh_tempo']; ?></td>
+                                    <td><?= date('d F Y', strtotime($data['jatuh_tempo'])); ?></td>
                                 </tr>
                                 <tr>
                                     <th>Nama Darurat</th>
@@ -46,6 +46,11 @@
                                     <th>Status</th>
                                     <th>:</th>
                                     <td><?= $data['status']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Lokasi</th>
+                                    <th>:</th>
+                                    <td><?= $data['nama_cabang']; ?></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\BarangFileModel;
 use App\Models\BarangGadaiModel;
+use App\Models\CabangModel;
 use App\Models\NasabahModel;
 use App\Models\TransaksiModel;
 use App\Services\SendMessageService;
@@ -18,6 +19,7 @@ class TransaksiService
     protected $barangService;
     protected $sendMessageService;
     protected $barangGadaiModel;
+    protected $cabangModel;
     protected $db;
 
     public function __construct()
@@ -30,6 +32,7 @@ class TransaksiService
         $this->barangService  = new BarangService();
         $this->sendMessageService  = new SendMessageService();
         $this->barangGadaiModel = new BarangGadaiModel();
+        $this->cabangModel = new CabangModel();
         $this->db = \Config\Database::connect();
     }
 
@@ -81,6 +84,7 @@ class TransaksiService
             'status' => 'Gadai',
             'tujuan' => $data['tujuan'],
             'detail_tujuan' => $data['detail_tujuan'] ?? null,
+            'cabang_id' => $data['detail_tujuan'] ?? $this->cabangModel->select('id')->like('LOWER(nama_cabang)', 'utama')->first()
         ]);
 
         $transaksi = $this->transaksiModel->select('created_at')->find($transaksiID);

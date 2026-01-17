@@ -378,6 +378,12 @@ class Validation extends BaseConfig
         'nasabah_id' => [
             'rules'  => 'permit_empty',
         ],
+        'cabang_id' => [
+            'rules'  => 'required',
+            'errors'    => [
+                'required' => 'Cabang harus dipilih'
+            ]
+        ],
         'nama_barang' => [
             'rules'  => 'required|min_length[3]',
             'errors' => [
@@ -495,5 +501,11 @@ class Validation extends BaseConfig
                 'required'     => 'Transaksi harus dipilih',
             ]
         ],
+    ];
+
+    public array $cabang = [
+        'nama_cabang' => 'required|min_length[3]',
+        'alamat_cabang' => 'required',
+        'link_google_maps' => 'permit_empty|valid_url'
     ];
 }
