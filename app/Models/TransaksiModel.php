@@ -20,6 +20,7 @@ class TransaksiModel extends CustomModel
         'status',
         'tujuan',
         'detail_tujuan',
+        'cabang_id',
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -70,8 +71,10 @@ class TransaksiModel extends CustomModel
             nasabahs.no_telp1,
             nasabahs.no_wa,
             nasabahs.alamat_domisili,
+            cabangs.nama_cabang,
         ")
-            ->join('nasabahs', 'transaksis.nasabah_id = nasabahs.id', 'INNER');
+            ->join('nasabahs', 'transaksis.nasabah_id = nasabahs.id', 'INNER')
+            ->join('cabangs', 'transaksis.cabang_id = cabangs.id', 'INNER');
 
         if (!$id && !$kode) {
             return $data->findAll();
@@ -113,7 +116,7 @@ class TransaksiModel extends CustomModel
     public function transaksiBulanan()
     {
         $query = $this
-            ->select("EXTRACT(MONTH FROM created_at) as bulan, COUNT(*) as jumlah_transaksi, SUM(nominal) as total_nominal")
+            ->select("EXTRACT(MONTH FROM created_at) as bulan, COUNT(*) as jumlah_transaksi, SUM(nominal) as total_nominal")->where('YEAR(created_at)', date('Y'))
             ->groupBy("EXTRACT(MONTH FROM created_at)")
             ->orderBy("bulan", "ASC")
             ->get()

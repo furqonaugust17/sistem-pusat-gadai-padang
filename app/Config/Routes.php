@@ -23,6 +23,7 @@ $routes->group('backend', static function ($routes) {
         $routes->resource('karyawan', ['controller' => 'KaryawanController']);
         $routes->resource('laporan', ['controller' => 'LaporanController']);
         $routes->resource('backup', ['controller' => 'BackupController']);
+        $routes->resource('cabang', ['controller' => 'CabangController']);
     });
 
     $routes->group('', ['filter' => 'group:admin'], static function ($routes) {

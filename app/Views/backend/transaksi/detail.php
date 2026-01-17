@@ -52,6 +52,11 @@ use CodeIgniter\I18n\Time;
                                     <th>:</th>
                                     <td><?= $data['status']; ?></td>
                                 </tr>
+                                <tr>
+                                    <th>Lokasi</th>
+                                    <th>:</th>
+                                    <td><?= $data['nama_cabang']; ?></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

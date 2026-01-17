@@ -46,7 +46,6 @@ class BarangGadaiService
             throw new Exception('Barang tidak ditemukan');
         }
 
-        // Update data umum barang gadai
         $data = [
             'nama_barang'   => $request->getPost('nama_barang'),
             'deskripsi'     => $request->getPost('deskripsi'),
@@ -55,14 +54,12 @@ class BarangGadaiService
         ];
         $this->barangGadaiModel->update($id, $data);
 
-        // Update data khusus berdasarkan tipe barang
         if ($barang['jenis'] === 'Kendaraan') {
             $this->updateBarangKendaraan($id, $request);
         } elseif ($barang['jenis'] === 'Elektronik') {
             $this->updateBarangElektronik($id, $request);
         }
 
-        // Upload file gambar (multiple)
         $this->uploadMultipleFiles($id, $request);
     }
 
@@ -75,7 +72,6 @@ class BarangGadaiService
             'plat_nomor'      => $request->getPost('plat_nomor'),
         ];
 
-        // Proses file opsional
         $stnk = $request->getFile('stnk');
         if ($stnk && $stnk->isValid()) {
             $updateData['stnk'] = $this->uploadSingleFile($stnk, 'stnk', $barangId);
@@ -103,10 +99,9 @@ class BarangGadaiService
     private function uploadSingleFile($file, $field, $barangId)
     {
         if (!$file || !$file->isValid()) {
-            return null; // Tidak upload, tidak error
+            return null;
         }
 
-        // Ambil data lama untuk hapus file lama
         $detail = $this->barangKendaraanModel->select($field)->where('barang_id', $barangId)->first();
         if ($detail && !empty($detail[$field])) {
             $this->deleteFileIfExists($detail[$field]);
@@ -125,7 +120,6 @@ class BarangGadaiService
     {
         $files = $request->getFiles();
 
-        // Tidak ada file_gambar di-upload → langsung keluar tanpa error
         if (!isset($files['file_gambar']) || empty($files['file_gambar'])) {
             return;
         }
@@ -138,14 +132,12 @@ class BarangGadaiService
         $uploadPath = WRITEPATH . 'uploads/barang_gadai/' . $barangId . '/';
         if (!is_dir($uploadPath)) mkdir($uploadPath, 0777, true);
 
-        // Hapus file lama hanya jika ada file baru yang valid
         $oldFiles = $this->barangFileModel->where('barang_id', $barangId)->findAll();
         foreach ($oldFiles as $old) {
             $this->deleteFileIfExists($old['file_path']);
         }
         $this->barangFileModel->where('barang_id', $barangId)->delete();
 
-        // Simpan file baru
         foreach ($validFiles as $file) {
             $randomName = $file->getRandomName();
             $file->move($uploadPath, $randomName);

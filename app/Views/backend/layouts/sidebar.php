@@ -42,6 +42,11 @@
                         <span class="nav-text">Karyawan</span>
                     </a>
                 </li>
+                <li><a href="<?= route_to('CabangController::index'); ?>" class="ai-icon" aria-expanded="false">
+                        <i class="fas fa-warehouse fw-bold"></i>
+                        <span class="nav-text">Cabang</span>
+                    </a>
+                </li>
                 <li><a href="<?= route_to('LaporanController::index'); ?>" class="ai-icon" aria-expanded="false">
                         <i class="fas fa-file-alt fw-bold"></i>
                         <span class="nav-text">Laporan</span>

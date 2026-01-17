@@ -108,7 +108,7 @@ class BarangGadaiController extends ResourceController
             $this->barangGadaiService->updateBarangGadai($id, $this->request);
             return redirect()->to(route_to('BarangGadaiController::show', $id))->with('success', 'Barang gadai berhasil diperbarui');
         } catch (\Exception $e) {
-            return redirect()->to(route_to('BarangGadaiController::edit', $id))->withInput()->with('errors', 'Barang gadai gagal diperbarui');
+            return redirect()->to(route_to('BarangGadaiController::edit', $id))->withInput()->with('errors', 'Barang gadai gagal diperbarui service');
         }
     }
 
