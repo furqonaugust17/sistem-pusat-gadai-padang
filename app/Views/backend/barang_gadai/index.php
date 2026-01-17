@@ -28,6 +28,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Kode Transaksi</th>
                                 <th>Nama Barang</th>
                                 <th>Deskripsi</th>
                                 <th>Jenis</th>
@@ -40,6 +41,7 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
+                                <th>Kode Transaksi</th>
                                 <th>Nama Barang</th>
                                 <th>Deskripsi</th>
                                 <th>Jenis</th>
@@ -84,6 +86,9 @@
                     data: null,
                     orderable: false,
                     searchable: false
+                },
+                {
+                    data: 'kode',
                 },
                 {
                     data: 'nama_barang',
