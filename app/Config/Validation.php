@@ -520,4 +520,23 @@ class Validation extends BaseConfig
         'alamat_cabang' => 'required',
         'link_google_maps' => 'permit_empty|valid_url'
     ];
+
+    public array $extendTempo = [
+        'interval_days' => [
+            'rules'  => 'required|numeric|greater_than[0]',
+            'errors' => [
+                'required'   => 'Perpanjang wajib diisi.',
+                'numeric'    => 'Perpanjang hanya boleh angka.',
+                'greater_than' => 'Perpanjang minimal 1.'
+            ]
+        ],
+        'nominal' => [
+            'rules'  => 'required|numeric|min_length[4]',
+            'errors' => [
+                'required'   => 'Nominal wajib diisi.',
+                'numeric'    => 'Nominal hanya boleh angka.',
+                'min_length' => 'Nominal terlalu kecil.'
+            ]
+        ]
+    ];
 }

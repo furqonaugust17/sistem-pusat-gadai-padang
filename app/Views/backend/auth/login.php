@@ -16,7 +16,7 @@
     <title>Login</title>
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="<?= base_url('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css'); ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/css/style.css'); ?>?version=<?= time(); ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet">
 
 </head>
 

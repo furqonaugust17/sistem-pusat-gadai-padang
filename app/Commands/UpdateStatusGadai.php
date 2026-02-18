@@ -22,9 +22,11 @@ class UpdateStatusGadai extends BaseCommand
         $today = date('Y-m-d');
 
         $transaksi = $trxModel
-            ->select("id, barang_id")
-            ->where("DATE(jatuh_tempo + INTERVAL '2 days') <=", $today)
+            ->select("transaksis.id, barang_id")
+            ->join("perpanjangs", "transaksis.id = perpanjangs.transaksi_id", "left")
             ->where("status", "Gadai")
+            ->having("DATE((transaksis.jatuh_tempo + COALESCE(SUM(interval_days), 0) * INTERVAL '1 day') + INTERVAL '2 days') <=", $today)
+            ->groupBy('transaksis.id')
             ->findAll();
 
         if (empty($transaksi)) {

@@ -90,7 +90,7 @@
 <?= $this->section('javascript'); ?>
 <script src="<?= base_url('assets/vendor/chart.js/Chart.bundle.min.js') ?>"></script>
 <script src="<?= base_url('assets/vendor/apexchart/apexchart.js') ?>"></script>
-<script src="<?= base_url('assets/js/dashboard/dashboard-1.js') ?>?version=<?= time(); ?>"></script>
+<script src="<?= base_url('assets/js/dashboard/dashboard-1.js') ?>"></script>
 <script type="text/javascript">
     $(document).ready(function() {});
 </script>

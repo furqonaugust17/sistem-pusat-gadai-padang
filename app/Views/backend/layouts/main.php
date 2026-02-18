@@ -21,7 +21,7 @@
     <?= $this->renderSection('css'); ?>
     <link href="<?= base_url('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/vendor/owl-carousel/owl.carousel.css') ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/css/style.css') ?>?version=<?= time(); ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
 </head>
 
 <body>

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CabangModel;
 use App\Models\NasabahModel;
+use App\Models\PerpanjangModel;
 use App\Models\TransaksiModel;
 use App\Services\SendMessageService;
 use App\Services\TransaksiService;
@@ -26,6 +27,7 @@ class TransaksiController extends ResourceController
     protected $sendMessageService;
     protected $transaksiModel;
     protected $cabangModel;
+    protected $perpanjangModel;
     protected $db;
 
     public function __construct()
@@ -35,6 +37,7 @@ class TransaksiController extends ResourceController
         $this->sendMessageService = new SendMessageService();
         $this->transaksiModel = new TransaksiModel();
         $this->cabangModel = new CabangModel();
+        $this->perpanjangModel = new PerpanjangModel();
         $this->db = \Config\Database::connect();
     }
 
@@ -62,6 +65,9 @@ class TransaksiController extends ResourceController
      */
     public function show($id = null)
     {
+        if (request()->isAJAX()) {
+            return $this->respond($this->transaksiService->detail($id));
+        }
         $data = [
             'titlePage' => 'Transaksi',
             'data' => $this->transaksiService->detail($id)
@@ -345,6 +351,40 @@ INNER JOIN barang_gadais C ON A.barang_id = C.id WHERE A.id = '$id'"
             $response['message'] = 'Notifikasi berhasil dikirim';
             return $this->respond($response, 200);
         } catch (\Throwable $th) {
+            $response['message'] = 'Terjadi kesalahan pada sistem. silahkan coba lagi nanti';
+            return $this->respond($response, 500);
+        }
+    }
+
+    public function extendTempo($id)
+    {
+        $response = [
+            'data' => ['csrf' => csrf_hash()]
+        ];
+
+        if ($id == null) {
+            $response['message'] = 'Transaksi harus dipilih. silahkan coba lagi.';
+            return $this->respond($response, 400);
+        }
+
+        $rules = config('Validation');
+        if (!$this->validate($rules->extendTempo)) {
+            $response['error'] = validation_list_errors();
+            $response['message'] = 'Jatuh Tempo Berhasil Diperpanjang.';
+            return $this->respond($response, 400);
+        }
+
+        try {
+            $data = $this->request->getPost();
+            $data['transaksi_id'] = $id;
+            $data['nominal'] = $this->normalizeCurrency($data['nominal']);
+            $this->perpanjangModel->insert($data);
+            $response['message'] = 'Jatuh Tempo Berhasil Diperpanjang.';
+            return $this->respond($response, 200);
+        } catch (\RuntimeException $e) {
+            $response['message'] = 'Transaksi Tidak Ditemukan. silahkan coba lagi nanti';
+            return $this->respond($response, 404);
+        } catch (\Exception $e) {
             $response['message'] = 'Terjadi kesalahan pada sistem. silahkan coba lagi nanti';
             return $this->respond($response, 500);
         }

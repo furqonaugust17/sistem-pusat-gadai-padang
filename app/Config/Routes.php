@@ -36,6 +36,7 @@ $routes->group('backend', static function ($routes) {
         $routes->get('transaksi/getTransaksi', 'TransaksiController::getTransaksi');
         $routes->put('transaksi/updateStatus/(:segment)', 'TransaksiController::updateStatus/$1');
         $routes->post('transaksi/sendNotification/(:segment)', 'TransaksiController::sendNotification/$1');
+        $routes->post('transaksi/extendTempo/(:segment)', 'TransaksiController::extendTempo/$1');
         $routes->get('whatsapp/log-pesan', 'WhatsappController::logPesan');
         $routes->resource('transaksi', ['controller' => 'TransaksiController']);
         $routes->get('upload/file/(:segment)/(:alpha)', 'BarangGadaiController::showFile/$1/$2', ['as' => 'file.barang']);
