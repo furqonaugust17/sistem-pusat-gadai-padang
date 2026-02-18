@@ -145,8 +145,9 @@ class TransaksiService
     public function datatable($orderBy, $orderDir, $start, $length, $search, $draw)
     {
         $builder = $this->transaksiModel
-            ->select("transaksis.id, transaksis.kode, transaksis.kode_trans, nasabahs.nama_lengkap as nasabah, transaksis.nominal, transaksis.jatuh_tempo, transaksis.status")
-            ->join("nasabahs", "nasabahs.id = transaksis.nasabah_id");
+            ->select("transaksis.id, transaksis.kode, transaksis.kode_trans, nasabahs.nama_lengkap as nasabah, transaksis.nominal, (transaksis.jatuh_tempo + COALESCE(SUM(interval_days), 0) * INTERVAL '1 day') AS jatuh_tempo, transaksis.status")
+            ->join("nasabahs", "nasabahs.id = transaksis.nasabah_id", "inner")
+            ->join("perpanjangs", "transaksis.id = perpanjangs.transaksi_id", "left");
 
 
         if ($search) {
@@ -161,7 +162,7 @@ class TransaksiService
                 ->orWhere("LOWER(TO_CHAR(transaksis.jatuh_tempo, 'DD Month YYYY')) LIKE ", "%{$searchLower}%", null, false)
                 ->groupEnd();
         }
-
+        $builder->groupBy('transaksis.id, nasabahs.nama_lengkap');
 
         $recordsTotal = $builder->countAllResults(false);
 

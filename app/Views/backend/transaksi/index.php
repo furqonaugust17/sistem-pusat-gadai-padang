@@ -79,6 +79,7 @@
 
 <?= $this->section('modal'); ?>
 <?= $this->include('backend/transaksi/_insert'); ?>
+<?= $this->include('backend/transaksi/_modalPerpanjang'); ?>
 <?= $this->endSection(); ?>
 
 <?= $this->section('javascript'); ?>
@@ -158,7 +159,7 @@
                         const uriPrint = '<?= route_to('TransaksiController::createReport', ':id'); ?>'.replace(':id', data);
 
                         const canUpdate = row.status && row.status.includes('Jatuh Tempo');
-
+                        const isGadai = row.status.includes('Gadai');
                         return `
         <div class="btn-group" role="group">
             <button 
@@ -190,6 +191,11 @@
                 <button type="submit" class="dropdown-item text-start" onclick="event.stopPropagation(); sendNotification('${data}')">
                     <i class="fas fa-paper-plane me-2"></i> Kirim Notifikasi
                 </button>
+                ${isGadai ? `
+                <button type="button" class="dropdown-item text-start" onclick="event.stopPropagation(); extendTempo('${data}')">
+                    <i class="far fa-clock me-2"></i> Perpanjang
+                </button>
+                ` : ''}
                 <div class="dropdown-divider"></div>
                 <form action="${uriPrint}" method="POST" target="_blank">
                     <button type="submit" class="dropdown-item text-start">
@@ -428,5 +434,94 @@
             }
         })
     }
+
+    function extendTempo(id) {
+        const uriShow = '<?= route_to('TransaksiController::show', ':id'); ?>'.replace(':id', id);
+        const uriSave = '<?= route_to('TransaksiController::extendTempo', ':id'); ?>'.replace(':id', id);
+        $.ajax({
+            url: uriShow,
+            type: 'GET',
+            success: function(response) {
+                if (response != null) {
+                    const {
+                        kode,
+                        nama_lengkap,
+                        no_wa
+                    } = response;
+                    $('#kode_transaksi').val(kode);
+                    $('#nama_nasabah').val(nama_lengkap);
+                    $('#no_telepon').val(no_wa);
+                    $('#modal-perpanjang form').attr('action', uriSave);
+                    $('#modal-perpanjang').modal('show');
+                } else {
+                    $('#table-transaksi').DataTable().ajax.reload()
+                    Swal.fire({
+                        title: "Error",
+                        text: "Data Tidak Ditemukan",
+                        type: "error",
+                        confirmButtonText: "Ok",
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    title: "Error",
+                    text: xhr.responseJSON.message,
+                    type: "error",
+                    confirmButtonText: "Ok",
+                });
+            },
+        });
+    }
+
+    $('#modal-perpanjang form').submit(function(e) {
+
+        var form = $(this);
+
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: $('#modal-perpanjang form').attr('action'),
+            data: form.serialize(),
+            dataType: "JSON",
+            success: function(response) {
+                toastr.success(response.message, {
+                    closeButton: false,
+                    debug: false,
+                    newestOnTop: false,
+                    progressBar: true,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: false,
+                    onclick: null,
+                    showDuration: 300,
+                    hideDuration: 1000,
+                    timeOut: 500,
+                    extendedTimeOut: 1000,
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                })
+                $('#modal-perpanjang').modal('hide');
+                $('#table-transaksi').DataTable().ajax.reload()
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    title: "Error",
+                    text: xhr.responseJSON.message,
+                    type: "error",
+                    confirmButtonText: "Ok",
+                });
+            },
+            complete: function(xhr, status, error) {
+                $('meta[name="<?= csrf_header(); ?>"]').attr('content', xhr.responseJSON.data.csrf);
+                $(`input[name="<?= csrf_token(); ?>"]`).each(function() {
+                    $(this).val(xhr.responseJSON.data.csrf);
+                });
+            }
+        });
+
+    });
 </script>
 <?= $this->endSection(); ?>

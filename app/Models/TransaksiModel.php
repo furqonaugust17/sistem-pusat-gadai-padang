@@ -102,15 +102,17 @@ class TransaksiModel extends CustomModel
         return $this->select("
             transaksis.id,
             transaksis.kode,
-            transaksis.jatuh_tempo,
+            (transaksis.jatuh_tempo + COALESCE(SUM(interval_days), 0) * INTERVAL '1 day') AS jatuh_tempo,
             nasabahs.nama_lengkap AS nama_nasabah,
             nasabahs.no_wa
         ")
             ->join('nasabahs', 'nasabahs.id = transaksis.nasabah_id')
+            ->join("perpanjangs", "transaksis.id = perpanjangs.transaksi_id", "left")
             ->where('transaksis.status', 'Gadai')
-            ->where("DATE(transaksis.jatuh_tempo) >= CURRENT_DATE")
-            ->where("DATE(transaksis.jatuh_tempo) <= CURRENT_DATE + INTERVAL '3 days'")
-            ->orderBy('transaksis.jatuh_tempo', 'ASC')
+            ->having("DATE((transaksis.jatuh_tempo + COALESCE(SUM(interval_days), 0) * INTERVAL '1 day')) >= ", "CURRENT_DATE", false)
+            ->having("DATE((transaksis.jatuh_tempo + COALESCE(SUM(interval_days), 0) * INTERVAL '1 day')) <= ", "CURRENT_DATE + INTERVAL '3 days'", false)
+            ->groupBy('transaksis.id, nasabahs.nama_lengkap, nasabahs.no_wa')
+            ->orderBy("(transaksis.jatuh_tempo + COALESCE(SUM(interval_days), 0) * INTERVAL '1 day')", 'ASC', false)
             ->findAll();
     }
 
